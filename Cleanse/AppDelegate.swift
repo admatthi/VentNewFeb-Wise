@@ -64,24 +64,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                
            dayweek = String(weekday)
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = tabBarBuyer
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = tabBarBuyer
+//
+//        self.window?.makeKeyAndVisible()
         
-        self.window?.makeKeyAndVisible()
-        
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-          
-          if launchedBefore {
-              
-              tabBarBuyer.selectedIndex = 0
-              
-          } else {
-              
-              tabBarBuyer.selectedIndex = 1
-              
-              UserDefaults.standard.set(true, forKey: "launchedBefore")
-              
-          }
+//        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+//          
+//          if launchedBefore {
+//              
+//              tabBarBuyer.selectedIndex = 0
+//              
+//          } else {
+//              
+//              tabBarBuyer.selectedIndex = 1
+//              
+//              UserDefaults.standard.set(true, forKey: "launchedBefore")
+//              
+//          }
         
         queryforpaywall()
         return true

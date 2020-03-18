@@ -96,7 +96,15 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                 headlines.append(book?.headline6 ?? "x")
                 headlines.append(book?.headline7 ?? "x")
                 headlines.append(book?.headline8 ?? "x")
-                
+                headlines.append(book?.headline9 ?? "x")
+                headlines.append(book?.headline10 ?? "x")
+                headlines.append(book?.headline11 ?? "x")
+                headlines.append(book?.headline12 ?? "x")
+                headlines.append(book?.headline13 ?? "x")
+                headlines.append(book?.headline14 ?? "x")
+                headlines.append(book?.headline15 ?? "x")
+
+
                 headlines = headlines.filter{$0 != "x"}
 
                 let alert = UIAlertController(title: "What would you like to do?", message: "", preferredStyle: .alert)
@@ -130,13 +138,69 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                          }}))
                 
                 
-                    self.performSegue(withIdentifier: "DepressionToRead", sender: self)
+                if didpurchase {
+                    
+                    self.performSegue(withIdentifier: "DiscoverToConsume", sender: self)
+
+                } else {
+                    
+                    self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+                }
+                
 
              
             }
 
 
         }
+    
+    @IBAction func tapDiscount(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Please enter your discount code", message: "", preferredStyle: .alert)
+        
+        alert.addTextField(configurationHandler: configurationTextField)
+
+                  alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { action in
+                      switch action.style{
+                      case .default:
+                          print("default")
+                        
+                        let textField = alert.textFields![0] // Force unwrapping because we know it exists.
+                        
+                        if textField.text != "" {
+                            
+                            if actualdiscount == textField.text! {
+                                
+                                didpurchase = true
+                                
+                                ref?.child("Users").child(uid).updateChildValues(["Purchased" : "True"])
+                                
+                            }
+                            
+                        }
+                          
+                          
+                      case .cancel:
+                          print("cancel")
+                          
+                      case .destructive:
+                          print("destructive")
+                          
+                          
+                      }}))
+        
+        self.present(alert, animated: true, completion: nil)
+
+        
+    }
+    
+    func configurationTextField(textField: UITextField!){
+              textField?.placeholder = "Promo Code"
+              
+              
+              
+              
+          }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -323,6 +387,8 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             let name = book?.name
             
+            cell.genrelabel.text = book?.genre
+            
             if (name?.contains(":"))! {
                 
                 var namestring = name?.components(separatedBy: ":")
@@ -342,7 +408,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             cell.titleImage.layer.cornerRadius = 10.0
             cell.titleImage.clipsToBounds = true
 //            cell.titleback.layer.cornerRadius = 10.0
-                       cell.titleback.clipsToBounds = true
+//                       cell.titleback.clipsToBounds = true
             
             cell.layer.cornerRadius = 10.0
             cell.layer.cornerRadius = 10.0
@@ -358,15 +424,15 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                                             cell.titleImage.kf.setImage(with: imageUrl)
                 
                 
-                cell.titleback.kf.setImage(with: imageUrl)
+//                cell.titleback.kf.setImage(with: imageUrl)
 
                 
-                let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-                                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-                          blurEffectView.frame = cell.titleback.bounds
-                                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                          
-                          cell.titleback.addSubview(blurEffectView)
+//                let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+//                                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//                          blurEffectView.frame = cell.titleback.bounds
+//                                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//
+//                          cell.titleback.addSubview(blurEffectView)
                           
                 
                 //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
@@ -439,13 +505,17 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         genres.removeAll()
         genres.append("All")
+        genres.append("Money")
         genres.append("Love")
-        genres.append("Success")
+        genres.append("Motivation")
+        genres.append("Humor")
+        genres.append("Spirituality")
         genres.append("Happiness")
+        genres.append("Fitness")
         genres.append("Depression")
         genres.append("Addiction")
-        genres.append("Focus")
-        genres.append("Anger")
+        genres.append("Productivity")
+        
         
         ref = Database.database().reference()
         
