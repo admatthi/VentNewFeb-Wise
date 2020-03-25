@@ -11,6 +11,7 @@ import UIKit
 class TitleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var backlabel: UIImageView!
     
+    @IBOutlet weak var blur: UIImageView!
     @IBOutlet weak var genrelabel: UILabel!
     @IBOutlet weak var viewslabel: UILabel!
     @IBOutlet weak var shadowview: UIImageView!

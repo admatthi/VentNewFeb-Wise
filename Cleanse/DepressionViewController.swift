@@ -17,7 +17,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
     var books: [Book] = [] {
               didSet {
 
-                  self.titleCollectionView.reloadData()
+//                  self.titleCollectionView.reloadData()
 
               }
           }
@@ -69,7 +69,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             } else {
 
                 let book = self.book(atIndexPath: indexPath)
-                
+
                 
                 headlines.removeAll()
                 
@@ -87,6 +87,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                 selectedauthorimage = book?.authorImage ?? ""
                 selectedbackground = book?.imageURL ?? ""
 
+                
                     
                 headlines.append(book?.headline1 ?? "x")
                 headlines.append(book?.headline2 ?? "x")
@@ -137,15 +138,26 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
 
                          }}))
                 
-                
-                if didpurchase {
-                    
-                    self.performSegue(withIdentifier: "DiscoverToConsume", sender: self)
+                if indexPath.row > 4 {
+                             
+                             if didpurchase {
+                                 
+                                                    self.performSegue(withIdentifier: "DiscoverToConsume", sender: self)
 
+                                 
+                             } else {
+                             
+                           
+                      self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+                             
+                             }
                 } else {
                     
-                    self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+                                 self.performSegue(withIdentifier: "DiscoverToConsume", sender: self)
                 }
+                         
+                
+            
                 
 
              
@@ -209,7 +221,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         case self.genreCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Categories", for: indexPath) as! GenreCollectionViewCell
             
-            collectionView.alpha = 1
+//            collectionView.alpha = 1
             cell.titlelabel.text = genres[indexPath.row]
             //            cell.titlelabel.sizeToFit()
             
@@ -219,7 +231,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             
             
-            genreCollectionView.alpha = 1
+//            genreCollectionView.alpha = 1
             
             if selectedindex == 0 {
                 
@@ -387,7 +399,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             let name = book?.name
             
-            cell.genrelabel.text = book?.genre
+            cell.genrelabel.text = "\(book!.author!)"
             
             if (name?.contains(":"))! {
                 
@@ -418,6 +430,36 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             //
             //                cell.tapup.addTarget(self, action: #selector(DiscoverViewController.tapWishlist), for: .touchUpInside)
             
+            
+            if indexPath.row > 4 {
+                
+                if didpurchase {
+                    
+                    cell.titlelabel.alpha = 1
+//                    cell.blur.alpha = 0
+                    cell.backlabel.alpha = 0.8
+//                    cell.titleImage.alpha = 1
+                    
+                } else {
+                
+              
+                
+                    cell.titlelabel.alpha = 0
+//                    cell.blur.alpha = 1
+                    cell.backlabel.alpha = 0.95
+                    
+                
+                }
+            } else {
+                
+                cell.titlelabel.alpha = 1
+//                                  cell.blur.alpha = 0
+                cell.backlabel.alpha = 0.8
+//                cell.titleImage.alpha = 1
+            }
+            
+            cell.titleImage.alpha = 0
+
           
             if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
                 
@@ -456,8 +498,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             cell.layer.cornerRadius = 5.0
             cell.layer.masksToBounds = true
             
-            cell.titlelabel.alpha = 1
-            cell.titlelabel.alpha = 1
+   
             
             if let viewsnum = book?.views {
                 
@@ -491,37 +532,34 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-                  let blurEffectView = UIVisualEffectView(effect: blurEffect)
-                  blurEffectView.frame = backimage.bounds
-                  blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                  backimage.addSubview(blurEffectView)
-        
-        let blurEffect2 = UIBlurEffect(style: UIBlurEffect.Style.dark)
-                  let blurEffectView2 = UIVisualEffectView(effect: blurEffect)
-                  blurEffectView2.frame = backimage2.bounds
-                  blurEffectView2.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                  backimage2.addSubview(blurEffectView2)
+//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
+//                  let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//                  blurEffectView.frame = backimage.bounds
+//                  blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//                  backimage.addSubview(blurEffectView)
+//        
+//        let blurEffect2 = UIBlurEffect(style: UIBlurEffect.Style.light)
+//                  let blurEffectView2 = UIVisualEffectView(effect: blurEffect)
+//                  blurEffectView2.frame = backimage2.bounds
+//                  blurEffectView2.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//                  backimage2.addSubview(blurEffectView2)
         
         genres.removeAll()
-        genres.append("All")
-        genres.append("Money")
-        genres.append("Love")
-        genres.append("Motivation")
-        genres.append("Humor")
-        genres.append("Spirituality")
-        genres.append("Happiness")
-        genres.append("Fitness")
-        genres.append("Depression")
-        genres.append("Addiction")
-        genres.append("Productivity")
+        genres.append("Stocks")
+        genres.append("Economics")
+        genres.append("Finance")
+        genres.append("Careers")
+        genres.append("Management")
+        genres.append("Real Estate")
+        genres.append("Taxation")
+        genres.append("Investing")
         
         
         ref = Database.database().reference()
         
         queryforinfo()
         
-        selectedgenre = "All"
+        selectedgenre = "Stocks"
         
         let date = Date()
         let dateFormatter = DateFormatter()
@@ -530,9 +568,13 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         dateformat = result
         
-
-
+//
+//
+//        titleCollectionView.layer.cornerRadius = 10.0
+//        titleCollectionView.clipsToBounds = true
         
+        backimage2.layer.cornerRadius = 10.0
+        backimage2.clipsToBounds = true
         
         if selectedgenre == "" || selectedgenre == "None" {
             
@@ -552,7 +594,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
         }
         
-        titleCollectionView.reloadData()
+//        titleCollectionView.reloadData()
         
         //        addstaticbooks()
         
@@ -565,29 +607,51 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         updater?.invalidate()
         player?.pause()
         
-        var screenSize = titleCollectionView.bounds
-        var screenWidth = screenSize.width
-        var screenHeight = screenSize.height
+     
+//        layout.itemSize = CGSize(width: screenWidth/2.3, height: screenWidth/1.4)
+//        layout.minimumInteritemSpacing = 0
+//        layout.minimumLineSpacing = 0
+//
+//        titleCollectionView!.collectionViewLayout = layout
         
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 2, bottom: 10, right: 2)
-        layout.itemSize = CGSize(width: screenWidth/2.3, height: screenWidth/1.4)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        titleCollectionView!.collectionViewLayout = layout
-        
-        
+//      var screenSize = titleCollectionView.bounds
+//           var screenWidth = screenSize.width
+//           var screenHeight = screenSize.height
+//
+//           let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//           layout.sectionInset = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
+//        layout.itemSize = CGSize(width: screenWidth/1.1, height: screenHeight)
+//        layout.minimumInteritemSpacing = 0
+//        layout.minimumLineSpacing = 0
+//
+//        titleCollectionView!.collectionViewLayout = layout
         queryforids { () -> Void in
             
         }
         
+        
         // Do any additional setup after loading the view.
     }
         
+    func addstaticbooks() {
+
+        var counter2 = 0
+
+        while counter2 < 25 {
+
+         ref?.child("AllBooks1").child(selectedgenre).childByAutoId().updateChildValues(["Name": "x", "Image" : "x", "Author" : "x"])
+
+
+            counter2 += 1
+
+        }
+
+    }
+    
+    
         func queryforids(completed: @escaping (() -> Void) ) {
 
-                   titleCollectionView.alpha = 0
+//                   titleCollectionView.alpha = 0
 
                    var functioncounter = 0
 

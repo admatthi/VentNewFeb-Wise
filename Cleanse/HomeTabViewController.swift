@@ -13,7 +13,7 @@ class HomeTabViewController: UITabBarController {
     
        override func viewDidLayoutSubviews() {
             
-
+   
         
     //
 //            self.tabBar.frame = CGRect(origin: CGPoint(x: 0,y :40), size: CGSize(width: view.frame.width, height: 50))

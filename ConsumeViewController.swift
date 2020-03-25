@@ -108,15 +108,16 @@ class ConsumeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        authorlabel.text = "\(selectedtitle) on \(selectedgenre.replacingOccurrences(of: " ", with: ""))"
-        
+//        authorlabel.text = "\(selectedtitle) on \(selectedgenre.replacingOccurrences(of: " ", with: ""))"
+//        
         counter = 0 
         
         arrayCount = headlines.count
         
         let imageURLString = selectedbackground
         
-        headlinelabel.text = headlines[0]
+        headlinelabel.text = selectedtitle
+        authorlabel.text = selectedauthorname
             
             if let imageUrl = URL(string: imageURLString) {
                 
