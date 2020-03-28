@@ -13,12 +13,30 @@ import FirebaseDatabase
 
 class HealthViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate  {
 
+    var id = String()
+    
   @IBOutlet weak var backimage: UIImageView!
         var books: [Book] = [] {
                   didSet {
+                    
+                    bookmarktapped = false
 
-                      self.titleCollectionView.reloadData()
+                    let book = self.book(atIndex: 0)
+                                               //            if book?.bookID == "Title" {
+                                               //
+                                               //                return cell
+                                               //
+                                               //            } else {
+                                               
+                                               
+                                               
+                                      let name = book?.name
+                                      let author = book?.author
+                    id = (book?.bookID)!
+                                  quotelabel.text = name
+                                  authorlabel.text = author
 
+                    
                   }
               }
           var genreindex = Int()
@@ -42,10 +60,12 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
                 let generator = UIImpactFeedbackGenerator(style: .heavy)
                 generator.impactOccurred()
                 self.view.endEditing(true)
-                titleCollectionView.isUserInteractionEnabled = true
+               
 
                 if collectionView.tag == 1 {
 
+                    
+                    if didpurchase {
                     selectedindex = indexPath.row
 
                     genreCollectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
@@ -64,6 +84,12 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
                     
 
                     genreCollectionView.reloadData()
+                        
+                    } else {
+                        
+                        self.performSegue(withIdentifier: "HealthToSale1", sender: self)
+
+                    }
 
                 } else {
 
@@ -547,7 +573,21 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
             genres.append("Exercise")
             genres.append("Illness")
 
+
+                let swipeLeftRec = UISwipeGestureRecognizer()
+                let swipeUpRec = UISwipeGestureRecognizer()
+                let swipeDownRec = UISwipeGestureRecognizer()
+                let swipeRightRec = UISwipeGestureRecognizer()
+
+                swipeRightRec.addTarget(self, action: #selector(self.swipeR) )
+                swipeRightRec.direction = .right
+                self.view!.addGestureRecognizer(swipeRightRec)
+                
+                
+                swipeLeftRec.addTarget(self, action: #selector(self.swipeL) )
+                swipeLeftRec.direction = .left
             
+            self.view!.addGestureRecognizer(swipeLeftRec)
             
             ref = Database.database().reference()
             
@@ -564,8 +604,7 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
             
 
 
-            titleCollectionView.layer.cornerRadius = 10.0
-            titleCollectionView.clipsToBounds = true
+          
             
             backimage2.layer.cornerRadius = 10.0
             backimage2.clipsToBounds = true
@@ -588,7 +627,6 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
                 
             }
             
-            titleCollectionView.reloadData()
             
             //        addstaticbooks()
             
@@ -601,29 +639,202 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
             updater?.invalidate()
             player?.pause()
             
-        var screenSize = titleCollectionView.bounds
-                     var screenWidth = screenSize.width
-                     var screenHeight = screenSize.height
-
-                     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-                     layout.sectionInset = UIEdgeInsets(top: 10, left: 2, bottom: 10, right: 2)
-                  layout.itemSize = CGSize(width: screenWidth/1.1, height: screenWidth)
-                  layout.minimumInteritemSpacing = 0
-                  layout.minimumLineSpacing = 0
-
-                  titleCollectionView!.collectionViewLayout = layout
-            
+      
             
             queryforids { () -> Void in
                 
             }
             
+            
+            bookmarktapped = false
             // Do any additional setup after loading the view.
         }
+    
+    @objc func swipeR() {
+            
+        bookmarktapped = false
+                        taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                       
+            self.tapPrevious(nil)
+            
+        }
+        
+        @objc func swipeL() {
+            
+            
+            if didpurchase {
+                
+                bookmarktapped = false
+                                taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                               
+            self.tapNext(nil)
+                
+            } else {
+                
+                self.performSegue(withIdentifier: "HealthToSale1", sender: self)
+
+            }
+            
+            
+        }
+      
+      @IBAction func tapNext(_ sender: AnyObject?) {
+            
+            
+       
+                
+                counter += 1
+                
+            let book = self.book(atIndex: counter)
+                       //            if book?.bookID == "Title" {
+                       //
+                       //                return cell
+                       //
+                       //            } else {
+                       
+                       
+                       
+              let name = book?.name
+              let author = book?.author
+          
+          quotelabel.text = name
+          authorlabel.text = author
+        id = (book?.bookID)!
+                quotelabel.slideInFromRight()
+          authorlabel.slideInFromRight()
+                
+          
+        }
+    
+    var bookmarktapped = Bool()
+     var randomstring = String()
+    
+    @IBOutlet weak var taplike: UIButton!
+     var screenshot = UIImage()
+     
+     open func takeScreenshot(_ shouldSave: Bool = true) -> UIImage? {
+         var screenshotImage :UIImage?
+         let layer = UIApplication.shared.keyWindow!.layer
+         let scale = UIScreen.main.scale
+         UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+         guard let context = UIGraphicsGetCurrentContext() else {return nil}
+         layer.render(in:context)
+         screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
+         UIGraphicsEndImageContext()
+         if let image = screenshotImage, shouldSave {
+             
+             screenshot = image
+             
+         }
+         
+         return screenshotImage
+     }
+
+     @IBAction func tapShare(_ sender: Any) {
+         
+         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+               
+               alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+               
+               alert.addAction(UIAlertAction(title: "Share This Quote", style: .default, handler: { action in
+                   switch action.style{
+                   case .default:
+                       
+                       let text = "You need to hear this."
+                       
+                       var image = self.screenshot
+                     
+                       let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+                       
+                       let shareAll : Array = [text, image, myWebsite] as [Any]
+                       
+                       
+                       let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                       
+                       activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
+                       
+                       activityViewController.popoverPresentationController?.sourceView = self.view
+                       self.present(activityViewController, animated: true, completion: nil)
+                   case .cancel:
+                       print("cancel")
+                       
+                   case .destructive:
+                       print("destructive")
+                       
+                       
+                   }}))
+               present(alert, animated: true)
+     }
+       @IBAction func tapDownvote(_ sender: Any) {
+              
+              self.tapNext(nil)
+
+          }
+        
+     
+     @IBAction func tapLike(_ sender: Any) {
+         
+      randomstring = UUID().uuidString
+                              
+                     
+                     if bookmarktapped {
+                         
+                         ref?.child("Users").child(uid).child(id).removeValue()
+                         
+                         taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                         
+                         bookmarktapped = false
+                         
+                     } else {
+                         
+                         taplike.setBackgroundImage(UIImage(named: "DarkBookMark"), for: .normal)
+                         
+                         var trimmedtext = String()
+                         
+                         
+                         trimmedtext = quotelabel.text ?? "x"
+                         
+                         var authorget = authorlabel.text ?? "x"
+                         ref?.child("Users").child(uid).child(id).updateChildValues(["Name" : trimmedtext, "Author" : authorget])
+                         
+                         bookmarktapped = true
+                         
+                     }
+     }
+     
+      
+      @IBAction func tapPrevious(_ sender: AnyObject?) {
+                   
+                   
+             if counter > 0 {
+              
+                       
+                       counter -= 1
+                       
+               let book = self.book(atIndex: counter)
+                                   //            if book?.bookID == "Title" {
+                                   //
+                                   //                return cell
+                                   //
+                                   //            } else {
+                                   
+                                   
+                                   
+                          let name = book?.name
+                          let author = book?.author
+                      
+                      quotelabel.text = name
+                      authorlabel.text = author
+                id = (book?.bookID)!
+                       quotelabel.slideInFromLeft()
+                        authorlabel.slideInFromLeft()
+                 
+               }
+             
+         }
             
             func queryforids(completed: @escaping (() -> Void) ) {
 
-                       titleCollectionView.alpha = 0
 
                        var functioncounter = 0
 
@@ -697,6 +908,9 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
                 
             }
 
+    @IBOutlet weak var quotelabel: UILabel!
+    
+    @IBOutlet weak var authorlabel: UILabel!
         /*
         // MARK: - Navigation
 
@@ -722,3 +936,4 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
             return self.book(atIndex: indexPath.row)
         }
     }
+

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "By proceeding, you a.png",
+      "filename" : "DarkBookMark.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "By proceeding, you a@2x.png",
+      "filename" : "DarkBookMark@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "By proceeding, you a@3x.png",
+      "filename" : "DarkBookMark@3x.png",
       "scale" : "3x"
     }
   ],

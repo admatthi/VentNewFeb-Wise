@@ -14,9 +14,26 @@ import FirebaseDatabase
 class DepressionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
     
     @IBOutlet weak var backimage: UIImageView!
+    
+    var id = String()
     var books: [Book] = [] {
               didSet {
 
+                bookmarktapped = false
+                let book = self.book(atIndex: 0)
+                                           //            if book?.bookID == "Title" {
+                                           //
+                                           //                return cell
+                                           //
+                                           //            } else {
+                                           
+                                           
+                                           
+                                  let name = book?.name
+                                  let author = book?.author
+                id = (book?.bookID)!
+                              quotelabel.text = name
+                              authorlabel.text = author
 //                  self.titleCollectionView.reloadData()
 
               }
@@ -42,9 +59,10 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
             self.view.endEditing(true)
-            titleCollectionView.isUserInteractionEnabled = true
 
             if collectionView.tag == 1 {
+                
+                if didpurchase {
 
                 selectedindex = indexPath.row
 
@@ -65,6 +83,12 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                 
 
                 genreCollectionView.reloadData()
+                    
+                } else {
+                    
+                    self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+
+                }
 
             } else {
 
@@ -231,7 +255,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             
             
-//            genreCollectionView.alpha = 1
+            genreCollectionView.alpha = 1
             
             if selectedindex == 0 {
                 
@@ -529,15 +553,20 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
     var selectedindex = Int()
     @IBOutlet weak var genreCollectionView: UICollectionView!
     @IBOutlet weak var titleCollectionView: UICollectionView!
+    
+    var counter = Int()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        counter = 0
         
 //        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
 //                  let blurEffectView = UIVisualEffectView(effect: blurEffect)
 //                  blurEffectView.frame = backimage.bounds
 //                  blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 //                  backimage.addSubview(blurEffectView)
-//        
+//
 //        let blurEffect2 = UIBlurEffect(style: UIBlurEffect.Style.light)
 //                  let blurEffectView2 = UIVisualEffectView(effect: blurEffect)
 //                  blurEffectView2.frame = backimage2.bounds
@@ -567,6 +596,22 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         let result = dateFormatter.string(from: date)
         
         dateformat = result
+        
+        let swipeRightRec = UISwipeGestureRecognizer()
+            let swipeLeftRec = UISwipeGestureRecognizer()
+            let swipeUpRec = UISwipeGestureRecognizer()
+            let swipeDownRec = UISwipeGestureRecognizer()
+            
+            swipeRightRec.addTarget(self, action: #selector(self.swipeR) )
+            swipeRightRec.direction = .right
+            self.view!.addGestureRecognizer(swipeRightRec)
+            
+            
+            swipeLeftRec.addTarget(self, action: #selector(self.swipeL) )
+            swipeLeftRec.direction = .left
+        
+        self.view!.addGestureRecognizer(swipeLeftRec)
+
         
 //
 //
@@ -629,9 +674,105 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
         }
         
-        
+        bookmarktapped = false
         // Do any additional setup after loading the view.
     }
+    
+    @objc func swipeR() {
+          
+        if didpurchase {
+            
+            bookmarktapped = false
+                          taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+          self.tapPrevious(nil)
+            
+        } else {
+            
+            self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+
+        }
+          
+      }
+      
+      @objc func swipeL() {
+          
+          
+          
+          if didpurchase {
+            
+            bookmarktapped = false
+                          taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                   self.tapNext(nil)
+
+                 } else {
+                     
+                     self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+
+                 }
+                   
+      }
+    
+    @IBAction func tapNext(_ sender: AnyObject?) {
+          
+          
+     taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+             
+             bookmarktapped = false
+              
+              counter += 1
+              
+          let book = self.book(atIndex: counter)
+                     //            if book?.bookID == "Title" {
+                     //
+                     //                return cell
+                     //
+                     //            } else {
+                     
+                     
+                     
+            let name = book?.name
+            let author = book?.author
+        id = (book?.bookID)!
+        quotelabel.text = name
+        authorlabel.text = author
+        
+              quotelabel.slideInFromRight()
+        authorlabel.slideInFromRight()
+              
+        
+      }
+    
+    @IBAction func tapPrevious(_ sender: AnyObject?) {
+            
+            taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                    
+                    bookmarktapped = false
+
+        if counter > 0 {
+                counter -= 1
+                
+        let book = self.book(atIndex: counter)
+                            //            if book?.bookID == "Title" {
+                            //
+                            //                return cell
+                            //
+                            //            } else {
+                            
+                            
+                            
+                   let name = book?.name
+                   let author = book?.author
+               id = (book?.bookID)!
+               quotelabel.text = name
+               authorlabel.text = author
+            
+                quotelabel.slideInFromLeft()
+                 authorlabel.slideInFromLeft()
+          
+        }
+        
+    }
+      
         
     func addstaticbooks() {
 
@@ -724,6 +865,117 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             })
             
         }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+         if motion == .motionShake {
+             
+             takeScreenshot(true)
+             
+         }
+     }
+    
+    var screenshot = UIImage()
+    
+    open func takeScreenshot(_ shouldSave: Bool = true) -> UIImage? {
+        var screenshotImage :UIImage?
+        let layer = UIApplication.shared.keyWindow!.layer
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+        guard let context = UIGraphicsGetCurrentContext() else {return nil}
+        layer.render(in:context)
+        screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        if let image = screenshotImage, shouldSave {
+            
+            screenshot = image
+            
+        }
+        
+        return screenshotImage
+    }
+
+    @IBAction func tapShare(_ sender: Any) {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+              
+              alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+              
+              alert.addAction(UIAlertAction(title: "Share This Quote", style: .default, handler: { action in
+                  switch action.style{
+                  case .default:
+                      
+                      let text = "You need to hear this."
+                      
+                      var image = self.screenshot
+                    
+                      let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+                      
+                      let shareAll : Array = [text, image, myWebsite] as [Any]
+                      
+                      
+                      let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                      
+                      activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
+                      
+                      activityViewController.popoverPresentationController?.sourceView = self.view
+                      self.present(activityViewController, animated: true, completion: nil)
+                  case .cancel:
+                      print("cancel")
+                      
+                  case .destructive:
+                      print("destructive")
+                      
+                      
+                  }}))
+              present(alert, animated: true)
+    }
+    @IBOutlet weak var authorlabel: UILabel!
+    
+    @IBOutlet weak var taplike: UIButton!
+    
+    var bookmarktapped = Bool()
+    var randomstring = String()
+    
+  @IBAction func tapLike(_ sender: Any) {
+        
+      randomstring = UUID().uuidString
+                             
+                    
+                    if bookmarktapped {
+                        
+                        ref?.child("Users").child(uid).child(id).removeValue()
+                        
+                        taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                        
+                        bookmarktapped = false
+                        
+                    } else {
+                        
+                        taplike.setBackgroundImage(UIImage(named: "DarkBookMark"), for: .normal)
+                        
+                        var trimmedtext = String()
+                        
+                        
+                        trimmedtext = quotelabel.text ?? "x"
+                        
+                        var authorget = authorlabel.text ?? "x"
+                        ref?.child("Users").child(uid).child(id).updateChildValues(["Name" : trimmedtext, "Author" : authorget])
+                        
+                        bookmarktapped = true
+                        
+                    }
+        
+    }
+    
+    
+    
+    @IBAction func tapDownvote(_ sender: Any) {
+        
+        self.tapNext(nil)
+
+    }
+    @IBOutlet weak var quotelabel: UILabel!
+    
 
     /*
     // MARK: - Navigation
@@ -734,6 +986,49 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+extension UIView {
+func slideInFromLeft(duration: TimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
+     // Create a CATransition animation
+     let slideInFromLeftTransition = CATransition()
+     
+     // Set its callback delegate to the completionDelegate that was provided (if any)
+     if let delegate: AnyObject = completionDelegate {
+         slideInFromLeftTransition.delegate = delegate as! CAAnimationDelegate
+     }
+     
+     // Customize the animation's properties
+    slideInFromLeftTransition.type = CATransitionType.push
+    slideInFromLeftTransition.subtype = CATransitionSubtype.fromLeft
+     slideInFromLeftTransition.duration = duration
+    slideInFromLeftTransition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+    slideInFromLeftTransition.fillMode = CAMediaTimingFillMode.removed
+     
+     // Add the animation to the View's layer
+     self.layer.add(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
+ }
+ 
+ func slideInFromRight(duration: TimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
+     // Create a CATransition animation
+     let slideInFromRightTransition = CATransition()
+     
+     // Set its callback delegate to the completionDelegate that was provided (if any)
+     if let delegate: AnyObject = completionDelegate {
+         slideInFromRightTransition.delegate = delegate as! CAAnimationDelegate
+     }
+     
+     // Customize the animation's properties
+    slideInFromRightTransition.type = CATransitionType.push
+    slideInFromRightTransition.subtype = CATransitionSubtype.fromRight
+     slideInFromRightTransition.duration = duration
+    slideInFromRightTransition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+    slideInFromRightTransition.fillMode = CAMediaTimingFillMode.removed
+     
+     // Add the animation to the View's layer
+     self.layer.add(slideInFromRightTransition, forKey: "slideInFromRightTransition")
+ }
 
 }
 

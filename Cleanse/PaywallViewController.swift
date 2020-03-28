@@ -102,11 +102,11 @@ class PaywallViewController: UIViewController {
         
         ref = Database.database().reference()
         
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = backimage.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        backimage.addSubview(blurEffectView)
+//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = backimage.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        backimage.addSubview(blurEffectView)
         
         tapcontinue.layer.cornerRadius = 5.0
         
@@ -145,17 +145,18 @@ class PaywallViewController: UIViewController {
             if let slimey = value?["Slimey"] as? String {
 
                 slimeybool = true
-                
+                self.value1.text = "30 Day Money Back Guarantee"
+
                 
                 self.termstext.alpha = 0
                          self.leadingtext.alpha = 0
                         self.disclaimertext.alpha = 0
-                         self.tapcontinue.setTitle("Try for FREE", for: .normal)
+                         self.tapcontinue.setTitle("Continue", for: .normal)
                 
             } else {
                 
                 slimeybool = false
-                self.value1.text = "3 Day Free Trial"
+                self.value1.text = "Special Offer!"
 
                 self.termstext.alpha = 1
                   self.leadingtext.alpha = 1

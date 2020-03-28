@@ -13,12 +13,28 @@ import FirebaseDatabase
 
 class LoveViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    var id = String()
    @IBOutlet weak var backimage: UIImageView!
         var books: [Book] = [] {
                   didSet {
+                    
+                    bookmarktapped = false
 
-                      self.titleCollectionView.reloadData()
-
+                    let book = self.book(atIndex: 0)
+                                               //            if book?.bookID == "Title" {
+                                               //
+                                               //                return cell
+                                               //
+                                               //            } else {
+                                               
+                                               
+                                               
+                                      let name = book?.name
+                                      let author = book?.author
+                    id = (book?.bookID)!
+                                  quotelabel.text = name
+                                  authorlabel.text = author
+                    
                   }
               }
           var genreindex = Int()
@@ -55,9 +71,10 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
                 let generator = UIImpactFeedbackGenerator(style: .heavy)
                 generator.impactOccurred()
                 self.view.endEditing(true)
-                titleCollectionView.isUserInteractionEnabled = true
 
                 if collectionView.tag == 1 {
+                    
+                    if didpurchase {
 
                     selectedindex = indexPath.row
 
@@ -77,6 +94,12 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
                     
 
                     genreCollectionView.reloadData()
+                        
+                    } else {
+                        
+                        self.performSegue(withIdentifier: "LoveToSale", sender: self)
+
+                    }
 
                 } else {
 
@@ -542,7 +565,21 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
         override func viewDidLoad() {
             super.viewDidLoad()
             
+
+              let swipeLeftRec = UISwipeGestureRecognizer()
+              let swipeUpRec = UISwipeGestureRecognizer()
+              let swipeDownRec = UISwipeGestureRecognizer()
+              let swipeRightRec = UISwipeGestureRecognizer()
+
+              swipeRightRec.addTarget(self, action: #selector(self.swipeR) )
+              swipeRightRec.direction = .right
+              self.view!.addGestureRecognizer(swipeRightRec)
+              
+              
+              swipeLeftRec.addTarget(self, action: #selector(self.swipeL) )
+              swipeLeftRec.direction = .left
           
+          self.view!.addGestureRecognizer(swipeLeftRec)
             
             genres.removeAll()
             genres.append("Relationships")
@@ -566,8 +603,6 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
             
 
 
-            titleCollectionView.layer.cornerRadius = 10.0
-            titleCollectionView.clipsToBounds = true
             
             backimage.layer.cornerRadius = 10.0
             backimage.clipsToBounds = true
@@ -590,7 +625,6 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
                 
             }
             
-            titleCollectionView.reloadData()
             
             //        addstaticbooks()
             
@@ -603,29 +637,203 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
             updater?.invalidate()
             player?.pause()
             
-            var screenSize = titleCollectionView.bounds
-                     var screenWidth = screenSize.width
-                     var screenHeight = screenSize.height
-
-                     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-                     layout.sectionInset = UIEdgeInsets(top: 10, left: 2, bottom: 10, right: 2)
-                  layout.itemSize = CGSize(width: screenWidth/1.1, height: screenWidth)
-                  layout.minimumInteritemSpacing = 0
-                  layout.minimumLineSpacing = 0
-
-                  titleCollectionView!.collectionViewLayout = layout
+           
             
             
             queryforids { () -> Void in
                 
             }
             
+            bookmarktapped = false
             // Do any additional setup after loading the view.
         }
+    
+    @objc func swipeR() {
             
-            func queryforids(completed: @escaping (() -> Void) ) {
+        bookmarktapped = false
+                        taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                       
+            self.tapPrevious(nil)
+            
+        }
+        
+        @objc func swipeL() {
+            
+            
+            if didpurchase {
+                
+                bookmarktapped = false
+                                taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                               
+            self.tapNext(nil)
+                
+             } else {
+                                      
+                                      self.performSegue(withIdentifier: "LoveToSale", sender: self)
 
-                       titleCollectionView.alpha = 0
+                                  }
+            
+            
+        }
+      
+      @IBAction func tapNext(_ sender: AnyObject?) {
+            
+            
+       
+                
+                counter += 1
+                
+            let book = self.book(atIndex: counter)
+                       //            if book?.bookID == "Title" {
+                       //
+                       //                return cell
+                       //
+                       //            } else {
+                       
+                       
+                       
+              let name = book?.name
+              let author = book?.author
+        id = (book?.bookID)!
+          quotelabel.text = name
+          authorlabel.text = author
+          
+                quotelabel.slideInFromRight()
+          authorlabel.slideInFromRight()
+                
+          
+        }
+      
+      @IBAction func tapPrevious(_ sender: AnyObject?) {
+              
+              
+        if counter > 0 {
+         
+                  
+                  counter -= 1
+                  
+          let book = self.book(atIndex: counter)
+                              //            if book?.bookID == "Title" {
+                              //
+                              //                return cell
+                              //
+                              //            } else {
+                              
+                              
+                              
+                     let name = book?.name
+                     let author = book?.author
+            id = (book?.bookID)!
+                 quotelabel.text = name
+                 authorlabel.text = author
+              
+                  quotelabel.slideInFromLeft()
+                   authorlabel.slideInFromLeft()
+            
+          }
+        
+    }
+    
+    var bookmarktapped = Bool()
+     var randomstring = String()
+     
+    @IBOutlet weak var taplike: UIButton!
+   @IBAction func tapLike(_ sender: Any) {
+        
+        randomstring = UUID().uuidString
+                             
+                    
+                    if bookmarktapped {
+                        
+                        ref?.child("Users").child(uid).child(id).removeValue()
+                        
+                        taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                        
+                        bookmarktapped = false
+                        
+                    } else {
+                        
+                        taplike.setBackgroundImage(UIImage(named: "DarkBookMark"), for: .normal)
+                        
+                        var trimmedtext = String()
+                        
+                        
+                        trimmedtext = quotelabel.text ?? "x"
+                        
+                        var authorget = authorlabel.text ?? "x"
+                        ref?.child("Users").child(uid).child(id).updateChildValues(["Name" : trimmedtext, "Author" : authorget])
+                        
+                        bookmarktapped = true
+                        
+                    }
+    }
+    
+      var screenshot = UIImage()
+     
+     open func takeScreenshot(_ shouldSave: Bool = true) -> UIImage? {
+         var screenshotImage :UIImage?
+         let layer = UIApplication.shared.keyWindow!.layer
+         let scale = UIScreen.main.scale
+         UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+         guard let context = UIGraphicsGetCurrentContext() else {return nil}
+         layer.render(in:context)
+         screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
+         UIGraphicsEndImageContext()
+         if let image = screenshotImage, shouldSave {
+             
+             screenshot = image
+             
+         }
+         
+         return screenshotImage
+     }
+
+     @IBAction func tapShare(_ sender: Any) {
+         
+         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+               
+               alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+               
+               alert.addAction(UIAlertAction(title: "Share This Quote", style: .default, handler: { action in
+                   switch action.style{
+                   case .default:
+                       
+                       let text = "You need to hear this."
+                       
+                       var image = self.screenshot
+                     
+                       let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+                       
+                       let shareAll : Array = [text, image, myWebsite] as [Any]
+                       
+                       
+                       let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                       
+                       activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
+                       
+                       activityViewController.popoverPresentationController?.sourceView = self.view
+                       self.present(activityViewController, animated: true, completion: nil)
+                   case .cancel:
+                       print("cancel")
+                       
+                   case .destructive:
+                       print("destructive")
+                       
+                       
+                   }}))
+               present(alert, animated: true)
+     }
+    @IBAction func tapDownvote(_ sender: Any) {
+           
+           self.tapNext(nil)
+
+       }
+     
+    @IBOutlet weak var quotelabel: UILabel!
+    
+    @IBOutlet weak var authorlabel: UILabel!
+    func queryforids(completed: @escaping (() -> Void) ) {
+
 
                        var functioncounter = 0
 
@@ -724,3 +932,4 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
             return self.book(atIndex: indexPath.row)
         }
     }
+
