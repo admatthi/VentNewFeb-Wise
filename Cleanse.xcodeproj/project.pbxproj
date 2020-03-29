@@ -42,6 +42,7 @@
 		9DD64A2D2376073000F159E5 /* FreeToPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */; };
 		9DD64A2F23760A1D00F159E5 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2E23760A1D00F159E5 /* HomeTabViewController.swift */; };
 		9DD9B400239C047A0061D960 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9B3FF239C047A0061D960 /* HomeTableViewCell.swift */; };
+		9DE1C834243139B200F73A0C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE1C833243139B200F73A0C /* StoreKit.framework */; };
 		9DE8FCE3242469980035E3DA /* LoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE8FCE2242469980035E3DA /* LoveViewController.swift */; };
 		9DE8FCE5242469C60035E3DA /* HealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE8FCE4242469C50035E3DA /* HealthViewController.swift */; };
 		9DE8FCE7242469DB0035E3DA /* HappinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE8FCE6242469DB0035E3DA /* HappinessViewController.swift */; };
@@ -114,6 +115,8 @@
 		9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeToPlayViewController.swift; sourceTree = "<group>"; };
 		9DD64A2E23760A1D00F159E5 /* HomeTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		9DD9B3FF239C047A0061D960 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		9DE1C832243139A000F73A0C /* Motivation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Motivation.entitlements; sourceTree = "<group>"; };
+		9DE1C833243139B200F73A0C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9DE8FCE2242469980035E3DA /* LoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoveViewController.swift; sourceTree = "<group>"; };
 		9DE8FCE4242469C50035E3DA /* HealthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthViewController.swift; sourceTree = "<group>"; };
 		9DE8FCE6242469DB0035E3DA /* HappinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappinessViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3423CF18D20C0F0F34AC59B7 /* Pods_Cleanse.framework in Frameworks */,
+				9DE1C834243139B200F73A0C /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +196,7 @@
 		9D7360E5236513DC00DC6ACB /* Cleanse */ = {
 			isa = PBXGroup;
 			children = (
+				9DE1C832243139A000F73A0C /* Motivation.entitlements */,
 				9D7360E6236513DC00DC6ACB /* AppDelegate.swift */,
 				9D328D0923651B26003768CF /* Main.storyboard */,
 				9DD9B3FF239C047A0061D960 /* HomeTableViewCell.swift */,
@@ -262,6 +267,7 @@
 		EEA43C460DA113541D36120A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9DE1C833243139B200F73A0C /* StoreKit.framework */,
 				7BF6CB590CDB6663324A2D2C /* Pods_Cleanse.framework */,
 				BB4E75DE477705A6F1FDAAF7 /* Pods_CleanseTests.framework */,
 				6BD8617D94B10E205003682E /* Pods_CleanseUITests.framework */,
@@ -281,6 +287,7 @@
 				9D7360E0236513DC00DC6ACB /* Frameworks */,
 				9D7360E1236513DC00DC6ACB /* Resources */,
 				5185DEDA10B031C74C1493A3 /* [CP] Embed Pods Frameworks */,
+				94FF85ADC8A432CDB43F9DAA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -443,6 +450,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Purchases/Purchases.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -457,6 +465,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Purchases.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -486,6 +495,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94FF85ADC8A432CDB43F9DAA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cleanse/Pods-Cleanse-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInAppMessaging/InAppMessagingDisplayResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppMessagingDisplayResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cleanse/Pods-Cleanse-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C9D17F181A0BEF726DF2A501 /* [CP] Check Pods Manifest.lock */ = {
@@ -710,6 +741,7 @@
 			baseConfigurationReference = 3FFB7E1A40DB188ABB430764 /* Pods-Cleanse.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-57";
+				CODE_SIGN_ENTITLEMENTS = Cleanse/Motivation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -722,7 +754,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.0;
+				MARKETING_VERSION = 3.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.CleanseRecipes;
 				PRODUCT_NAME = Motivation;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -736,6 +768,7 @@
 			baseConfigurationReference = 6E785B0B06B646A92655E699 /* Pods-Cleanse.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-57";
+				CODE_SIGN_ENTITLEMENTS = Cleanse/Motivation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -748,7 +781,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.0;
+				MARKETING_VERSION = 3.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.CleanseRecipes;
 				PRODUCT_NAME = Motivation;
 				PROVISIONING_PROFILE_SPECIFIER = "";

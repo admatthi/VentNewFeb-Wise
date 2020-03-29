@@ -14,6 +14,8 @@ import FirebaseStorage
 import Purchases
 import FBSDKCoreKit
 import IQKeyboardManager
+import FirebaseMessaging
+import AppsFlyerLib
 
 var entereddiscount = String()
 
@@ -24,8 +26,22 @@ var monthdate = String()
 var dayweek = String()
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate, AppsFlyerTrackerDelegate {
+    func onConversionDataSuccess(_ conversionInfo: [AnyHashable : Any]) {
+        print("success")
+    }
+    
+    
+    
+    
+    func onConversionDataFail(_ error: Error) {
+        print("\(error)")
 
+    }
+    
+    @objc func sendLaunch(app:Any) {
+        AppsFlyerTracker.shared().trackAppLaunch()
+    }
     var window: UIWindow?
 
 
@@ -36,6 +52,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AppEvents.activateApp()
         
+        AppsFlyerTracker.shared().appsFlyerDevKey = "GSfLvX3FDxH58hR3yDZzZe"
+        AppsFlyerTracker.shared().appleAppID = "1486018778"
+        AppsFlyerTracker.shared().delegate = self
+        AppsFlyerTracker.shared().isDebug = true
+
+        NotificationCenter.default.addObserver(self,
+        selector: #selector(sendLaunch),
+        // For Swift version < 4.2 replace name argument with the commented out code
+        name: UIApplication.didBecomeActiveNotification, //.UIApplicationDidBecomeActive for Swift < 4.2
+        object: nil)
+        
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
         
         Purchases.debugLogsEnabled = true
         Purchases.configure(withAPIKey: "paCLaBYrGELMfdxuMQqbROxMfgDbcGGn", appUserID: nil)
@@ -84,7 +113,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //          }
         
         queryforpaywall()
+        
+        
+       if #available(iOS 10.0, *) {
+          // For iOS 10 display notification (sent via APNS)
+          UNUserNotificationCenter.current().delegate = self
+
+          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+          UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in })
+        } else {
+          let settings: UIUserNotificationSettings =
+          UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+          application.registerUserNotificationSettings(settings)
+        }
+        
+        Messaging.messaging().delegate = self
+
         return true
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+      print("Firebase registration token: \(fcmToken)")
+
+      let dataDict:[String: String] = ["token": fcmToken]
+      NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        
+        InstanceID.instanceID().instanceID { (result, error) in
+          if let error = error {
+            print("Error fetching remote instance ID: \(error)")
+          } else if let result = result {
+            print("Remote instance ID token: \(result.token)")
+        
+
+          }
+        }
+      // TODO: If necessary send token to application server.
+      // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print(deviceTokenString)
+        
+        
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+
+            print("i am not available in simulator \(error)")
     }
     
     func queryforpaywall() {

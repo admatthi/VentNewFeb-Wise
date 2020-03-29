@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import Purchases
 import FBSDKCoreKit
+import AppsFlyerLib
+
 var refer = String()
 
 @objc protocol SwiftPaywallDelegate {
@@ -70,6 +72,15 @@ class PaywallViewController: UIViewController {
                           ref?.child("Users").child(uid).updateChildValues(["Purchased" : "True"])
                           
                           didpurchase = true
+                        
+                        AppsFlyerTracker.shared().trackEvent("purchase",
+                        withValues: [
+                            AFEventParamContentId:"1234567",
+                            AFEventParamContentType : "category_a",
+                            AFEventParamRevenue: 20,
+                            AFEventParamCurrency:"USD"
+                        ]);
+                        
                           self.dismiss(animated: true, completion: nil)
                           
                       } else {

@@ -12,6 +12,10 @@ pod 'Firebase/Storage'
 pod 'Purchases'
 pod 'FBSDKCoreKit'
 pod 'IQKeyboardManager'
+pod 'Firebase/InAppMessaging'
+pod 'Firebase/Messaging'
+pod 'AppsFlyerFramework'
+
 
 
   # Pods for Cleanse

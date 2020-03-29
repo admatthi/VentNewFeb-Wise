@@ -555,6 +555,8 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        counter = 0
+        
         queryforids { () -> Void in
             
         }
@@ -672,7 +674,11 @@ class FavoritesViewController: UIViewController {
               if didpurchase {
                 
                 bookmarktapped = false
+                
+                    
                        self.tapNext(nil)
+                    
+                
 
                      } else {
                          
@@ -685,6 +691,8 @@ class FavoritesViewController: UIViewController {
         @IBAction func tapNext(_ sender: AnyObject?) {
               
               
+            if counter < books.count-1 {
+
          taplike.setBackgroundImage(UIImage(named: "DarkBookMark"), for: .normal)
                  
                  bookmarktapped = false
@@ -709,6 +717,7 @@ class FavoritesViewController: UIViewController {
                   quotelabel.slideInFromRight()
             authorlabel.slideInFromRight()
                   
+            }
             
           }
         
@@ -912,7 +921,9 @@ class FavoritesViewController: UIViewController {
             
             randomstring = UUID().uuidString
                             
-                
+                let generator = UIImpactFeedbackGenerator(style: .heavy)
+                generator.impactOccurred()
+            
                 if bookmarktapped {
                     
         
@@ -920,12 +931,12 @@ class FavoritesViewController: UIViewController {
                 } else {
                     
                 ref?.child("Users").child(uid).child(id).removeValue()
+                    books.remove(at: counter)
 
-                    taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                    counter -= 1
                     
                     tapNext(nil)
                     
-                    bookmarktapped = true
                     
                 }
                 
