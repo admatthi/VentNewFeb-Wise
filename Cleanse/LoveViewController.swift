@@ -718,7 +718,7 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
         counter += 1
         
         if counter < books.count {
-
+swipeRight(referrer: referrer)
         let book = self.book(atIndex: counter)
         //            if book?.bookID == "Title" {
         //

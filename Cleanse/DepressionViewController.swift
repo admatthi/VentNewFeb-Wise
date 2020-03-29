@@ -756,7 +756,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             //
             //            } else {
             
-            
+            swipeRight(referrer: referrer)
             
             let name = book?.name
             let author = book?.author

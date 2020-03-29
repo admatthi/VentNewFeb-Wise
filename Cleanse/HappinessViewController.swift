@@ -12,6 +12,9 @@ import FirebaseCore
 import FirebaseDatabase
 import FBSDKCoreKit
 
+func swipeRight(referrer : String) {
+    AppEvents.logEvent(AppEvents.Name(rawValue: "downvote tapped"))
+}
 class HappinessViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate  {
     
     func logFavoriteTapped(referrer : String) {
@@ -727,7 +730,8 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             print("books = \(books.count) and \(counter)")
             blur.slideInFromRight()
 
-        
+            swipeRight(referrer: referrer)
+            
         let book = self.book(atIndex: counter)
         //            if book?.bookID == "Title" {
         //
