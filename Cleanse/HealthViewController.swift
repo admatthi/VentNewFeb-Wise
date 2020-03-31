@@ -603,6 +603,25 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
         genres.append("Dieting")
         genres.append("Exercise")
         genres.append("Illness")
+        
+        backgroundimages.removeAll()
+          backgroundimages.append(UIImage(named: "plants1")!)
+          backgroundimages.append(UIImage(named: "plants2")!)
+          backgroundimages.append(UIImage(named: "plants3")!)
+          backgroundimages.append(UIImage(named: "plants4")!)
+            backgroundimages.append(UIImage(named: "plants5")!)
+            backgroundimages.append(UIImage(named: "plants6")!)
+          backgroundimages.append(UIImage(named: "plants7")!)
+            backgroundimages.append(UIImage(named: "plants8")!)
+            backgroundimages.append(UIImage(named: "plants9")!)
+          backgroundimages.append(UIImage(named: "plants10")!)
+            backgroundimages.append(UIImage(named: "plants11")!)
+            backgroundimages.append(UIImage(named: "plants12")!)
+          
+          var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+          backimage2.image = backgroundimages[backgroundcounter]
+          
+        
         if didpurchase {
             
             quotelabel.alpha = 1
@@ -716,6 +735,12 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         if counter < books.count {
 swipeRight(referrer: referrer)
+            
+            var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+                        backimage2.image = backgroundimages[backgroundcounter]
+            backimage2.slideInFromRight()
+
+            
         let book = self.book(atIndex: counter)
         //            if book?.bookID == "Title" {
         //
@@ -779,13 +804,14 @@ swipeRight(referrer: referrer)
     @IBAction func tapShare(_ sender: Any) {
         
         logTapShare(referrer: referrer)
-        let text = "You need to hear this."
-                             
-                             var image = self.screenshot
-                           
-                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
-                             
-                             let shareAll : Array = [text, image, myWebsite] as [Any]
+            takeScreenshot()
+               let text = ""
+                                     
+                                     var image = self.screenshot
+        //
+        //                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+                                     
+                                     let shareAll : Array = [image] as [Any]
                              
                              
                              let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
@@ -850,6 +876,10 @@ swipeRight(referrer: referrer)
             
             
             counter -= 1
+            
+            var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+                             backimage2.image = backgroundimages[backgroundcounter]
+                 backimage2.slideInFromLeft()
             
             let book = self.book(atIndex: counter)
             //            if book?.bookID == "Title" {

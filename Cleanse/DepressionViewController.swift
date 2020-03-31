@@ -12,6 +12,8 @@ import FirebaseCore
 import FirebaseDatabase
 import FBSDKCoreKit
 
+var backgroundimages = [UIImage]()
+
 class DepressionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
     
     @IBOutlet weak var backimage: UIImageView!
@@ -603,6 +605,26 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         genres.append("Taxation")
         genres.append("Investing")
         
+        backgroundimages.removeAll()
+        backgroundimages.append(UIImage(named: "sunrise1")!)
+        backgroundimages.append(UIImage(named: "sunrise2")!)
+        backgroundimages.append(UIImage(named: "sunrise3")!)
+        backgroundimages.append(UIImage(named: "sunrise4")!)
+          backgroundimages.append(UIImage(named: "sunrise5")!)
+          backgroundimages.append(UIImage(named: "sunrise6")!)
+        backgroundimages.append(UIImage(named: "sunrise7")!)
+          backgroundimages.append(UIImage(named: "sunrise8")!)
+          backgroundimages.append(UIImage(named: "sunrise9")!)
+        backgroundimages.append(UIImage(named: "sunrise10")!)
+          backgroundimages.append(UIImage(named: "sunrise11")!)
+          backgroundimages.append(UIImage(named: "sunrise12")!)
+        
+        var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+        backimage2.image = backgroundimages[backgroundcounter]
+        
+        
+        
+        
         if didpurchase {
             
             quotelabel.alpha = 1
@@ -622,10 +644,13 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    @IBOutlet weak var backimage3: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         counter = 0
+        
+    
         
         //        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
         //                  let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -739,6 +764,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    
     @IBAction func tapNext(_ sender: AnyObject?) {
         
         
@@ -748,7 +774,8 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         if counter < books.count {
             
-            
+            var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+                backimage2.image = backgroundimages[backgroundcounter]
             let book = self.book(atIndex: counter)
             //            if book?.bookID == "Title" {
             //
@@ -766,6 +793,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             quotelabel.slideInFromRight()
             authorlabel.slideInFromRight()
+            backimage2.slideInFromRight()
             
             if didpurchase {
                 
@@ -799,6 +827,9 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         if counter > 0 {
             counter -= 1
             
+            var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+                backimage2.image = backgroundimages[backgroundcounter]
+            
             let book = self.book(atIndex: counter)
             //            if book?.bookID == "Title" {
             //
@@ -814,8 +845,10 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             quotelabel.text = name
             authorlabel.text = author
             
-            quotelabel.slideInFromLeft()
-            authorlabel.slideInFromLeft()
+            blur.slideInFromTop()
+            quotelabel.slideInFromTop()
+            authorlabel.slideInFromTop()
+            backimage2.slideInFromTop()
             
             if didpurchase {
                 
@@ -828,7 +861,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                 quotelabel.alpha = 0
                 authorlabel.alpha = 0
                 blur.alpha = 1
-                blur.slideInFromLeft()
+                blur.slideInFromTop()
             }
             
             
@@ -960,13 +993,14 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func tapShare(_ sender: Any) {
         
         logTapShare(referrer: referrer)
-        let text = "You need to hear this."
-        
-        var image = self.screenshot
-        
-        let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
-        
-        let shareAll : Array = [text, image, myWebsite] as [Any]
+        takeScreenshot()
+               let text = ""
+                                     
+                                     var image = self.screenshot
+        //
+        //                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+                                     
+                                     let shareAll : Array = [image] as [Any]
         
         
         let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
@@ -1051,25 +1085,49 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
 }
 
 extension UIView {
-func slideInFromLeft(duration: TimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
+func slideInFromTop(duration: TimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
      // Create a CATransition animation
-     let slideInFromLeftTransition = CATransition()
+     let slideInFromTopTransition = CATransition()
      
      // Set its callback delegate to the completionDelegate that was provided (if any)
      if let delegate: AnyObject = completionDelegate {
-         slideInFromLeftTransition.delegate = delegate as! CAAnimationDelegate
+         slideInFromTopTransition.delegate = delegate as! CAAnimationDelegate
      }
      
      // Customize the animation's properties
-    slideInFromLeftTransition.type = CATransitionType.push
-    slideInFromLeftTransition.subtype = CATransitionSubtype.fromLeft
-     slideInFromLeftTransition.duration = duration
-    slideInFromLeftTransition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-    slideInFromLeftTransition.fillMode = CAMediaTimingFillMode.removed
+    slideInFromTopTransition.type = CATransitionType.push
+    slideInFromTopTransition.subtype = CATransitionSubtype.fromLeft
+     slideInFromTopTransition.duration = duration
+    slideInFromTopTransition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+    slideInFromTopTransition.fillMode = CAMediaTimingFillMode.removed
      
      // Add the animation to the View's layer
-     self.layer.add(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
+     self.layer.add(slideInFromTopTransition, forKey: "slideInFromTopTransition")
  }
+    
+    func slideInFromBottom(duration: TimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
+        // Create a CATransition animation
+        let slideInFromBottomTransition = CATransition()
+        
+        // Set its callback delegate to the completionDelegate that was provided (if any)
+        if let delegate: AnyObject = completionDelegate {
+            slideInFromBottomTransition.delegate = delegate as! CAAnimationDelegate
+        }
+        
+        // Customize the animation's properties
+       slideInFromBottomTransition.type = CATransitionType.push
+       slideInFromBottomTransition.subtype = CATransitionSubtype.fromTop
+        slideInFromBottomTransition.duration = duration
+       slideInFromBottomTransition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+       slideInFromBottomTransition.fillMode = CAMediaTimingFillMode.removed
+        
+        // Add the animation to the View's layer
+        self.layer.add(slideInFromBottomTransition, forKey: "slideInFromBottomTransition")
+    }
+    
+
+    
+    
  
  func slideInFromRight(duration: TimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
      // Create a CATransition animation
@@ -1090,6 +1148,27 @@ func slideInFromLeft(duration: TimeInterval = 0.5, completionDelegate: AnyObject
      // Add the animation to the View's layer
      self.layer.add(slideInFromRightTransition, forKey: "slideInFromRightTransition")
  }
+    
+    
+    func slideInFromLeft(duration: TimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
+        // Create a CATransition animation
+        let slideInFromRightTransition = CATransition()
+        
+        // Set its callback delegate to the completionDelegate that was provided (if any)
+        if let delegate: AnyObject = completionDelegate {
+            slideInFromRightTransition.delegate = delegate as! CAAnimationDelegate
+        }
+        
+        // Customize the animation's properties
+       slideInFromRightTransition.type = CATransitionType.push
+       slideInFromRightTransition.subtype = CATransitionSubtype.fromRight
+        slideInFromRightTransition.duration = duration
+       slideInFromRightTransition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+       slideInFromRightTransition.fillMode = CAMediaTimingFillMode.removed
+        
+        // Add the animation to the View's layer
+        self.layer.add(slideInFromRightTransition, forKey: "slideInFromRightTransition")
+    }
     
     
   

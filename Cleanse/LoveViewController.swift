@@ -594,8 +594,8 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         tapNext(nil)
     }
-    @IBOutlet weak var backimage2: UIImageView!
     @IBOutlet weak var depression: UIImageView!
+    @IBOutlet weak var backimage2: UIImageView!
     var selectedindex = Int()
     @IBOutlet weak var genreCollectionView: UICollectionView!
     @IBOutlet weak var titleCollectionView: UICollectionView!
@@ -605,6 +605,24 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
         genres.append("Family")
         genres.append("Friends")
         genres.append("Self")
+        
+        backgroundimages.removeAll()
+          backgroundimages.append(UIImage(named: "sunrise1")!)
+          backgroundimages.append(UIImage(named: "sunrise2")!)
+          backgroundimages.append(UIImage(named: "sunrise3")!)
+          backgroundimages.append(UIImage(named: "sunrise4")!)
+            backgroundimages.append(UIImage(named: "sunrise5")!)
+            backgroundimages.append(UIImage(named: "sunrise6")!)
+          backgroundimages.append(UIImage(named: "sunrise7")!)
+            backgroundimages.append(UIImage(named: "sunrise8")!)
+            backgroundimages.append(UIImage(named: "sunrise9")!)
+          backgroundimages.append(UIImage(named: "sunrise10")!)
+            backgroundimages.append(UIImage(named: "sunrise11")!)
+            backgroundimages.append(UIImage(named: "sunrise12")!)
+          
+          var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+          backimage2.image = backgroundimages[backgroundcounter]
+          
         
         if didpurchase {
             
@@ -661,8 +679,8 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         
         
-        backimage.layer.cornerRadius = 10.0
-        backimage.clipsToBounds = true
+        backimage2.layer.cornerRadius = 10.0
+        backimage2.clipsToBounds = true
         
         
         
@@ -736,7 +754,9 @@ swipeRight(referrer: referrer)
         
         quotelabel.slideInFromRight()
         authorlabel.slideInFromRight()
-        
+        var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+                               backimage2.image = backgroundimages[backgroundcounter]
+                 backimage2.slideInFromRight()
         if didpurchase {
             
             quotelabel.alpha = 1
@@ -763,6 +783,10 @@ swipeRight(referrer: referrer)
             
             counter -= 1
             
+            var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+                                   backimage2.image = backgroundimages[backgroundcounter]
+                     backimage2.slideInFromLeft()
+            
             let book = self.book(atIndex: counter)
             //            if book?.bookID == "Title" {
             //
@@ -777,7 +801,7 @@ swipeRight(referrer: referrer)
             id = book?.bookID ?? "x"
             quotelabel.text = name
             authorlabel.text = author
-            
+        
             quotelabel.slideInFromLeft()
             authorlabel.slideInFromLeft()
             
@@ -794,7 +818,7 @@ swipeRight(referrer: referrer)
             quotelabel.alpha = 0
             authorlabel.alpha = 0
             blur.alpha = 1
-            blur.slideInFromRight()
+            blur.slideInFromLeft()
         }
         
     }
@@ -864,14 +888,14 @@ swipeRight(referrer: referrer)
     @IBAction func tapShare(_ sender: Any) {
         
         logTapShare(referrer: referrer)
-        let text = "You need to hear this."
-                             
-                             var image = self.screenshot
-                           
-                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
-                             
-                             let shareAll : Array = [text, image, myWebsite] as [Any]
-                             
+         takeScreenshot()
+               let text = ""
+                                     
+                                     var image = self.screenshot
+        //
+        //                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+                                     
+                                     let shareAll : Array = [image] as [Any]
                              
                              let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
                              

@@ -67,7 +67,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
                 quotelabel.alpha = 0
                 authorlabel.alpha = 0
                 blur.alpha = 1
-                blur.slideInFromRight()
+                blur.slideInFromBottom()
             }
             
             genreCollectionView.reloadData()
@@ -121,7 +121,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             //            titleCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
             
-            blur.slideInFromRight()
+            blur.slideInFromBottom()
             
             genreCollectionView.reloadData()
             
@@ -618,6 +618,25 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         genres.append("Addiction")
         genres.append("Spirituality")
         
+        
+        
+             backgroundimages.removeAll()
+             backgroundimages.append(UIImage(named: "beach1")!)
+             backgroundimages.append(UIImage(named: "beach2")!)
+             backgroundimages.append(UIImage(named: "beach3")!)
+             backgroundimages.append(UIImage(named: "beach4")!)
+               backgroundimages.append(UIImage(named: "beach5")!)
+               backgroundimages.append(UIImage(named: "beach6")!)
+             backgroundimages.append(UIImage(named: "beach7")!)
+               backgroundimages.append(UIImage(named: "beach8")!)
+               backgroundimages.append(UIImage(named: "beach9")!)
+             backgroundimages.append(UIImage(named: "beach10")!)
+               backgroundimages.append(UIImage(named: "beach11")!)
+               backgroundimages.append(UIImage(named: "beach12")!)
+             
+             var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+             backimage2.image = backgroundimages[backgroundcounter]
+        
         if didpurchase {
             
             quotelabel.alpha = 1
@@ -638,6 +657,8 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         }
         
         
+        
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -649,12 +670,15 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         let swipeRightRec = UISwipeGestureRecognizer()
         
         swipeRightRec.addTarget(self, action: #selector(self.swipeR) )
-        swipeRightRec.direction = .right
+        swipeRightRec.direction = .down
         self.view!.addGestureRecognizer(swipeRightRec)
         
         
         swipeLeftRec.addTarget(self, action: #selector(self.swipeL) )
-        swipeLeftRec.direction = .left
+        swipeLeftRec.direction = .up
+        
+   
+              
         
         self.view!.addGestureRecognizer(swipeLeftRec)
         
@@ -728,10 +752,19 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         if counter < books.count {
             
             print("books = \(books.count) and \(counter)")
-            blur.slideInFromRight()
+            blur.slideInFromBottom()
 
             swipeRight(referrer: referrer)
             
+            var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+                          backimage2.image = backgroundimages[backgroundcounter]
+            
+            fullview.slideInFromBottom()
+//            backimage2.slideInFromBottom()
+//            tapdownvote.slideInFromBottom()
+//             tapshare.slideInFromBottom()
+//            taplike.slideInFromBottom()
+
         let book = self.book(atIndex: counter)
         //            if book?.bookID == "Title" {
         //
@@ -743,24 +776,38 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         
         let name = book?.name
         let author = book?.author
+            let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let date = dateFormatter.date(from:publisheddate)!
+
+            let dateago = date.timeAgoSinceDate()
+            
+            print(dateago)
+            
+            timeagolabel.text = dateago
+            
         id = book?.bookID ?? "x"
         
         quotelabel.text = name
         authorlabel.text = author
         
-        quotelabel.slideInFromRight()
-        authorlabel.slideInFromRight()
+        quotelabel.slideInFromBottom()
+        authorlabel.slideInFromBottom()
             
         }
         
         
     }
+    @IBOutlet weak var fullview: UIView!
     
     var bookmarktapped = Bool()
     var randomstring = String()
     var screenshot = UIImage()
     
     open func takeScreenshot(_ shouldSave: Bool = true) -> UIImage? {
+        
         var screenshotImage :UIImage?
         let layer = UIApplication.shared.keyWindow!.layer
         let scale = UIScreen.main.scale
@@ -781,13 +828,15 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBAction func tapShare(_ sender: Any) {
         
         logTapShare(referrer: referrer)
-       let text = "You need to hear this."
+        
+        takeScreenshot()
+       let text = ""
                              
                              var image = self.screenshot
-                           
-                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+//
+//                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
                              
-                             let shareAll : Array = [text, image, myWebsite] as [Any]
+                             let shareAll : Array = [image] as [Any]
                              
                              
                              let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
@@ -797,6 +846,9 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
                              activityViewController.popoverPresentationController?.sourceView = self.view
                              self.present(activityViewController, animated: true, completion: nil)
     }
+    @IBOutlet weak var tapdownvote: UIButton!
+    @IBOutlet weak var tapsavetop: UIButton!
+    @IBOutlet weak var tapshare: UIButton!
     @IBAction func tapDownvote(_ sender: Any) {
         
         logTapDownvote(referrer: referrer)
@@ -833,13 +885,30 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             var authorget = authorlabel.text ?? "x"
             ref?.child("Users").child(uid).child(id).updateChildValues(["Name" : trimmedtext, "Author" : authorget])
+                        
+            let formatter = DateFormatter()
+            // initially set the format based on your datepicker date / server String
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+            let myString = formatter.string(from: Date()) // string purpose I add here
+            // convert your string to date
+            let yourDate = formatter.date(from: myString)
+            //then again set the date format whhich type of output you need
+            formatter.dateFormat = "dd-MMM-yyyy"
+            // again convert your date to string
+            let myStringafd = formatter.string(from: yourDate!)
             
+            ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Date" : myString])
+
             bookmarktapped = true
             
         }
         
     }
     
+    @IBOutlet weak var likeslabel: UILabel!
+    
+    @IBOutlet weak var timeagolabel: UILabel!
     
     @IBAction func tapPrevious(_ sender: AnyObject?) {
         
@@ -849,6 +918,12 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             counter -= 1
             
+            var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+                                   backimage2.image = backgroundimages[backgroundcounter]
+                     backimage2.slideInFromLeft()
+            tapdownvote.slideInFromLeft()
+            tapshare.slideInFromLeft()
+            taplike.slideInFromLeft()
             let book = self.book(atIndex: counter)
             //            if book?.bookID == "Title" {
             //
@@ -868,6 +943,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             blur.slideInFromLeft()
             quotelabel.slideInFromLeft()
             authorlabel.slideInFromLeft()
+            backimage2.slideInFromLeft()
             
             if didpurchase {
                 
@@ -904,7 +980,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
                     
                     self.books = newbooks
                     
-                    self.books = self.books.sorted(by: { $0.popularity ?? 0  > $1.popularity ?? 0 })
+                    self.books = self.books.sorted(by: { $0.date ?? "2020-02-28 14:51:06"  > $1.date ?? "2020-02-28 14:51:06" })
                     
                 }
                 
@@ -988,3 +1064,48 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         }
     }
 
+extension Date {
+
+func timeAgoSinceDate() -> String {
+
+    // From Time
+    let fromDate = self
+
+    // To Time
+    let toDate = Date()
+
+    // Estimation
+    // Year
+    if let interval = Calendar.current.dateComponents([.year], from: fromDate, to: toDate).year, interval > 0  {
+
+        return interval == 1 ? "\(interval)" + " " + "year ago" : "\(interval)" + " " + "years ago"
+    }
+
+    // Month
+    if let interval = Calendar.current.dateComponents([.month], from: fromDate, to: toDate).month, interval > 0  {
+
+        return interval == 1 ? "\(interval)" + " " + "month ago" : "\(interval)" + " " + "months ago"
+    }
+
+    // Day
+    if let interval = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day, interval > 0  {
+
+        return interval == 1 ? "\(interval)" + " " + "day ago" : "\(interval)" + " " + "days ago"
+    }
+
+    // Hours
+    if let interval = Calendar.current.dateComponents([.hour], from: fromDate, to: toDate).hour, interval > 0 {
+
+        return interval == 1 ? "\(interval)" + " " + "hour ago" : "\(interval)" + " " + "hours ago"
+    }
+
+    // Minute
+    if let interval = Calendar.current.dateComponents([.minute], from: fromDate, to: toDate).minute, interval > 0 {
+
+        return interval == 1 ? "\(interval)" + " " + "minute ago" : "\(interval)" + " " + "minutes ago"
+    }
+
+    return "a moment ago"
+    
+    }
+}

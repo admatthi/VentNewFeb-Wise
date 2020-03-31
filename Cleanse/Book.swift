@@ -59,6 +59,7 @@ struct Book {
         self.bookID = id
         self.author = json["Author"] as? String
         self.views = json["Views"] as? Int
+        self.date = json["Date"] as? String
 
         self.description = json["Description"] as? String
         self.imageURL = json["Image"] as? String
@@ -95,7 +96,6 @@ struct Book {
         self.text1 = json["Text0"] as? String
         self.text2 = json["Text1"] as? String
         self.text3 = json["Text2"] as? String
-        self.date = json["Date"] as? String
         self.intdate = json["IntDate"] as? Int
         self.title = json["Title"] as? String
 
