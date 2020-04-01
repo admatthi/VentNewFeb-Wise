@@ -1096,7 +1096,7 @@ func slideInFromTop(duration: TimeInterval = 0.5, completionDelegate: AnyObject?
      
      // Customize the animation's properties
     slideInFromTopTransition.type = CATransitionType.push
-    slideInFromTopTransition.subtype = CATransitionSubtype.fromLeft
+    slideInFromTopTransition.subtype = CATransitionSubtype.fromBottom
      slideInFromTopTransition.duration = duration
     slideInFromTopTransition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
     slideInFromTopTransition.fillMode = CAMediaTimingFillMode.removed

@@ -52,6 +52,18 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             let name = book?.name
             let author = book?.author
             
+            let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let date = dateFormatter.date(from:publisheddate)!
+
+            let dateago = date.timeAgoSinceDate()
+            
+            print(dateago)
+            
+            timeagolabel.text = dateago
+            
             id = book?.bookID ?? "x"
             quotelabel.text = name
             authorlabel.text = author
@@ -759,7 +771,6 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
                           backimage2.image = backgroundimages[backgroundcounter]
             
-            fullview.slideInFromBottom()
 //            backimage2.slideInFromBottom()
 //            tapdownvote.slideInFromBottom()
 //             tapshare.slideInFromBottom()
@@ -792,9 +803,12 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         
         quotelabel.text = name
         authorlabel.text = author
+            
+            fullview.slideInFromBottom()
+
         
-        quotelabel.slideInFromBottom()
-        authorlabel.slideInFromBottom()
+//        quotelabel.slideInFromBottom()
+//        authorlabel.slideInFromBottom()
             
         }
         
@@ -920,10 +934,10 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
                                    backimage2.image = backgroundimages[backgroundcounter]
-                     backimage2.slideInFromLeft()
-            tapdownvote.slideInFromLeft()
-            tapshare.slideInFromLeft()
-            taplike.slideInFromLeft()
+//                     backimage2.slideInFromTop()
+//            tapdownvote.slideInFromTop()
+//            tapshare.slideInFromTop()
+//            taplike.slideInFromTop()
             let book = self.book(atIndex: counter)
             //            if book?.bookID == "Title" {
             //
@@ -937,14 +951,27 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             let author = book?.author
             
             id = book?.bookID ?? "x"
+            let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let date = dateFormatter.date(from:publisheddate)!
+
+            let dateago = date.timeAgoSinceDate()
+            
+            print(dateago)
+            
+            timeagolabel.text = dateago
             quotelabel.text = name
             authorlabel.text = author
             
-            blur.slideInFromLeft()
-            quotelabel.slideInFromLeft()
-            authorlabel.slideInFromLeft()
-            backimage2.slideInFromLeft()
-            
+            blur.slideInFromTop()
+//            quotelabel.slideInFromTop()
+//            authorlabel.slideInFromTop()
+//            backimage2.slideInFromTop()
+//
+            fullview.slideInFromTop()
+
             if didpurchase {
                 
                 quotelabel.alpha = 1
@@ -1090,19 +1117,19 @@ func timeAgoSinceDate() -> String {
     // Day
     if let interval = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day, interval > 0  {
 
-        return interval == 1 ? "\(interval)" + " " + "day ago" : "\(interval)" + " " + "days ago"
+        return interval == 1 ? "\(interval)" + " " + "day ago" : "\(interval)" + "d ago"
     }
 
     // Hours
     if let interval = Calendar.current.dateComponents([.hour], from: fromDate, to: toDate).hour, interval > 0 {
 
-        return interval == 1 ? "\(interval)" + " " + "hour ago" : "\(interval)" + " " + "hours ago"
+        return interval == 1 ? "\(interval)" + " " + "hour ago" : "\(interval)" + "h ago"
     }
 
     // Minute
     if let interval = Calendar.current.dateComponents([.minute], from: fromDate, to: toDate).minute, interval > 0 {
 
-        return interval == 1 ? "\(interval)" + " " + "minute ago" : "\(interval)" + " " + "minutes ago"
+        return interval == 1 ? "\(interval)" + " " + "minute ago" : "\(interval)" + "m ago"
     }
 
     return "a moment ago"

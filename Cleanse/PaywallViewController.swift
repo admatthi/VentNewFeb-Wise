@@ -36,7 +36,32 @@ class PaywallViewController: UIViewController {
     
     @IBAction func tapRestore(_ sender: Any) {
         
-        
+        Purchases.shared.restoreTransactions { (purchaserInfo, error) in
+            //... check purchaserInfo to see if entitlement is now active
+            
+            if let error = error {
+                
+                
+            } else {
+                
+                self.logPurchaseSuccessEvent(referrer : refer)
+                //
+                ref?.child("Users").child(uid).updateChildValues(["Purchased" : "True"])
+                
+                didpurchase = true
+                
+                AppsFlyerTracker.shared().trackEvent("purchase",
+                                                     withValues: [
+                                                        AFEventParamContentId:"1234567",
+                                                        AFEventParamContentType : "category_a",
+                                                        AFEventParamRevenue: 20,
+                                                        AFEventParamCurrency:"USD"
+                ]);
+                
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+        }
     }
     @IBAction func tapBack(_ sender: Any) {
         
