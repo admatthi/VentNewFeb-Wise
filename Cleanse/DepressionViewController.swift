@@ -518,43 +518,9 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                 cell.backlabel.alpha = 0.8
                 //                cell.titleImage.alpha = 1
             }
+                        
             
-            cell.titleImage.alpha = 0
-            
-            
-            if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
-                
-                cell.titleImage.kf.setImage(with: imageUrl)
-                
-                
-                //                cell.titleback.kf.setImage(with: imageUrl)
-                
-                
-                //                let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-                //                                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-                //                          blurEffectView.frame = cell.titleback.bounds
-                //                                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                //
-                //                          cell.titleback.addSubview(blurEffectView)
-                
-                
-                //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-                //                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-                //                    blurEffectView.frame = cell.titleback.bounds
-                //                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                //                    cell.titleback.addSubview(blurEffectView)
-                
-                
-            }
-            
-            let isWished = Bool()
-            
-            if wishlistids.contains(book!.bookID) {
-                
-                
-            } else {
-                
-            }
+          
             
             cell.layer.cornerRadius = 5.0
             cell.layer.masksToBounds = true

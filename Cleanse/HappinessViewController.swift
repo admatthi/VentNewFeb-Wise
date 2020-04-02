@@ -62,26 +62,10 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             print(dateago)
             
-            timeagolabel.text = dateago
+//            timeagolabel.text = dateago
             
-            id = book?.bookID ?? "x"
-            quotelabel.text = name
-            authorlabel.text = author
             
-            if didpurchase {
-                
-                quotelabel.alpha = 1
-                authorlabel.alpha = 1
-                blur.alpha = 0
-            } else {
-                
-                
-                quotelabel.alpha = 0
-                authorlabel.alpha = 0
-                blur.alpha = 1
-                blur.slideInFromBottom()
-            }
-            
+            titleCollectionView.reloadData()
             genreCollectionView.reloadData()
         }
     }
@@ -214,18 +198,18 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
                 
                 if didpurchase {
                     
-                    self.performSegue(withIdentifier: "HappinessToConsume", sender: self)
+                    self.performSegue(withIdentifier: "HappinessToOverview", sender: self)
                     
                     
                 } else {
                     
                     
-                    self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+                    self.performSegue(withIdentifier: "HappinessToOverview", sender: self)
                     
                 }
             } else {
                 
-                self.performSegue(withIdentifier: "HappinessToConsume", sender: self)
+                self.performSegue(withIdentifier: "HappinessToOverview", sender: self)
             }
             
             
@@ -484,27 +468,25 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             let name = book?.name
             
-            cell.genrelabel.text = book?.author
+//            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+//               let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//               blurEffectView.frame = cell.backlabel.bounds
+//               blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//
+//            cell.backlabel.addSubview(blurEffectView)
             
-            if (name?.contains(":"))! {
-                
-                var namestring = name?.components(separatedBy: ":")
-                
-                cell.titlelabel.text = namestring![0]
-                
-            } else {
-                
+            backgroundcounter = Int.random(in: 0..<backgroundimages.count)
+
+            if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
+
+                                             cell.titleImage.kf.setImage(with: imageUrl)
+                       
+                       }//            cell.backlabel.image = backgroundimages[backgroundcounter]
+        
+            var viewscounter =  Int.random(in: 1..<9)
+            cell.viewslabel.text = "\(viewscounter)m ago"
+
                 cell.titlelabel.text = name
-                
-            }
-            
-            cell.titleImage.layer.shadowColor = UIColor.black.cgColor
-            cell.titleImage.layer.shadowOffset = CGSize(width: 1, height: 1)
-            cell.titleImage.layer.shadowOpacity = 1
-            cell.titleImage.layer.shadowRadius = 1.0
-            cell.titleImage.layer.cornerRadius = 10.0
-            cell.titleImage.clipsToBounds = true
-            //            cell.titleback.layer.cornerRadius = 10.0
             //                       cell.titleback.clipsToBounds = true
             
             cell.layer.cornerRadius = 10.0
@@ -516,38 +498,8 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             //                cell.tapup.addTarget(self, action: #selector(DiscoverViewController.tapWishlist), for: .touchUpInside)
             
             
-            if indexPath.row > 4 {
-                
-                if didpurchase {
-                    
-                    cell.titlelabel.alpha = 1
-                    cell.blur.alpha = 0
-                    cell.backlabel.alpha = 0.8
-                    cell.titleImage.alpha = 1
-                    
-                } else {
-                    
-                    
-                    
-                    cell.titlelabel.alpha = 0
-                    cell.blur.alpha = 1
-                    cell.backlabel.alpha = 0.95
-                    cell.titleImage.alpha = 0
-                    
-                    
-                }
-            } else {
-                
-                cell.titlelabel.alpha = 1
-                cell.blur.alpha = 0
-                cell.backlabel.alpha = 0.8
-                cell.titleImage.alpha = 1
-            }
-            
-            
-            if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
-                
-                cell.titleImage.kf.setImage(with: imageUrl)
+
+   
                 
                 
                 //                cell.titleback.kf.setImage(with: imageUrl)
@@ -568,31 +520,24 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
                 //                    cell.titleback.addSubview(blurEffectView)
                 
                 
-            }
             
-            let isWished = Bool()
+      
             
-            if wishlistids.contains(book!.bookID) {
-                
-                
-            } else {
-                
-            }
             
             cell.layer.cornerRadius = 5.0
             cell.layer.masksToBounds = true
             
             
-            
-            if let viewsnum = book?.views {
-                
-                cell.viewslabel.text = "\(book!.views!)M views"
-                
-            } else {
-                
-                cell.viewslabel.text = "6M views"
-                
-            }
+//
+//            if let viewsnum = book?.views {
+//
+//                cell.viewslabel.text = "\(book!.views!)M views"
+//
+//            } else {
+//
+//                cell.viewslabel.text = "6M views"
+//
+//            }
             
             
             
@@ -623,7 +568,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
     
     override func viewDidAppear(_ animated: Bool) {
         genres.removeAll()
-        genres.append("Covid-19")
+        genres.append("Hope")
         genres.append("Depression")
         genres.append("Panic")
         genres.append("Anxiety")
@@ -646,23 +591,11 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
                backgroundimages.append(UIImage(named: "beach11")!)
                backgroundimages.append(UIImage(named: "beach12")!)
              
-             var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
-             backimage2.image = backgroundimages[backgroundcounter]
+         
         
-        if didpurchase {
-            
-            quotelabel.alpha = 1
-            authorlabel.alpha = 1
-            blur.alpha = 0
-        } else {
-            
-            quotelabel.alpha = 0
-            authorlabel.alpha = 0
-            blur.alpha = 1
-        }
+    
         
-        
-        selectedgenre = "Covid-19"
+        selectedgenre = "Hope"
         
         queryforids { () -> Void in
             
@@ -680,6 +613,13 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         let swipeUpRec = UISwipeGestureRecognizer()
         let swipeDownRec = UISwipeGestureRecognizer()
         let swipeRightRec = UISwipeGestureRecognizer()
+        
+                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                       blurEffectView.frame = backimage2.bounds
+                       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+                    backimage2.addSubview(blurEffectView)
         
         swipeRightRec.addTarget(self, action: #selector(self.swipeR) )
         swipeRightRec.direction = .down
@@ -707,8 +647,18 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         
         dateformat = result
         
+        var screenSize = titleCollectionView.bounds
+          var screenWidth = screenSize.width
+          var screenHeight = screenSize.height
+
         
+                      let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+                   layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        layout.itemSize = CGSize(width: screenWidth/2.3, height: screenHeight/2.4)
+                layout.minimumInteritemSpacing = 0
+                layout.minimumLineSpacing = 0
         
+                   titleCollectionView!.collectionViewLayout = layout
         
         backimage2.layer.cornerRadius = 10.0
         backimage2.clipsToBounds = true
@@ -730,8 +680,11 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         
         bookmarktapped = false
         
+        
         // Do any additional setup after loading the view.
     }
+    
+    var backgroundcounter = Int()
     
     @objc func swipeR() {
         

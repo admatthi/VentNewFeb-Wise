@@ -192,7 +192,7 @@ class PaywallViewController: UIViewController {
             } else {
                 
                 slimeybool = false
-                self.value1.text = "Special Offer!"
+                self.value1.text = "Read Quotes!"
 
                 self.termstext.alpha = 1
                   self.leadingtext.alpha = 1

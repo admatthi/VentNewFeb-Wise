@@ -23,4 +23,5 @@ class TitleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var upvoteslabel: UILabel!
     @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var titlelabel: UILabel!
+    
 }

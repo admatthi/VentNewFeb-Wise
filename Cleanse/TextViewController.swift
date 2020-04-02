@@ -42,17 +42,10 @@ class TextViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func tapBack(_ sender: Any) {
         
-        lastcount()
+        self.dismiss(animated: true, completion: nil)
         
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-             self.textView.endEditing(true)
-      
-
-
-         }
+  
     
     var arrayCount = Int()
     
@@ -60,9 +53,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var text: UILabel!
     
     func nextcount() {
-        
-        textView.text = ""
-          textView.textColor = UIColor.white
+
         
         if counter > headlines.count-2 {
             
@@ -118,69 +109,33 @@ class TextViewController: UIViewController, UITextViewDelegate {
         
         counter = 0
         arrayCount = headlines.count
-        whiteline.alpha = 0
-
-//        textView.returnKeyType = UIReturnKeyType.done
-        
-        progressView.layer.cornerRadius = 5.0
-        progressView.clipsToBounds = true
-        
-        textView.layer.cornerRadius = 5.0
-        textView.clipsToBounds = true
-        
-        var transform : CGAffineTransform = CGAffineTransform(scaleX: 1.0, y: 3.0)
-        progressView.transform = transform
-        
-        textView.delegate = self
-        
-        textView.text = ""
-        textView.textColor = UIColor.white
-        
-        textView.becomeFirstResponder()
-        
-        tapsave.layer.cornerRadius = 5.0
-        tapsave.clipsToBounds = true
-    
-//        textView.layer.borderColor = UIColor.white.cgColor
-//        textView.layer.borderWidth = 2.0
-        
-        if headlines.count > 1 {
+      
             
-            progressView.alpha = 0
+            titlelabel.text = headlines[counter]
             
-            text.text = headlines[counter]
-            
-        } else {
-            
-            
-            
-            progressView.alpha = 0
-            text.text = selectedheadline
-            
-        }
-        
+   
         let imageURLString = selectedbackground
         
         let  imageUrl = URL(string: imageURLString)
         
-        background2.kf.setImage(with: imageUrl)
+        backimage.kf.setImage(with: imageUrl)
         
-    
-        authorftile.text = selectedauthorname
-//        titleoftile.text = selectedtitle
         
-        if textone != "" {
-            
-            textView.text = textone
-        } else {
-            
-            textView.text = ""
+        let swipeRightRec = UISwipeGestureRecognizer()
+        let swipeLeftRec = UISwipeGestureRecognizer()
+        let swipeUpRec = UISwipeGestureRecognizer()
+        let swipeDownRec = UISwipeGestureRecognizer()
+        
+        swipeRightRec.addTarget(self, action: #selector(self.swipeR) )
+        swipeRightRec.direction = .right
+        self.view!.addGestureRecognizer(swipeRightRec)
+        
+        
+        swipeLeftRec.addTarget(self, action: #selector(self.swipeL) )
+        swipeLeftRec.direction = .left
+        self.view!.addGestureRecognizer(swipeLeftRec)
 
-        }
         
-        newText = textView.text
-        
-//        if newText.count < 240 {
 //
 //                 tapsave.alpha = 0.5
 //                 tapsave.isUserInteractionEnabled = false
@@ -215,63 +170,40 @@ class TextViewController: UIViewController, UITextViewDelegate {
 
      }
     
+    @objc func swipeR() {
+          
+          lastcount()
+          
+          
+          
+      }
+    
+    @objc func swipeL() {
+          
+          nextcount()
+          
+          
+          
+      }
+    
     override func viewDidDisappear(_ animated: Bool) {
         
-            textone = ""
-            texttwo = ""
-            textthree = ""
+         
     }
     
     func showpropersummaries() {
 
         if counter == 0 {
 
-            self.progressView.setProgress(0.0, animated: false)
 
         } else {
-            let progress = (Float(counter)/Float(arrayCount-1))
-            self.progressView.setProgress(Float(progress), animated: true)
+           
         }
 
         if counter < headlines.count {
-            
-            if counter == 0 {
-                
-                if textone != "" {
-                    
-                    textView.text = textone
-                } else {
-                    
-                    textView.text = ""
+         
 
-                }
-            }
-            
-            if counter == 1 {
-                
-                if texttwo != "" {
-                    
-                    textView.text = texttwo
-                } else {
-                    
-                    textView.text = ""
-
-                }
-            }
-            
-            if counter == 2 {
-                
-                if textthree != "" {
-                    
-                    textView.text = textthree
-                } else {
-                    
-                    textView.text = ""
-
-                }
-            }
-
-        text.text = headlines[counter]
+        titlelabel.text = headlines[counter]
 
 
         print(counter)

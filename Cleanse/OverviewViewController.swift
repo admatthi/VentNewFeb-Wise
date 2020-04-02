@@ -21,7 +21,6 @@ class OverviewViewController: UIViewController {
         if didpurchase {
             
             randomString = NSUUID().uuidString
-
             
             self.performSegue(withIdentifier: "OverviewToRead", sender: self)
         } else {
