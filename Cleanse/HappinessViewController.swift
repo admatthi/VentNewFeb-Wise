@@ -117,7 +117,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             //            titleCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
             
-            blur.slideInFromBottom()
+            
             
             genreCollectionView.reloadData()
             
@@ -483,8 +483,8 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
                        
                        }//            cell.backlabel.image = backgroundimages[backgroundcounter]
         
-            var viewscounter =  Int.random(in: 1..<9)
-            cell.viewslabel.text = "\(viewscounter)m ago"
+            var viewscounter =  book?.profession
+            cell.viewslabel.text = viewscounter
 
                 cell.titlelabel.text = name
             //                       cell.titleback.clipsToBounds = true
@@ -568,7 +568,6 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
     
     override func viewDidAppear(_ animated: Bool) {
         genres.removeAll()
-        genres.append("Hope")
         genres.append("Depression")
         genres.append("Panic")
         genres.append("Anxiety")
@@ -595,7 +594,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         
     
         
-        selectedgenre = "Hope"
+        selectedgenre = genres[0]
         
         queryforids { () -> Void in
             
@@ -654,7 +653,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         
                       let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
                    layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-        layout.itemSize = CGSize(width: screenWidth/2.3, height: screenHeight/2.4)
+        layout.itemSize = CGSize(width: screenWidth/2.35, height: screenHeight/2.4)
                 layout.minimumInteritemSpacing = 0
                 layout.minimumLineSpacing = 0
         
@@ -717,7 +716,6 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         if counter < books.count {
             
             print("books = \(books.count) and \(counter)")
-            blur.slideInFromBottom()
 
             swipeRight(referrer: referrer)
             

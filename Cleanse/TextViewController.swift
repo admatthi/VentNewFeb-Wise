@@ -25,17 +25,17 @@ class TextViewController: UIViewController, UITextViewDelegate {
     func addDoneButtonOnKeyboard(){
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
-
+        
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
-
+        
         let items = [flexSpace, done]
         doneToolbar.items = items
         doneToolbar.sizeToFit()
-
+        
         textView.inputAccessoryView = doneToolbar
     }
-
+    
     @objc func doneButtonAction(){
         textView.resignFirstResponder()
     }
@@ -45,7 +45,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
         self.dismiss(animated: true, completion: nil)
         
     }
-  
+    
     
     var arrayCount = Int()
     
@@ -53,7 +53,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var text: UILabel!
     
     func nextcount() {
-
+        
         
         if counter > headlines.count-2 {
             
@@ -61,7 +61,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
             generator.impactOccurred()
             
             
-
+            
             
             self.dismiss(animated: true, completion: nil)
             
@@ -70,30 +70,30 @@ class TextViewController: UIViewController, UITextViewDelegate {
             counter += 1
             
             
-            
+            titlelabel.slideInFromRight()
             showpropersummaries()
-//            textView.slideInFromRight()
-//            text.slideInFromRight()
+            //            textView.slideInFromRight()
+            //            text.slideInFromRight()
         }
         
     }
-//
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//         if(text == "\n") {
-//             textView.resignFirstResponder()
-//             return false
-//         }
-//         return true
-//     }
-
-     /* Older versions of Swift */
-//     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-//         if(text == "\n") {
-//             textView.resignFirstResponder()
-//             return false
-//         }
-//         return true
-//     }
+    //
+    //    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    //         if(text == "\n") {
+    //             textView.resignFirstResponder()
+    //             return false
+    //         }
+    //         return true
+    //     }
+    
+    /* Older versions of Swift */
+    //     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    //         if(text == "\n") {
+    //             textView.resignFirstResponder()
+    //             return false
+    //         }
+    //         return true
+    //     }
     
     @IBAction func tapDismiss(_ sender: Any) {
         
@@ -109,11 +109,11 @@ class TextViewController: UIViewController, UITextViewDelegate {
         
         counter = 0
         arrayCount = headlines.count
-      
-            
-            titlelabel.text = headlines[counter]
-            
-   
+        
+        
+        titlelabel.text = headlines[counter]
+        
+        
         let imageURLString = selectedbackground
         
         let  imageUrl = URL(string: imageURLString)
@@ -134,88 +134,101 @@ class TextViewController: UIViewController, UITextViewDelegate {
         swipeLeftRec.addTarget(self, action: #selector(self.swipeL) )
         swipeLeftRec.direction = .left
         self.view!.addGestureRecognizer(swipeLeftRec)
-
         
-//
-//                 tapsave.alpha = 0.5
-//                 tapsave.isUserInteractionEnabled = false
-//            characterslabel.alpha = 1
-//             } else {
-//
-//                 tapsave.alpha = 1
-//                 tapsave.isUserInteractionEnabled = true
-//                characterslabel.alpha = 0
-//             }
-//
+        swipeDownRec.addTarget(self, action: #selector(self.swipeD) )
+        swipeDownRec.direction = .down
+        self.view!.addGestureRecognizer(swipeDownRec)
+        
+        //
+        //                 tapsave.alpha = 0.5
+        //                 tapsave.isUserInteractionEnabled = false
+        //            characterslabel.alpha = 1
+        //             } else {
+        //
+        //                 tapsave.alpha = 1
+        //                 tapsave.isUserInteractionEnabled = true
+        //                characterslabel.alpha = 0
+        //             }
+        //
         
         // Do any additional setup after loading the view.
     }
     
     func lastcount() {
-
-         if counter == 0 {
-
+        
+        if counter == 0 {
+            
             self.dismiss(animated: true, completion: nil)
             
-         } else {
-
-             counter -= 1
+        } else {
+            
+            counter -= 1
+            titlelabel.slideInFromLeft()
             showpropersummaries()
-//
-//             textView.slideInFromLeft()
-//             text.slideInFromLeft()
-
-         }
-
-
-     }
+            //
+            //             textView.slideInFromLeft()
+            //             text.slideInFromLeft()
+            
+        }
+        
+        
+    }
     
     @objc func swipeR() {
-          
-          lastcount()
-          
-          
-          
-      }
+        
+        lastcount()
+        
+        
+        
+    }
+    
+    @objc func swipeD() {
+        
+        self.dismiss(animated: true, completion: nil)
+        
+        
+        
+    }
+    
     
     @objc func swipeL() {
-          
-          nextcount()
-          
-          
-          
-      }
+        
+        nextcount()
+        
+        
+        
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
         
-         
+        
     }
     
     func showpropersummaries() {
-
+        
         if counter == 0 {
-
-
+            
+            
         } else {
-           
+            
         }
-
+        
         if counter < headlines.count {
-         
-
-        titlelabel.text = headlines[counter]
-
-
-        print(counter)
-
+            
+            
+            titlelabel.text = headlines[counter]
+            
+            
+            print(counter)
+            
         }
     }
     
     @IBOutlet weak var characterslabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
     func textViewDidBeginEditing(_ textView: UITextView) {
-      
-            whiteline.alpha = 0
+        
+        whiteline.alpha = 0
         textView.textColor = .white
     }
     
@@ -223,23 +236,23 @@ class TextViewController: UIViewController, UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         
-//        newText = textView.text
-//
-//        let myint = 240-newText.count
-//
-//        characterslabel.text = "\(myint)"
-//
-//        if newText.count < 240 {
-//
-//            tapsave.alpha = 0.5
-//            tapsave.isUserInteractionEnabled = false
-//            characterslabel.alpha = 1
-//        } else {
-//
-//            tapsave.alpha = 1
-//            tapsave.isUserInteractionEnabled = true
-//            characterslabel.alpha = 0
-//        }
+        //        newText = textView.text
+        //
+        //        let myint = 240-newText.count
+        //
+        //        characterslabel.text = "\(myint)"
+        //
+        //        if newText.count < 240 {
+        //
+        //            tapsave.alpha = 0.5
+        //            tapsave.isUserInteractionEnabled = false
+        //            characterslabel.alpha = 1
+        //        } else {
+        //
+        //            tapsave.alpha = 1
+        //            tapsave.isUserInteractionEnabled = true
+        //            characterslabel.alpha = 0
+        //        }
     }
     
     func setDoneOnKeyboard() {
@@ -250,7 +263,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
         keyboardToolbar.items = [flexBarButton, doneBarButton]
         self.textView.inputAccessoryView = keyboardToolbar
     }
-
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -298,7 +311,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
                 
                 
                 ref?.child("Entries").child(uid).child(randomString).updateChildValues(["Author" : selectedauthorname, "Name" : selectedtitle, "Headline1" : headlines[0], "Headline2" : headlines[1], "Headline3" : headlines[2],"Headline4" : headlines[3],"Headline5" : headlines[4], "Author Image" : selectedauthorimage, "Image" : selectedbackground, "Text\(counter)" : textView.text!, "Date" : dateformat])
-
+                
             }
             
             if headlines.count == 6 {
@@ -306,7 +319,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
                 
                 
                 ref?.child("Entries").child(uid).child(randomString).updateChildValues(["Author" : selectedauthorname, "Name" : selectedtitle, "Headline1" : headlines[0], "Headline2" : headlines[1], "Headline3" : headlines[2],"Headline4" : headlines[3],"Headline5" : headlines[4],"Headline6" : headlines[5], "Author Image" : selectedauthorimage, "Image" : selectedbackground, "Text\(counter)" : textView.text!, "Date" : dateformat])
-
+                
             }
             
             if headlines.count == 7 {
@@ -314,7 +327,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
                 
                 
                 ref?.child("Entries").child(uid).child(randomString).updateChildValues(["Author" : selectedauthorname, "Name" : selectedtitle, "Headline1" : headlines[0], "Headline2" : headlines[1], "Headline3" : headlines[2],"Headline4" : headlines[3],"Headline5" : headlines[4],"Headline6" : headlines[5],"Headline7" : headlines[6], "Author Image" : selectedauthorimage, "Image" : selectedbackground, "Text\(counter)" : textView.text!, "Date" : dateformat])
-
+                
             }
             
             if headlines.count == 8 {
@@ -322,7 +335,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
                 
                 
                 ref?.child("Entries").child(uid).child(randomString).updateChildValues(["Author" : selectedauthorname, "Name" : selectedtitle, "Headline1" : headlines[0], "Headline2" : headlines[1], "Headline3" : headlines[2],"Headline4" : headlines[3],"Headline5" : headlines[4],"Headline6" : headlines[5],"Headline7" : headlines[6],"Headline8" : headlines[7], "Author Image" : selectedauthorimage, "Image" : selectedbackground, "Text\(counter)" : textView.text!, "Date" : dateformat])
-
+                
             }
             
             nextcount()
@@ -344,15 +357,15 @@ class TextViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -181,18 +181,18 @@ class PaywallViewController: UIViewController {
             if let slimey = value?["Slimey"] as? String {
 
                 slimeybool = true
-                self.value1.text = "30 Day Money Back Guarantee"
+                self.value1.text = "3 Day FREE Trial"
 
                 
                 self.termstext.alpha = 0
                          self.leadingtext.alpha = 0
                         self.disclaimertext.alpha = 0
-                         self.tapcontinue.setTitle("Continue", for: .normal)
+                         self.tapcontinue.setTitle("Try for FREE!", for: .normal)
                 
             } else {
                 
                 slimeybool = false
-                self.value1.text = "Read Quotes!"
+                self.value1.text = "3 Day Free Trial"
 
                 self.termstext.alpha = 1
                   self.leadingtext.alpha = 1
