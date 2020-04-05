@@ -620,14 +620,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         
                     backimage2.addSubview(blurEffectView)
         
-        swipeRightRec.addTarget(self, action: #selector(self.swipeR) )
-        swipeRightRec.direction = .down
-        self.view!.addGestureRecognizer(swipeRightRec)
-        
-        
-        swipeLeftRec.addTarget(self, action: #selector(self.swipeL) )
-        swipeLeftRec.direction = .up
-        
+    
    
               
         
@@ -685,28 +678,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
     
     var backgroundcounter = Int()
     
-    @objc func swipeR() {
-        
-        bookmarktapped = false
-        taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
-        
-        self.tapPrevious(nil)
-        
-    }
-    
-    @objc func swipeL() {
-        
-        
-        bookmarktapped = false
-        taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
-        
-        self.tapNext(nil)
-        
-        
-        
-        
-    }
-    
+
     @IBAction func tapNext(_ sender: AnyObject?) {
         
         
@@ -1002,14 +974,12 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
                 } else {
                     
                     didpurchase = false
-                    self.performSegue(withIdentifier: "HappyToSale", sender: self)
                     
                 }
                 
             } else {
                 
                 didpurchase = false
-                self.performSegue(withIdentifier: "HappyToSale", sender: self)
             }
             
         })

@@ -616,19 +616,7 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
                        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
                     backimage2.addSubview(blurEffectView)
-        
-        swipeRightRec.addTarget(self, action: #selector(self.swipeR) )
-        swipeRightRec.direction = .down
-        self.view!.addGestureRecognizer(swipeRightRec)
-        
-        
-        swipeLeftRec.addTarget(self, action: #selector(self.swipeL) )
-        swipeLeftRec.direction = .up
-        
-   
-              
-        
-        self.view!.addGestureRecognizer(swipeLeftRec)
+ 
         
         ref = Database.database().reference()
         
@@ -999,14 +987,12 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
                 } else {
                     
                     didpurchase = false
-                    self.performSegue(withIdentifier: "HappyToSale", sender: self)
                     
                 }
                 
             } else {
                 
                 didpurchase = false
-                self.performSegue(withIdentifier: "HappyToSale", sender: self)
             }
             
         })

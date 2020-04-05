@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class FavoritesViewController: UIViewController {
+class FavoritesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var backimage: UIImageView!
         var books: [Book] = [] {
@@ -27,9 +27,7 @@ class FavoritesViewController: UIViewController {
                                                
                                       let name = book?.name
                                       let author = book?.author
-                    id = book?.bookID ?? "x"
-                                  quotelabel.text = name
-                                  authorlabel.text = author
+                    titleCollectionView.reloadData()
     //                  self.titleCollectionView.reloadData()
 
                   }
@@ -82,7 +80,7 @@ class FavoritesViewController: UIViewController {
                         
                     } else {
                         
-                        self.performSegue(withIdentifier: "YouToSale", sender: self)
+                        self.performSegue(withIdentifier: "FavoritesToRead", sender: self)
 
                     }
 
@@ -102,14 +100,14 @@ class FavoritesViewController: UIViewController {
                     selectedamazonurl = book?.amazonURL ?? ""
                     selecteddescription = book?.description ?? ""
                     selectedduration = book?.duration ?? 15
-                    selectedheadline = book?.headline1 ?? ""
+                    selectedheadline = book?.name ?? ""
                     selectedprofession = book?.profession ?? ""
                     selectedauthorimage = book?.authorImage ?? ""
                     selectedbackground = book?.imageURL ?? ""
 
                     
                         
-                    headlines.append(book?.headline1 ?? "x")
+                    headlines.append(book?.name ?? "x")
                     headlines.append(book?.headline2 ?? "x")
                     headlines.append(book?.headline3 ?? "x")
                     headlines.append(book?.headline4 ?? "x")
@@ -162,18 +160,18 @@ class FavoritesViewController: UIViewController {
                                  
                                  if didpurchase {
                                      
-                                                        self.performSegue(withIdentifier: "DiscoverToConsume", sender: self)
+                                                        self.performSegue(withIdentifier: "FavoritesToRead", sender: self)
 
                                      
                                  } else {
                                  
                                
-                          self.performSegue(withIdentifier: "YouToSale", sender: self)
+                          self.performSegue(withIdentifier: "FavoritesToRead", sender: self)
                                  
                                  }
                     } else {
                         
-                                     self.performSegue(withIdentifier: "DiscoverToConsume", sender: self)
+                                     self.performSegue(withIdentifier: "FavoritesToRead", sender: self)
                     }
                              
                     
@@ -419,7 +417,7 @@ class FavoritesViewController: UIViewController {
                 
                 let name = book?.name
                 
-                cell.genrelabel.text = "\(book!.author!)"
+//                cell.genrelabel.text = "\(book!.author!)"
                 
                 if (name?.contains(":"))! {
                     
@@ -451,35 +449,6 @@ class FavoritesViewController: UIViewController {
                 //                cell.tapup.addTarget(self, action: #selector(DiscoverViewController.tapWishlist), for: .touchUpInside)
                 
                 
-                if indexPath.row > 4 {
-                    
-                    if didpurchase {
-                        
-                        cell.titlelabel.alpha = 1
-    //                    cell.blur.alpha = 0
-                        cell.backlabel.alpha = 0.8
-    //                    cell.titleImage.alpha = 1
-                        
-                    } else {
-                    
-                  
-                    
-                        cell.titlelabel.alpha = 0
-    //                    cell.blur.alpha = 1
-                        cell.backlabel.alpha = 0.95
-                        
-                    
-                    }
-                } else {
-                    
-                    cell.titlelabel.alpha = 1
-    //                                  cell.blur.alpha = 0
-                    cell.backlabel.alpha = 0.8
-    //                cell.titleImage.alpha = 1
-                }
-                
-                cell.titleImage.alpha = 0
-
               
                 if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
                     
@@ -505,31 +474,22 @@ class FavoritesViewController: UIViewController {
                     
                     
                 }
-                
-                let isWished = Bool()
-                
-                if wishlistids.contains(book!.bookID) {
-                    
-                    
-                } else {
-                    
-                }
-                
+         
                 cell.layer.cornerRadius = 5.0
                 cell.layer.masksToBounds = true
                 
        
                 
-                if let viewsnum = book?.views {
-                    
-                    cell.viewslabel.text = "\(book!.views!)M views"
-                    
-                } else {
-                    
-                    cell.viewslabel.text = "6M views"
-
-                }
-                
+//                if let viewsnum = book?.views {
+//
+//                    cell.viewslabel.text = "\(book!.views!)M views"
+//
+//                } else {
+//
+//                    cell.viewslabel.text = "6M views"
+//
+//                }
+//
                 
                 
                 
@@ -635,17 +595,17 @@ class FavoritesViewController: UIViewController {
     //
     //        titleCollectionView!.collectionViewLayout = layout
             
-    //      var screenSize = titleCollectionView.bounds
-    //           var screenWidth = screenSize.width
-    //           var screenHeight = screenSize.height
+          var screenSize = titleCollectionView.bounds
+               var screenWidth = screenSize.width
+               var screenHeight = screenSize.height
     //
-    //           let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    //           layout.sectionInset = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
-    //        layout.itemSize = CGSize(width: screenWidth/1.1, height: screenHeight)
-    //        layout.minimumInteritemSpacing = 0
-    //        layout.minimumLineSpacing = 0
-    //
-    //        titleCollectionView!.collectionViewLayout = layout
+               let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+                              layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+                   layout.itemSize = CGSize(width: screenWidth/2.35, height: screenHeight/2.4)
+                           layout.minimumInteritemSpacing = 0
+                           layout.minimumLineSpacing = 0
+                   
+                              titleCollectionView!.collectionViewLayout = layout
            
             
             
@@ -711,11 +671,8 @@ class FavoritesViewController: UIViewController {
                 let name = book?.name
                 let author = book?.author
             id = book?.bookID ?? "x"
-            quotelabel.text = name
-            authorlabel.text = author
-            
-                  quotelabel.slideInFromRight()
-            authorlabel.slideInFromRight()
+    
+           
                   
             }
             
@@ -743,11 +700,7 @@ class FavoritesViewController: UIViewController {
                        let author = book?.author
                    id = book?.bookID ?? "x"
 
-                quotelabel.text = name
-                   authorlabel.text = author
-                
-                    quotelabel.slideInFromLeft()
-                     authorlabel.slideInFromLeft()
+             
               
             }
             

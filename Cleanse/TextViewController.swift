@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseCore
+import FirebaseDatabase
+import FBSDKCoreKit
 
 var selectedheadline = String()
 var dateformat = String()
@@ -21,6 +25,24 @@ class TextViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var bookcover: UIImageView!
     @IBOutlet weak var authorlabel: UILabel!
     @IBOutlet weak var titlelabel: UILabel!
+    
+    
+    func logFavoriteTapped(referrer : String) {
+        AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
+    }
+    
+    func logGenreViewed(referrer : String) {
+        AppEvents.logEvent(AppEvents.Name(rawValue: "genre viewed"), parameters: ["referrer" : referrer, "genre" : selectedgenre])
+    }
+    
+    func logTapShare(referrer : String) {
+        AppEvents.logEvent(AppEvents.Name(rawValue: "share tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
+    }
+    
+    func logTapDownvote(referrer : String) {
+        AppEvents.logEvent(AppEvents.Name(rawValue: "downvote tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
+    }
+    
     
     func addDoneButtonOnKeyboard(){
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -71,6 +93,10 @@ class TextViewController: UIViewController, UITextViewDelegate {
             
             
             titlelabel.slideInFromRight()
+            authorlabel.slideInFromRight()
+            tapshare.slideInFromRight()
+            taplike.slideInFromRight()
+            tapdownvote.slideInFromRight()
             showpropersummaries()
             //            textView.slideInFromRight()
             //            text.slideInFromRight()
@@ -110,6 +136,8 @@ class TextViewController: UIViewController, UITextViewDelegate {
         counter = 0
         arrayCount = headlines.count
         
+        randomstring = UUID().uuidString
+
         
         titlelabel.text = headlines[counter]
         
@@ -119,7 +147,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
         let  imageUrl = URL(string: imageURLString)
         
         backimage.kf.setImage(with: imageUrl)
-        
+        authorlabel.text = "- \(selectedgenre)"
         
         let swipeRightRec = UISwipeGestureRecognizer()
         let swipeLeftRec = UISwipeGestureRecognizer()
@@ -154,6 +182,112 @@ class TextViewController: UIViewController, UITextViewDelegate {
         // Do any additional setup after loading the view.
     }
     
+    open func takeScreenshot(_ shouldSave: Bool = true) -> UIImage? {
+            
+            var screenshotImage :UIImage?
+            let layer = UIApplication.shared.keyWindow!.layer
+            let scale = UIScreen.main.scale
+            UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+            guard let context = UIGraphicsGetCurrentContext() else {return nil}
+            layer.render(in:context)
+            screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            if let image = screenshotImage, shouldSave {
+                
+                screenshot = image
+                
+            }
+            
+            return screenshotImage
+        }
+    
+    var screenshot = UIImage()
+        
+        @IBAction func tapShare(_ sender: Any) {
+            
+            logTapShare(referrer: referrer)
+            
+            takeScreenshot()
+           let text = ""
+                                 
+                                 var image = self.screenshot
+    //
+    //                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+                                 
+                                 let shareAll : Array = [image] as [Any]
+                                 
+                                 
+                                 let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                                 
+                                 activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
+                                 
+                                 activityViewController.popoverPresentationController?.sourceView = self.view
+                                 self.present(activityViewController, animated: true, completion: nil)
+        }
+        @IBOutlet weak var tapdownvote: UIButton!
+        @IBOutlet weak var tapsavetop: UIButton!
+        @IBOutlet weak var tapshare: UIButton!
+        @IBAction func tapDownvote(_ sender: Any) {
+            
+            logTapDownvote(referrer: referrer)
+            nextcount()
+            
+        }
+        @IBOutlet weak var taplike: UIButton!
+        
+        var id = String()
+        var bookmarktapped = Bool()
+    
+    var randomstring = String()
+        
+        @IBAction func tapLike(_ sender: Any) {
+            
+            
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.impactOccurred()
+            
+            if bookmarktapped {
+                
+                ref?.child("Users").child(uid).child(randomstring).removeValue()
+                
+                taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+                
+                bookmarktapped = false
+                
+            } else {
+                
+                taplike.setBackgroundImage(UIImage(named: "DarkBookMark"), for: .normal)
+                
+                var trimmedtext = String()
+                logFavoriteTapped(referrer: referrer)
+                
+                trimmedtext = titlelabel.text ?? "x"
+                
+                var authorget = selectedauthorname
+                ref?.child("Users").child(uid).child(randomstring).updateChildValues(["Name" : trimmedtext, "Author" : authorget, "Image" : selectedbackground])
+                            
+                let formatter = DateFormatter()
+                // initially set the format based on your datepicker date / server String
+                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+                let myString = formatter.string(from: Date()) // string purpose I add here
+                // convert your string to date
+                let yourDate = formatter.date(from: myString)
+                //then again set the date format whhich type of output you need
+                formatter.dateFormat = "dd-MMM-yyyy"
+                // again convert your date to string
+                let myStringafd = formatter.string(from: yourDate!)
+                
+//                ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Date" : myString])
+
+                bookmarktapped = true
+                
+            }
+            
+        }
+    
+    
+    
     func lastcount() {
         
         if counter == 0 {
@@ -164,6 +298,10 @@ class TextViewController: UIViewController, UITextViewDelegate {
             
             counter -= 1
             titlelabel.slideInFromLeft()
+            authorlabel.slideInFromLeft()
+            taplike.slideInFromLeft()
+            tapshare.slideInFromLeft()
+            tapdownvote.slideInFromLeft()
             showpropersummaries()
             //
             //             textView.slideInFromLeft()
@@ -176,6 +314,10 @@ class TextViewController: UIViewController, UITextViewDelegate {
     
     @objc func swipeR() {
         
+        bookmarktapped = false
+
+          taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+
         lastcount()
         
         
@@ -193,6 +335,10 @@ class TextViewController: UIViewController, UITextViewDelegate {
     
     @objc func swipeL() {
         
+        bookmarktapped = false
+
+        taplike.setBackgroundImage(UIImage(named: "LightBookMark"), for: .normal)
+
         nextcount()
         
         
@@ -215,6 +361,8 @@ class TextViewController: UIViewController, UITextViewDelegate {
         
         if counter < headlines.count {
             
+            randomstring = UUID().uuidString
+
             
             titlelabel.text = headlines[counter]
             
