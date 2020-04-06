@@ -588,6 +588,8 @@ class FavoritesViewController: UIViewController, UICollectionViewDelegate, UICol
             updater?.invalidate()
             player?.pause()
             
+            titleCollectionView.layer.cornerRadius = 10.0
+            titleCollectionView.clipsToBounds = true
          
     //        layout.itemSize = CGSize(width: screenWidth/2.3, height: screenWidth/1.4)
     //        layout.minimumInteritemSpacing = 0

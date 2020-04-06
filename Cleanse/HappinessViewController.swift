@@ -273,9 +273,9 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         
         var counter2 = 0
         
-        while counter2 < 25 {
+        while counter2 < 15 {
             
-            ref?.child("AllBooks1").child(selectedgenre).childByAutoId().updateChildValues(["Name": "x", "Image" : "x", "Author" : "x"])
+            ref?.child("AllBooks1").child(selectedgenre).childByAutoId().updateChildValues(["Name": "x", "Image" : "x", "Author" : "Brian Stevens", "Genre" : "x", "Headline1" : "x", "Headline2" : "x", "Headline3" : "x", "Headline4" : "x", "Headline5" : "x", "Headline6" : "x", "Headline7" : "x", "Headline8" : "x", "Headline9" : "x", "Headline10" : "x", "Headline11" : "x", "Headline12" : "x", "Headline13" : "x", "Headline14" : "x", "Headline15" : "x", "Headline16" : "x", "Headline17" : "x", "Headline18" : "x", "Headline19" : "x", "Headline20" : "x", "Headline21" : "x", "Headline22" : "x", "Headline23" : "x", "Headline24" : "x", "Headline25" : "x", "Headline26" : "x", "Headline27" : "x", "Headline28" : "x", "Headline29" : "x", "Headline30" : "x", "Headline31" : "x", "Author Image" : "https://images.unsplash.com/photo-1541418950054-c12804e149d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60", "Description" : "x", "Profession" : "x"])
             
             
             counter2 += 1
@@ -283,6 +283,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         }
         
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch collectionView {
@@ -296,7 +297,6 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             cell.selectedimage.layer.cornerRadius = 10.0
             cell.selectedimage.layer.masksToBounds = true
-            
             
             
             
@@ -613,13 +613,13 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         let swipeDownRec = UISwipeGestureRecognizer()
         let swipeRightRec = UISwipeGestureRecognizer()
         
-                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
-                       blurEffectView.frame = backimage2.bounds
-                       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-                    backimage2.addSubview(blurEffectView)
-        
+//                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+//                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//                       blurEffectView.frame = backimage2.bounds
+//                       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        
+//                    backimage2.addSubview(blurEffectView)
+//        
     
    
               

@@ -744,7 +744,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FFB7E1A40DB188ABB430764 /* Pods-Cleanse.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-64";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-69";
 				CODE_SIGN_ENTITLEMENTS = Cleanse/Motivation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -758,7 +758,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.2.0;
+				MARKETING_VERSION = 4.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.CleanseRecipes;
 				PRODUCT_NAME = Quotely;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -771,7 +771,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E785B0B06B646A92655E699 /* Pods-Cleanse.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-64";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-69";
 				CODE_SIGN_ENTITLEMENTS = Cleanse/Motivation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -785,7 +785,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.2.0;
+				MARKETING_VERSION = 4.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.CleanseRecipes;
 				PRODUCT_NAME = Quotely;
 				PROVISIONING_PROFILE_SPECIFIER = "";

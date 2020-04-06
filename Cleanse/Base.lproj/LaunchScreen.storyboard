@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background-4" translatesAutoresizingMaskIntoConstraints="NO" id="fVo-bL-hcX">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle Copy 2" translatesAutoresizingMaskIntoConstraints="NO" id="fVo-bL-hcX">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -49,6 +49,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Background-4" width="512" height="512"/>
+        <image name="Rectangle Copy 2" width="414" height="896"/>
     </resources>
 </document>
