@@ -11,6 +11,7 @@ import Firebase
 
 class FavoritesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    var genres = [String]()
     @IBOutlet weak var backimage: UIImageView!
         var books: [Book] = [] {
                   didSet {

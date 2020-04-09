@@ -32,6 +32,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         AppEvents.logEvent(AppEvents.Name(rawValue: "downvote tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
     }
     
+    var genres = [String]()
     
     @IBOutlet weak var backimage: UIImageView!
     var books: [Book] = [] {
@@ -56,12 +57,17 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let date = dateFormatter.date(from:publisheddate)!
-
+            
             let dateago = date.timeAgoSinceDate()
             
             print(dateago)
             
-//            timeagolabel.text = dateago
+            //            timeagolabel.text = dateago
+            
+            let myIndexPath = IndexPath(row: 1, section: 0)
+            
+            
+            titleCollectionView.scrollToItem(at: myIndexPath, at: UICollectionView.ScrollPosition.top, animated: false)
             
             
             titleCollectionView.reloadData()
@@ -125,6 +131,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             let book = self.book(atIndexPath: indexPath)
             
+            selectedamazonurl = selectedgenre
             
             headlines.removeAll()
             
@@ -134,7 +141,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             selectedurl = book?.audioURL ?? ""
             selectedbookid = book?.bookID ?? ""
             selectedgenre = book?.genre ?? ""
-            selectedamazonurl = book?.amazonURL ?? ""
+            
             selecteddescription = book?.description ?? ""
             selectedduration = book?.duration ?? 15
             selectedheadline = book?.headline1 ?? ""
@@ -158,7 +165,22 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             headlines.append(book?.headline13 ?? "x")
             headlines.append(book?.headline14 ?? "x")
             headlines.append(book?.headline15 ?? "x")
+            headlines.append(book?.headline16 ?? "x")
+            headlines.append(book?.headline17 ?? "x")
+            headlines.append(book?.headline18 ?? "x")
+            headlines.append(book?.headline19 ?? "x")
+            headlines.append(book?.headline20 ?? "x")
             
+            headlines.append(book?.headline21 ?? "x")
+            headlines.append(book?.headline22 ?? "x")
+            headlines.append(book?.headline23 ?? "x")
+            headlines.append(book?.headline24 ?? "x")
+            headlines.append(book?.headline25 ?? "x")
+            headlines.append(book?.headline26 ?? "x")
+            headlines.append(book?.headline27 ?? "x")
+            headlines.append(book?.headline28 ?? "x")
+            headlines.append(book?.headline29 ?? "x")
+            headlines.append(book?.headline30 ?? "x")
             
             headlines = headlines.filter{$0 != "x"}
             
@@ -294,7 +316,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             cell.selectedimage.layer.masksToBounds = true
             
             
-//            addstaticbooks()
+            //            addstaticbooks()
             
             genreCollectionView.alpha = 1
             
@@ -464,25 +486,24 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             let name = book?.name
             
-//            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-//               let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//               blurEffectView.frame = cell.backlabel.bounds
-//               blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//
-//            cell.backlabel.addSubview(blurEffectView)
+            //            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+            //               let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //               blurEffectView.frame = cell.backlabel.bounds
+            //               blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            //
+            //            cell.backlabel.addSubview(blurEffectView)
             
-            backgroundcounter = Int.random(in: 0..<backgroundimages.count)
-
+            
             if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
-
-                                             cell.titleImage.kf.setImage(with: imageUrl)
-                       
-                       }//            cell.backlabel.image = backgroundimages[backgroundcounter]
-        
+                
+                cell.titleImage.kf.setImage(with: imageUrl)
+                
+            }//            cell.backlabel.image = backgroundimages[backgroundcounter]
+            
             var viewscounter =  book?.profession
             cell.viewslabel.text = viewscounter
-
-                cell.titlelabel.text = name
+            
+            cell.titlelabel.text = name
             //                       cell.titleback.clipsToBounds = true
             
             cell.layer.cornerRadius = 10.0
@@ -494,48 +515,63 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             //                cell.tapup.addTarget(self, action: #selector(DiscoverViewController.tapWishlist), for: .touchUpInside)
             
             
-
-   
-                
-                
-                //                cell.titleback.kf.setImage(with: imageUrl)
-                
-                
-                //                let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-                //                                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-                //                          blurEffectView.frame = cell.titleback.bounds
-                //                                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                //
-                //                          cell.titleback.addSubview(blurEffectView)
-                
-                
-                //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-                //                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-                //                    blurEffectView.frame = cell.titleback.bounds
-                //                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                //                    cell.titleback.addSubview(blurEffectView)
-                
-                
             
-      
+            
+            
+            
+            //                cell.titleback.kf.setImage(with: imageUrl)
+            
+            
+            //                let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+            //                                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //                          blurEffectView.frame = cell.titleback.bounds
+            //                                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            //
+            //                          cell.titleback.addSubview(blurEffectView)
+            
+            
+            //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+            //                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //                    blurEffectView.frame = cell.titleback.bounds
+            //                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            //                    cell.titleback.addSubview(blurEffectView)
+            
+            
+            
+            
             
             
             cell.layer.cornerRadius = 5.0
             cell.layer.masksToBounds = true
             
             
-//
-//            if let viewsnum = book?.views {
-//
-//                cell.viewslabel.text = "\(book!.views!)M views"
-//
-//            } else {
-//
-//                cell.viewslabel.text = "6M views"
-//
-//            }
+            //
+            //            if let viewsnum = book?.views {
+            //
+            //                cell.viewslabel.text = "\(book!.views!)M views"
+            //
+            //            } else {
+            //
+            //                cell.viewslabel.text = "6M views"
+            //
+            //            }
             
             
+            if name == "x" {
+                
+                cell.titlelabel.alpha = 0
+                cell.backlabel.alpha = 0
+                cell.viewslabel.alpha = 0
+                cell.titleImage.alpha = 0
+                cell.greylabel.alpha = 0
+            } else {
+                
+                cell.titlelabel.alpha = 1
+                cell.backlabel.alpha = 1
+                cell.viewslabel.alpha = 1
+                cell.titleImage.alpha = 1
+                cell.greylabel.alpha = 1
+            }
             
             
             return cell
@@ -563,40 +599,11 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        genres.removeAll()
-        genres.append("Money")
-        genres.append("Stocks")
-        genres.append("Real Estate")
-        genres.append("Success")
-        genres.append("Finance")
-        genres.append("Career")
-        genres.append("Economics")
-
         
         
-             backgroundimages.removeAll()
-             backgroundimages.append(UIImage(named: "beach1")!)
-             backgroundimages.append(UIImage(named: "beach2")!)
-             backgroundimages.append(UIImage(named: "beach3")!)
-             backgroundimages.append(UIImage(named: "beach4")!)
-               backgroundimages.append(UIImage(named: "beach5")!)
-               backgroundimages.append(UIImage(named: "beach6")!)
-             backgroundimages.append(UIImage(named: "beach7")!)
-               backgroundimages.append(UIImage(named: "beach8")!)
-               backgroundimages.append(UIImage(named: "beach9")!)
-             backgroundimages.append(UIImage(named: "beach10")!)
-               backgroundimages.append(UIImage(named: "beach11")!)
-               backgroundimages.append(UIImage(named: "beach12")!)
-             
-         
         
-    
         
-        selectedgenre = genres[0]
         
-        queryforids { () -> Void in
-            
-        }
         
         
         
@@ -611,16 +618,16 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         let swipeDownRec = UISwipeGestureRecognizer()
         let swipeRightRec = UISwipeGestureRecognizer()
         
-//                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-//                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//                       blurEffectView.frame = backimage2.bounds
-//                       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        
-//                    backimage2.addSubview(blurEffectView)
-//   
-   titleCollectionView.layer.cornerRadius = 10.0
-    titleCollectionView.clipsToBounds = true
-              
+        //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        //                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //                       blurEffectView.frame = backimage2.bounds
+        //                       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //
+        //                    backimage2.addSubview(blurEffectView)
+        //
+        titleCollectionView.layer.cornerRadius = 10.0
+        titleCollectionView.clipsToBounds = true
+        
         
         backimage2.layer.cornerRadius = 10.0
         backimage2.clipsToBounds = true
@@ -633,6 +640,29 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         queryforinfo()
         
         
+        genres.removeAll()
+        genres.append("Money")
+        genres.append("Stocks")
+//        genres.append("Real Estate")
+        genres.append("Career")
+        
+        genres.append("Success")
+        //                  genres.append("Finance")
+        //                  genres.append("Economics")
+        
+        
+        selectedgenre = genres[0]
+        selectedindex = 0
+        
+        genreCollectionView.reloadData()
+        
+        queryforids { () -> Void in
+            
+        }
+        
+        
+        
+        
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d"
@@ -641,17 +671,17 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         dateformat = result
         
         var screenSize = titleCollectionView.bounds
-          var screenWidth = screenSize.width
-          var screenHeight = screenSize.height
-
+        var screenWidth = screenSize.width
+        var screenHeight = screenSize.height
         
-                      let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-                   layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         layout.itemSize = CGSize(width: screenWidth/2.35, height: screenHeight/2.4)
-                layout.minimumInteritemSpacing = 0
-                layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         
-                   titleCollectionView!.collectionViewLayout = layout
+        titleCollectionView!.collectionViewLayout = layout
         
         backimage2.layer.cornerRadius = 10.0
         backimage2.clipsToBounds = true
@@ -683,56 +713,56 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func tapNext(_ sender: AnyObject?) {
         
         
-
+        
         counter += 1
         
         if counter < books.count {
             
             print("books = \(books.count) and \(counter)")
-
+            
             swipeRight(referrer: referrer)
             
             var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
-                          backimage2.image = backgroundimages[backgroundcounter]
+            backimage2.image = backgroundimages[backgroundcounter]
             
-//            backimage2.slideInFromBottom()
-//            tapdownvote.slideInFromBottom()
-//             tapshare.slideInFromBottom()
-//            taplike.slideInFromBottom()
-
-        let book = self.book(atIndex: counter)
-        //            if book?.bookID == "Title" {
-        //
-        //                return cell
-        //
-        //            } else {
-        
-        
-        
-        let name = book?.name
-        let author = book?.author
+            //            backimage2.slideInFromBottom()
+            //            tapdownvote.slideInFromBottom()
+            //             tapshare.slideInFromBottom()
+            //            taplike.slideInFromBottom()
+            
+            let book = self.book(atIndex: counter)
+            //            if book?.bookID == "Title" {
+            //
+            //                return cell
+            //
+            //            } else {
+            
+            
+            
+            let name = book?.name
+            let author = book?.author
             let publisheddate = book?.date ?? "2020-03-31 14:37:21"
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let date = dateFormatter.date(from:publisheddate)!
-
+            
             let dateago = date.timeAgoSinceDate()
             
             print(dateago)
             
             timeagolabel.text = dateago
             
-        id = book?.bookID ?? "x"
-        
-        quotelabel.text = name
-        authorlabel.text = author
+            id = book?.bookID ?? "x"
+            
+            quotelabel.text = name
+            authorlabel.text = author
             
             fullview.slideInFromBottom()
-
-        
-//        quotelabel.slideInFromBottom()
-//        authorlabel.slideInFromBottom()
+            
+            
+            //        quotelabel.slideInFromBottom()
+            //        authorlabel.slideInFromBottom()
             
         }
         
@@ -768,21 +798,21 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         logTapShare(referrer: referrer)
         
         takeScreenshot()
-       let text = ""
-                             
-                             var image = self.screenshot
-//
-//                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
-                             
-                             let shareAll : Array = [image] as [Any]
-                             
-                             
-                             let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
-                             
-                             activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
-                             
-                             activityViewController.popoverPresentationController?.sourceView = self.view
-                             self.present(activityViewController, animated: true, completion: nil)
+        let text = ""
+        
+        var image = self.screenshot
+        //
+        //                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
+        
+        let shareAll : Array = [image] as [Any]
+        
+        
+        let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+        
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
+        
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
     }
     @IBOutlet weak var tapdownvote: UIButton!
     @IBOutlet weak var tapsavetop: UIButton!
@@ -823,11 +853,11 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             var authorget = authorlabel.text ?? "x"
             ref?.child("Users").child(uid).child(id).updateChildValues(["Name" : trimmedtext, "Author" : authorget])
-                        
+            
             let formatter = DateFormatter()
             // initially set the format based on your datepicker date / server String
             formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-
+            
             let myString = formatter.string(from: Date()) // string purpose I add here
             // convert your string to date
             let yourDate = formatter.date(from: myString)
@@ -837,7 +867,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             let myStringafd = formatter.string(from: yourDate!)
             
             ref?.child("AllBooks1").child(selectedgenre).child(id).updateChildValues(["Date" : myString])
-
+            
             bookmarktapped = true
             
         }
@@ -857,11 +887,11 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             counter -= 1
             
             var backgroundcounter = Int.random(in: 0..<backgroundimages.count)
-                                   backimage2.image = backgroundimages[backgroundcounter]
-//                     backimage2.slideInFromTop()
-//            tapdownvote.slideInFromTop()
-//            tapshare.slideInFromTop()
-//            taplike.slideInFromTop()
+            backimage2.image = backgroundimages[backgroundcounter]
+            //                     backimage2.slideInFromTop()
+            //            tapdownvote.slideInFromTop()
+            //            tapshare.slideInFromTop()
+            //            taplike.slideInFromTop()
             let book = self.book(atIndex: counter)
             //            if book?.bookID == "Title" {
             //
@@ -880,7 +910,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let date = dateFormatter.date(from:publisheddate)!
-
+            
             let dateago = date.timeAgoSinceDate()
             
             print(dateago)
@@ -890,12 +920,12 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             authorlabel.text = author
             
             blur.slideInFromTop()
-//            quotelabel.slideInFromTop()
-//            authorlabel.slideInFromTop()
-//            backimage2.slideInFromTop()
-//
+            //            quotelabel.slideInFromTop()
+            //            authorlabel.slideInFromTop()
+            //            backimage2.slideInFromTop()
+            //
             fullview.slideInFromTop()
-
+            
             if didpurchase {
                 
                 quotelabel.alpha = 1
@@ -931,7 +961,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                     
                     self.books = newbooks
                     
-                    self.books = self.books.sorted(by: { $0.date ?? "2020-02-28 14:51:06"  > $1.date ?? "2020-02-28 14:51:06" })
+                    self.books = self.books.sorted(by: { $1.name ?? "2020-02-28 14:51:06"  > $0.name ?? "2020-02-28 14:51:06" })
                     
                 }
                 

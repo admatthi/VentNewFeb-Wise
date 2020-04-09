@@ -35,6 +35,16 @@ struct Book {
     let headline18: String?
     let headline19: String?
     let headline20: String?
+    let headline21: String?
+    let headline22: String?
+    let headline23: String?
+    let headline24: String?
+    let headline25: String?
+    let headline26: String?
+    let headline27: String?
+    let headline28: String?
+    let headline29: String?
+    let headline30: String?
     let cliffhanger: Int?
     let audioURL: String?
     let popularity: Int?
@@ -85,6 +95,16 @@ struct Book {
         self.headline18 = json["Headline18"] as? String
         self.headline19 = json["Headline19"] as? String
         self.headline20 = json["Headline20"] as? String
+        self.headline21 = json["Headline21"] as? String
+        self.headline22 = json["Headline22"] as? String
+        self.headline23 = json["Headline23"] as? String
+        self.headline24 = json["Headline24"] as? String
+        self.headline25 = json["Headline25"] as? String
+        self.headline26 = json["Headline26"] as? String
+        self.headline27 = json["Headline27"] as? String
+        self.headline28 = json["Headline28"] as? String
+        self.headline29 = json["Headline29"] as? String
+        self.headline30 = json["Headline30"] as? String
         self.cliffhanger = json["Cliffhanger"] as? Int
         self.popularity = json["Popularity"] as? Int
         self.audioURL = json["AudioURL"] as? String

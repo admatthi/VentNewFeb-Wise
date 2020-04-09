@@ -64,14 +64,19 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
 //            timeagolabel.text = dateago
             
-            
+            let myIndexPath = IndexPath(row: 1, section: 0)
+                      
+                      
+                      titleCollectionView.scrollToItem(at: myIndexPath, at: UICollectionView.ScrollPosition.top, animated: false)
+                      
             titleCollectionView.reloadData()
             genreCollectionView.reloadData()
         }
     }
     
     var genreindex = Int()
-    
+    var genres = [String]()
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         switch collectionView {
@@ -127,7 +132,8 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             let book = self.book(atIndexPath: indexPath)
             
-            
+            selectedamazonurl = selectedgenre
+
             headlines.removeAll()
             
             bookindex = indexPath.row
@@ -136,7 +142,6 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             selectedurl = book?.audioURL ?? ""
             selectedbookid = book?.bookID ?? ""
             selectedgenre = book?.genre ?? ""
-            selectedamazonurl = book?.amazonURL ?? ""
             selecteddescription = book?.description ?? ""
             selectedduration = book?.duration ?? 15
             selectedheadline = book?.headline1 ?? ""
@@ -146,20 +151,36 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             
             headlines.append(book?.headline1 ?? "x")
-            headlines.append(book?.headline2 ?? "x")
-            headlines.append(book?.headline3 ?? "x")
-            headlines.append(book?.headline4 ?? "x")
-            headlines.append(book?.headline5 ?? "x")
-            headlines.append(book?.headline6 ?? "x")
-            headlines.append(book?.headline7 ?? "x")
-            headlines.append(book?.headline8 ?? "x")
-            headlines.append(book?.headline9 ?? "x")
-            headlines.append(book?.headline10 ?? "x")
-            headlines.append(book?.headline11 ?? "x")
-            headlines.append(book?.headline12 ?? "x")
-            headlines.append(book?.headline13 ?? "x")
-            headlines.append(book?.headline14 ?? "x")
-            headlines.append(book?.headline15 ?? "x")
+                   headlines.append(book?.headline2 ?? "x")
+                   headlines.append(book?.headline3 ?? "x")
+                   headlines.append(book?.headline4 ?? "x")
+                   headlines.append(book?.headline5 ?? "x")
+                   headlines.append(book?.headline6 ?? "x")
+                   headlines.append(book?.headline7 ?? "x")
+                   headlines.append(book?.headline8 ?? "x")
+                   headlines.append(book?.headline9 ?? "x")
+                   headlines.append(book?.headline10 ?? "x")
+                   headlines.append(book?.headline11 ?? "x")
+                   headlines.append(book?.headline12 ?? "x")
+                   headlines.append(book?.headline13 ?? "x")
+                   headlines.append(book?.headline14 ?? "x")
+                   headlines.append(book?.headline15 ?? "x")
+                   headlines.append(book?.headline16 ?? "x")
+                   headlines.append(book?.headline17 ?? "x")
+                   headlines.append(book?.headline18 ?? "x")
+                   headlines.append(book?.headline19 ?? "x")
+                   headlines.append(book?.headline20 ?? "x")
+
+                   headlines.append(book?.headline21 ?? "x")
+                         headlines.append(book?.headline22 ?? "x")
+                         headlines.append(book?.headline23 ?? "x")
+                         headlines.append(book?.headline24 ?? "x")
+                         headlines.append(book?.headline25 ?? "x")
+                         headlines.append(book?.headline26 ?? "x")
+                         headlines.append(book?.headline27 ?? "x")
+                         headlines.append(book?.headline28 ?? "x")
+                         headlines.append(book?.headline29 ?? "x")
+                         headlines.append(book?.headline30 ?? "x")
             
             
             headlines = headlines.filter{$0 != "x"}
@@ -474,9 +495,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
 //               blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 //
 //            cell.backlabel.addSubview(blurEffectView)
-            
-            backgroundcounter = Int.random(in: 0..<backgroundimages.count)
-
+        
             if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
 
                                              cell.titleImage.kf.setImage(with: imageUrl)
@@ -527,7 +546,21 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             cell.layer.cornerRadius = 5.0
             cell.layer.masksToBounds = true
             
-            
+                     if name == "x" {
+                         
+                         cell.titlelabel.alpha = 0
+                         cell.backlabel.alpha = 0
+                         cell.viewslabel.alpha = 0
+                         cell.titleImage.alpha = 0
+                         cell.greylabel.alpha = 0
+                     } else {
+                                     
+                                     cell.titlelabel.alpha = 1
+                                            cell.backlabel.alpha = 1
+                                            cell.viewslabel.alpha = 1
+                                            cell.titleImage.alpha = 1
+                                            cell.greylabel.alpha = 1
+                                 }
 //
 //            if let viewsnum = book?.views {
 //
@@ -567,39 +600,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        genres.removeAll()
-        genres.append("Depression")
-        genres.append("Panic")
-        genres.append("Anxiety")
-        genres.append("Addiction")
-        genres.append("Spirituality")
-        
-        
-        
-             backgroundimages.removeAll()
-             backgroundimages.append(UIImage(named: "beach1")!)
-             backgroundimages.append(UIImage(named: "beach2")!)
-             backgroundimages.append(UIImage(named: "beach3")!)
-             backgroundimages.append(UIImage(named: "beach4")!)
-               backgroundimages.append(UIImage(named: "beach5")!)
-               backgroundimages.append(UIImage(named: "beach6")!)
-             backgroundimages.append(UIImage(named: "beach7")!)
-               backgroundimages.append(UIImage(named: "beach8")!)
-               backgroundimages.append(UIImage(named: "beach9")!)
-             backgroundimages.append(UIImage(named: "beach10")!)
-               backgroundimages.append(UIImage(named: "beach11")!)
-               backgroundimages.append(UIImage(named: "beach12")!)
-             
-         
-        
-    
-        
-        selectedgenre = genres[0]
-        
-        queryforids { () -> Void in
-            
-        }
-        
+
         
         
         
@@ -617,10 +618,26 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
 //                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
 //                       blurEffectView.frame = backimage2.bounds
 //                       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        
+//
 //                    backimage2.addSubview(blurEffectView)
-//        
+//
     
+   genres.removeAll()
+   genres.append("Depression")
+   genres.append("Panic")
+   genres.append("Anxiety")
+   genres.append("Addiction")
+   genres.append("Spirituality")
+   
+   
+      selectedgenre = genres[0]
+        selectedindex = 0
+        
+        genreCollectionView.reloadData()
+   
+   queryforids { () -> Void in
+       
+   }
    
               
         
@@ -930,8 +947,8 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
                     
                     self.books = newbooks
                     
-                    self.books = self.books.sorted(by: { $0.date ?? "2020-02-28 14:51:06"  > $1.date ?? "2020-02-28 14:51:06" })
-                    
+                    self.books = self.books.sorted(by: { $1.name ?? "2020-02-28 14:51:06"  > $0.name ?? "2020-02-28 14:51:06" })
+
                 }
                 
                 //                                for each in snapDict {

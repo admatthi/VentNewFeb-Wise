@@ -32,7 +32,7 @@ class SleepViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     var genreindex = Int()
-    
+    var genres = [String]()
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
             refer = "On Tap Discover"

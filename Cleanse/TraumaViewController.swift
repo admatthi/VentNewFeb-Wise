@@ -14,7 +14,7 @@ import FirebaseDatabase
 class TraumaViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     var selectedindex = Int()
     var genreindex = Int()
-
+var genres = [String]()
     @IBOutlet weak var genreCollectionView: UICollectionView!
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         

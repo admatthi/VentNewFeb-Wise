@@ -42,6 +42,15 @@ class OverviewViewController: UIViewController {
         tapstart.layer.cornerRadius = 5.0
         tapstart.clipsToBounds = true
 
+        let swipeRightRec = UISwipeGestureRecognizer()
+        let swipeLeftRec = UISwipeGestureRecognizer()
+        let swipeUpRec = UISwipeGestureRecognizer()
+        let swipeDownRec = UISwipeGestureRecognizer()
+        
+
+        swipeDownRec.addTarget(self, action: #selector(self.swipeBack) )
+        swipeDownRec.direction = .down
+        self.view!.addGestureRecognizer(swipeDownRec)
         
         
         authorimage.layer.cornerRadius = authorimage.frame.size.width / 2
@@ -72,7 +81,7 @@ class OverviewViewController: UIViewController {
         authorlabel.text = selectedauthorname
         titlelabel.text = selectedtitle
         professionlabel.text = selectedprofession
-        descriptionlabel.text = selecteddescription
+        descriptionlabel.text = "\(selecteddescription) We hope these quotes teach you a life-changing lesson 😊"
  
 
         // Do any additional setup after loading the view.
@@ -89,6 +98,11 @@ class OverviewViewController: UIViewController {
     }
     */
 
+    @objc func swipeBack() {
+        
+        self.dismiss(animated: true, completion: nil)
+
+    }
     @IBAction func tapBack(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
