@@ -963,8 +963,8 @@ class LoveViewController: UIViewController, UICollectionViewDataSource, UICollec
                     
                     self.books = newbooks
                     
-                    self.books = self.books.sorted(by: { $1.name ?? "2020-02-28 14:51:06"  > $0.name ?? "2020-02-28 14:51:06" })
-
+                    self.books = self.books.sorted(by: { $0.date ?? "2020-02-28 14:51:06"  > $1.date ?? "2020-02-28 14:51:06" })
+                    
                 }
                 
                 //                                for each in snapDict {

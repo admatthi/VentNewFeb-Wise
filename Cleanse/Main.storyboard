@@ -171,13 +171,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="pUC-j3-a73">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="217.00000000000023"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="hf6-zu-5JX">
-                                <rect key="frame" x="0.0" y="206" width="414" height="690.00000000000023"/>
+                                <rect key="frame" x="0.0" y="206" width="414" height="690"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="Z8V-t2-hOF">
-                                <rect key="frame" x="20" y="335" width="52" height="52.000000000000227"/>
+                                <rect key="frame" x="20" y="335" width="52" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="52" id="6vJ-Dx-JJo"/>
                                     <constraint firstAttribute="height" constant="52" id="XJU-as-63H"/>
@@ -292,7 +292,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="roP-dD-Qyv">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="943.00000000000023"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="943"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Xrr-Wy-a2K">
                                 <rect key="frame" x="0.0" y="49" width="414" height="813"/>
@@ -315,7 +315,7 @@
                                                     <rect key="frame" x="0.0" y="8" width="171" height="205"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle Copy 5" translatesAutoresizingMaskIntoConstraints="NO" id="dtO-Rq-EVh">
-                                                    <rect key="frame" x="-2" y="97" width="176" height="116"/>
+                                                    <rect key="frame" x="-2" y="-19" width="176" height="232"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to be hopeful in your life" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tl1-MZ-pzW">
                                                     <rect key="frame" x="5" y="133" width="161" height="74"/>
@@ -454,13 +454,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="945"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNK-JP-ohz">
-                                <rect key="frame" x="16" y="121" width="384" height="30.5"/>
+                                <rect key="frame" x="16" y="121" width="384" height="30"/>
                                 <fontDescription key="fontDescription" name="BasisGrotesquePro-Bold" family="Basis Grotesque Pro" pointSize="26"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmi-mu-1DB">
-                                <rect key="frame" x="16" y="157.5" width="48.5" height="21"/>
+                                <rect key="frame" x="16" y="157" width="50.5" height="21"/>
                                 <fontDescription key="fontDescription" name="BasisGrotesquePro-Bold" family="Basis Grotesque Pro" pointSize="18"/>
                                 <color key="textColor" red="0.99903899431228638" green="0.6847878098487854" blue="0.35889795422554016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -472,7 +472,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="- What happened today" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="V3U-wC-2j1">
-                                <rect key="frame" x="15" y="189.5" width="374" height="629.5"/>
+                                <rect key="frame" x="15" y="189" width="374" height="630"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="19"/>
@@ -527,7 +527,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="YrS-5C-LiS">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896.00000000000023"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -583,7 +583,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Motivate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dp-Xw-0c7">
-                                                    <rect key="frame" x="95" y="16" width="127" height="23.5"/>
+                                                    <rect key="frame" x="95" y="16" width="133" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="BasisGrotesquePro-Bold" family="Basis Grotesque Pro" pointSize="20"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -836,7 +836,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 quotes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAL-XA-n3A">
-                                                    <rect key="frame" x="13" y="9" width="58.5" height="15.5"/>
+                                                    <rect key="frame" x="11.5" y="9" width="61" height="15"/>
                                                     <fontDescription key="fontDescription" name="BasisGrotesquePro-Bold" family="Basis Grotesque Pro" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1215,7 +1215,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="yu5-C9-hyd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="945.00000000000023"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="945"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="t47-UU-8Ou">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
@@ -1238,7 +1238,7 @@
                                                     <rect key="frame" x="0.0" y="8" width="171" height="205"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle Copy 5" translatesAutoresizingMaskIntoConstraints="NO" id="pOA-dz-F1G">
-                                                    <rect key="frame" x="-2" y="97" width="176" height="116"/>
+                                                    <rect key="frame" x="-2" y="-19" width="176" height="232"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to be hopeful in your life" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqI-hb-6bx">
                                                     <rect key="frame" x="5" y="133" width="161" height="74"/>
@@ -1454,40 +1454,63 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marion Wellington" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smE-FN-uvo">
-                                                    <rect key="frame" x="5" y="177" width="161" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marion Wellington" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smE-FN-uvo">
+                                                    <rect key="frame" x="5" y="165" width="161" height="21"/>
                                                     <fontDescription key="fontDescription" name="BasisGrotesquePro-Bold" family="Basis Grotesque Pro" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5M Views" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qp2-z8-TbE">
+                                                    <rect key="frame" x="5" y="185" width="161" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="DNA-So-Vaa"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="BasisGrotesquePro-Bold" family="Basis Grotesque Pro" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 quotes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zeC-SF-Psb">
-                                                    <rect key="frame" x="13" y="9" width="58.5" height="15.5"/>
+                                                    <rect key="frame" x="11.5" y="9" width="61" height="15"/>
                                                     <fontDescription key="fontDescription" name="BasisGrotesquePro-Bold" family="Basis Grotesque Pro" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="r" translatesAutoresizingMaskIntoConstraints="NO" id="BJf-jG-cEf">
+                                                    <rect key="frame" x="103" y="-5" width="68" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="67.999999999999886" id="Q5N-dp-o6g"/>
+                                                        <constraint firstAttribute="height" constant="44" id="twX-So-Dc4"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="BJf-jG-cEf" secondAttribute="trailing" id="3fa-gi-cFT"/>
                                                 <constraint firstAttribute="trailing" secondItem="i2v-Qk-nal" secondAttribute="trailing" id="4FG-zN-Zgu"/>
                                                 <constraint firstAttribute="bottom" secondItem="i2v-Qk-nal" secondAttribute="bottom" constant="6" id="DsA-3u-CiU"/>
                                                 <constraint firstItem="zeC-SF-Psb" firstAttribute="centerX" secondItem="8Bl-c8-0w3" secondAttribute="centerX" id="GwN-s0-BYq"/>
                                                 <constraint firstItem="8Bl-c8-0w3" firstAttribute="top" secondItem="txE-7O-Kcw" secondAttribute="top" constant="6" id="Rza-Gf-oic"/>
+                                                <constraint firstAttribute="bottom" secondItem="qp2-z8-TbE" secondAttribute="bottom" constant="7" id="T2E-Tn-uuB"/>
                                                 <constraint firstItem="fBe-bD-sTb" firstAttribute="leading" secondItem="txE-7O-Kcw" secondAttribute="leading" id="VCa-5e-cJi"/>
+                                                <constraint firstItem="qp2-z8-TbE" firstAttribute="leading" secondItem="txE-7O-Kcw" secondAttribute="leading" constant="5" id="WS3-t3-IcD"/>
                                                 <constraint firstItem="8Bl-c8-0w3" firstAttribute="leading" secondItem="txE-7O-Kcw" secondAttribute="leading" constant="5" id="XAG-q2-Qgs"/>
                                                 <constraint firstItem="smE-FN-uvo" firstAttribute="leading" secondItem="txE-7O-Kcw" secondAttribute="leading" constant="5" id="aIB-6x-fEO"/>
-                                                <constraint firstAttribute="bottom" secondItem="smE-FN-uvo" secondAttribute="bottom" constant="15" id="bcQ-IP-nSX"/>
+                                                <constraint firstAttribute="bottom" secondItem="smE-FN-uvo" secondAttribute="bottom" constant="27" id="bcQ-IP-nSX"/>
                                                 <constraint firstAttribute="trailing" secondItem="fBe-bD-sTb" secondAttribute="trailing" id="fJ1-6K-Pl9"/>
                                                 <constraint firstItem="zeC-SF-Psb" firstAttribute="centerY" secondItem="8Bl-c8-0w3" secondAttribute="centerY" id="mdZ-03-95K"/>
                                                 <constraint firstAttribute="bottom" secondItem="fBe-bD-sTb" secondAttribute="bottom" constant="6" id="nAB-Sc-7da"/>
                                                 <constraint firstAttribute="trailing" secondItem="smE-FN-uvo" secondAttribute="trailing" constant="5" id="nNa-h0-Ukp"/>
                                                 <constraint firstItem="i2v-Qk-nal" firstAttribute="leading" secondItem="txE-7O-Kcw" secondAttribute="leading" id="tXf-bS-4XG"/>
                                                 <constraint firstItem="i2v-Qk-nal" firstAttribute="top" secondItem="txE-7O-Kcw" secondAttribute="top" constant="-11" id="ucl-qj-DF2"/>
+                                                <constraint firstAttribute="trailing" secondItem="qp2-z8-TbE" secondAttribute="trailing" constant="5" id="wUQ-MS-yuK"/>
+                                                <constraint firstItem="BJf-jG-cEf" firstAttribute="top" secondItem="txE-7O-Kcw" secondAttribute="top" constant="-5" id="ySk-Hb-79Z"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="171" height="213"/>
                                         <connections>
                                             <outlet property="backlabel" destination="fBe-bD-sTb" id="ALg-vv-IzL"/>
                                             <outlet property="greylabel" destination="8Bl-c8-0w3" id="yqv-tU-bNx"/>
+                                            <outlet property="newlabel" destination="BJf-jG-cEf" id="tgY-rm-KSG"/>
+                                            <outlet property="timeago" destination="qp2-z8-TbE" id="SNg-VZ-4z6"/>
                                             <outlet property="titleImage" destination="i2v-Qk-nal" id="Eax-wf-AUf"/>
                                             <outlet property="titlelabel" destination="smE-FN-uvo" id="GsC-24-2wK"/>
                                             <outlet property="viewslabel" destination="zeC-SF-Psb" id="F2P-yP-ynH"/>
@@ -1636,7 +1659,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="hQ4-cT-sOH">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896.00000000000023"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Design is not just what" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwM-AC-EeM">
                                 <rect key="frame" x="57" y="127" width="337" height="30.5"/>
@@ -1804,7 +1827,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 quotes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ab-8x-xuh">
-                                                            <rect key="frame" x="13" y="9" width="58.5" height="15.5"/>
+                                                            <rect key="frame" x="11.5" y="9" width="61" height="15"/>
                                                             <fontDescription key="fontDescription" name="BasisGrotesquePro-Bold" family="Basis Grotesque Pro" pointSize="13"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -2189,7 +2212,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 quotes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPd-rL-1d0">
-                                                    <rect key="frame" x="13" y="9" width="58.5" height="15.5"/>
+                                                    <rect key="frame" x="11.5" y="9" width="61" height="15"/>
                                                     <fontDescription key="fontDescription" name="BasisGrotesquePro-Bold" family="Basis Grotesque Pro" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -2826,6 +2849,7 @@
         <image name="blackx" width="200" height="200"/>
         <image name="iPhone XR Copy" width="106" height="58"/>
         <image name="image1" width="668" height="1002"/>
+        <image name="r" width="644" height="286"/>
         <image name="s4-2" width="634" height="951"/>
         <image name="sunrise9" width="634" height="951"/>
     </resources>
@@ -2834,8 +2858,8 @@
         <segue reference="Enk-yh-hcS"/>
         <segue reference="CUF-Gx-k0p"/>
         <segue reference="1n6-SL-pBO"/>
-        <segue reference="6Kg-e8-6LR"/>
+        <segue reference="DQG-lI-6bt"/>
         <segue reference="Lo7-dB-OB6"/>
-        <segue reference="7A4-6b-tzc"/>
+        <segue reference="24a-eo-MIq"/>
     </inferredMetricsTieBreakers>
 </document>

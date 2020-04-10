@@ -947,8 +947,8 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
                     
                     self.books = newbooks
                     
-                    self.books = self.books.sorted(by: { $1.name ?? "2020-02-28 14:51:06"  > $0.name ?? "2020-02-28 14:51:06" })
-
+                    self.books = self.books.sorted(by: { $0.date ?? "2020-02-28 14:51:06"  > $1.date ?? "2020-02-28 14:51:06" })
+                    
                 }
                 
                 //                                for each in snapDict {
@@ -1042,32 +1042,31 @@ func timeAgoSinceDate() -> String {
     // Estimation
     // Year
     if let interval = Calendar.current.dateComponents([.year], from: fromDate, to: toDate).year, interval > 0  {
-
-        return interval == 1 ? "\(interval)" + " " + "year ago" : "\(interval)" + " " + "years ago"
+//
+        return "26"
     }
-
-    // Month
+//
+//    // Month
     if let interval = Calendar.current.dateComponents([.month], from: fromDate, to: toDate).month, interval > 0  {
-
-        return interval == 1 ? "\(interval)" + " " + "month ago" : "\(interval)" + " " + "months ago"
+//
+        return "26"
     }
-
-    // Day
+//
+//    // Day
     if let interval = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day, interval > 0  {
 
-        return interval == 1 ? "\(interval)" + " " + "day ago" : "\(interval)" + "d ago"
+        return "26"
     }
 
     // Hours
     if let interval = Calendar.current.dateComponents([.hour], from: fromDate, to: toDate).hour, interval > 0 {
 
-        return interval == 1 ? "\(interval)" + " " + "hour ago" : "\(interval)" + "h ago"
+        return interval == 1 ? "\(interval)" + " " + " " : "\(interval)" + " "
     }
 
-    // Minute
     if let interval = Calendar.current.dateComponents([.minute], from: fromDate, to: toDate).minute, interval > 0 {
 
-        return interval == 1 ? "\(interval)" + " " + "minute ago" : "\(interval)" + "m ago"
+        return "2"
     }
 
     return "a moment ago"

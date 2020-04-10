@@ -49,18 +49,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             
             
-            let name = book?.name
-            let author = book?.author
             
-            let publisheddate = book?.date ?? "2020-03-31 14:37:21"
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let date = dateFormatter.date(from:publisheddate)!
-            
-            let dateago = date.timeAgoSinceDate()
-            
-            print(dateago)
             
             //            timeagolabel.text = dateago
             
@@ -536,9 +525,36 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             //                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             //                    cell.titleback.addSubview(blurEffectView)
             
+
             
+            let publisheddate = book?.date ?? "2020-03-31 14:37:21"
             
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let date = dateFormatter.date(from:publisheddate)!
             
+            var dateago = date.timeAgoSinceDate()
+            
+            dateago = dateago.replacingOccurrences(of: " ", with: "")
+            
+            let intdateago = Int(dateago) ?? 24
+            
+            if intdateago > 23 {
+                
+                cell.newlabel.alpha = 0
+                
+            } else {
+                
+                cell.newlabel.alpha = 1
+
+            }
+
+            
+            print(dateago)
+            
+            var backgroundcounter = Int.random(in: 1..<9)
+
+            cell.timeago.text = "\(backgroundcounter)M views"
             
             
             cell.layer.cornerRadius = 5.0
@@ -749,7 +765,6 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             let dateago = date.timeAgoSinceDate()
             
-            print(dateago)
             
             timeagolabel.text = dateago
             
@@ -961,7 +976,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                     
                     self.books = newbooks
                     
-                    self.books = self.books.sorted(by: { $1.name ?? "2020-02-28 14:51:06"  > $0.name ?? "2020-02-28 14:51:06" })
+                    self.books = self.books.sorted(by: { $0.date ?? "2020-02-28 14:51:06"  > $1.date ?? "2020-02-28 14:51:06" })
                     
                 }
                 
