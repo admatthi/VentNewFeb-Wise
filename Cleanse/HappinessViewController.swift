@@ -17,22 +17,16 @@ func swipeRight(referrer : String) {
 }
 class HappinessViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate  {
     
-    func logFavoriteTapped(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
+    func logBookViewed(referrer : String) {
+        AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "bookID" : selectedbookid])
     }
     
     func logGenreViewed(referrer : String) {
         AppEvents.logEvent(AppEvents.Name(rawValue: "genre viewed"), parameters: ["referrer" : referrer, "genre" : selectedgenre])
     }
     
-    func logTapShare(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "share tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
-    }
     
-    func logTapDownvote(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "downvote tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
-    }
-    
+   
     
     @IBOutlet weak var backimage: UIImageView!
     var books: [Book] = [] {
@@ -122,7 +116,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             
             //            titleCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
             
-            
+//            addstaticbooks()
             
             genreCollectionView.reloadData()
             
@@ -148,7 +142,8 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             selectedprofession = book?.profession ?? ""
             selectedauthorimage = book?.authorImage ?? ""
             selectedbackground = book?.imageURL ?? ""
-            
+            selectedbookid = book?.bookID ?? ""
+            logBookViewed(referrer: referrer)
             
             headlines.append(book?.headline1 ?? "x")
                    headlines.append(book?.headline2 ?? "x")
@@ -572,6 +567,28 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
 //
 //            }
             
+            let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+                 
+                 let dateFormatter = DateFormatter()
+                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                 let date = dateFormatter.date(from:publisheddate)!
+                 
+                 var dateago = date.timeAgoSinceDate()
+                 
+                 dateago = dateago.replacingOccurrences(of: " ", with: "")
+                 
+                 let intdateago = Int(dateago) ?? 24
+                 
+                 if intdateago > 23 {
+                     
+                     cell.newlabel.alpha = 0
+                     
+                 } else {
+                     
+                     cell.newlabel.alpha = 1
+
+                 }
+            
             
             
             
@@ -674,7 +691,7 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
         
         
         
-        //        addstaticbooks()
+//                addstaticbooks()
         
         
         
@@ -781,7 +798,6 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
     
     @IBAction func tapShare(_ sender: Any) {
         
-        logTapShare(referrer: referrer)
         
         takeScreenshot()
        let text = ""
@@ -805,7 +821,6 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var tapshare: UIButton!
     @IBAction func tapDownvote(_ sender: Any) {
         
-        logTapDownvote(referrer: referrer)
         self.tapNext(nil)
         
     }
@@ -833,7 +848,6 @@ class HappinessViewController: UIViewController, UICollectionViewDataSource, UIC
             taplike.setBackgroundImage(UIImage(named: "DarkBookMark"), for: .normal)
             
             var trimmedtext = String()
-            logFavoriteTapped(referrer: referrer)
             
             trimmedtext = quotelabel.text ?? "x"
             

@@ -13,9 +13,9 @@ import FirebaseDatabase
 import FBSDKCoreKit
 class HealthViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate  {
     
-    func logFavoriteTapped(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
-    }
+      func logBookViewed(referrer : String) {
+          AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "bookID" : selectedbookid])
+      }
     
     func logGenreViewed(referrer : String) {
         AppEvents.logEvent(AppEvents.Name(rawValue: "genre viewed"), parameters: ["referrer" : referrer, "genre" : selectedgenre])
@@ -144,7 +144,7 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
             selectedprofession = book?.profession ?? ""
             selectedauthorimage = book?.authorImage ?? ""
             selectedbackground = book?.imageURL ?? ""
-            
+            logBookViewed(referrer: referrer)
             
         headlines.append(book?.headline1 ?? "x")
                    headlines.append(book?.headline2 ?? "x")
@@ -574,6 +574,28 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
                                             cell.greylabel.alpha = 1
                                  }
             
+            let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+                 
+                 let dateFormatter = DateFormatter()
+                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                 let date = dateFormatter.date(from:publisheddate)!
+                 
+                 var dateago = date.timeAgoSinceDate()
+                 
+                 dateago = dateago.replacingOccurrences(of: " ", with: "")
+                 
+                 let intdateago = Int(dateago) ?? 24
+                 
+                 if intdateago > 23 {
+                     
+                     cell.newlabel.alpha = 0
+                     
+                 } else {
+                     
+                     cell.newlabel.alpha = 1
+
+                 }
+            
             return cell
             
             //            }
@@ -849,7 +871,6 @@ class HealthViewController: UIViewController, UICollectionViewDataSource, UIColl
             taplike.setBackgroundImage(UIImage(named: "DarkBookMark"), for: .normal)
             
             var trimmedtext = String()
-            logFavoriteTapped(referrer: referrer)
             
             trimmedtext = quotelabel.text ?? "x"
             

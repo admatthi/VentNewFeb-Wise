@@ -28,19 +28,19 @@ class TextViewController: UIViewController, UITextViewDelegate {
     
     
     func logFavoriteTapped(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
+        AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "quoteid" : counter, "bookid" : selectedbookid])
     }
     
     func logGenreViewed(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "genre viewed"), parameters: ["referrer" : referrer, "genre" : selectedgenre])
+        AppEvents.logEvent(AppEvents.Name(rawValue: "genre viewed"), parameters: ["referrer" : referrer, "genre" : selectedgenre, "bookid" : selectedbookid])
     }
     
     func logTapShare(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "share tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
+        AppEvents.logEvent(AppEvents.Name(rawValue: "share tapped"), parameters: ["referrer" : referrer, "quoteid" : counter, "bookid" : selectedbookid])
     }
     
     func logTapDownvote(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "downvote tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
+        AppEvents.logEvent(AppEvents.Name(rawValue: "downvote tapped"), parameters: ["referrer" : referrer, "quoteid" : counter, "bookid" : selectedbookid])
     }
     
     
@@ -147,7 +147,7 @@ class TextViewController: UIViewController, UITextViewDelegate {
         ref = Database.database().reference()
         titlelabel.heightAnchor
         
-//                ref?.child("AllBooks1").child(selectedamazonurl).child(selectedbookid).updateChildValues(["Profession" : "\(arrayCount) quotes"])
+                ref?.child("AllBooks1").child(selectedamazonurl).child(selectedbookid).updateChildValues(["Profession" : "\(arrayCount) quotes"])
         
         randomstring = UUID().uuidString
         
@@ -194,6 +194,8 @@ class TextViewController: UIViewController, UITextViewDelegate {
         
         // Do any additional setup after loading the view.
     }
+    
+
     
     open func takeScreenshot(_ shouldSave: Bool = true) -> UIImage? {
         
@@ -349,6 +351,11 @@ class TextViewController: UIViewController, UITextViewDelegate {
         
         
         
+    }
+    @IBAction func tapBack2(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+
     }
     
     @objc func swipeD() {

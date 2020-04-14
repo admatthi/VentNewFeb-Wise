@@ -16,9 +16,9 @@ var backgroundimages = [UIImage]()
 
 class DepressionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
     
-    func logFavoriteTapped(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
-    }
+      func logBookViewed(referrer : String) {
+          AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "bookid" : selectedbookid])
+      }
     
     func logGenreViewed(referrer : String) {
         AppEvents.logEvent(AppEvents.Name(rawValue: "genre viewed"), parameters: ["referrer" : referrer, "genre" : selectedgenre])
@@ -137,7 +137,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             selectedprofession = book?.profession ?? ""
             selectedauthorimage = book?.authorImage ?? ""
             selectedbackground = book?.imageURL ?? ""
-            
+            logBookViewed(referrer: referrer)
             
             headlines.append(book?.headline1 ?? "x")
             headlines.append(book?.headline2 ?? "x")
@@ -554,7 +554,6 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             var backgroundcounter = Int.random(in: 1..<9)
 
-            cell.timeago.text = "\(backgroundcounter)M views"
             
             
             cell.layer.cornerRadius = 5.0
@@ -862,7 +861,6 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             taplike.setBackgroundImage(UIImage(named: "DarkBookMark"), for: .normal)
             
             var trimmedtext = String()
-            logFavoriteTapped(referrer: referrer)
             
             trimmedtext = quotelabel.text ?? "x"
             

@@ -8,15 +8,21 @@
 
 import UIKit
 import Kingfisher
-
+import FBSDKCoreKit
 var selectedauthorname = String()
 var selectedprofession = String()
 var selectedbackground = String()
 
 class OverviewViewController: UIViewController {
+    
+    func logBookOpened(referrer : String) {
+             AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "bookid" : selectedbookid])
+         }
 
     @IBOutlet weak var tapstart: UIButton!
     @IBAction func tapStart(_ sender: Any) {
+        
+        logBookOpened(referrer: referrer)
         
         if didpurchase {
             
@@ -98,6 +104,11 @@ class OverviewViewController: UIViewController {
     }
     */
 
+    @IBAction func tapBack2(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+
+    }
     @objc func swipeBack() {
         
         self.dismiss(animated: true, completion: nil)

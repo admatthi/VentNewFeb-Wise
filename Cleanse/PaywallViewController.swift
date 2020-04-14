@@ -188,6 +188,7 @@ class PaywallViewController: UIViewController {
                          self.leadingtext.alpha = 0
                         self.disclaimertext.alpha = 0
                          self.tapcontinue.setTitle("Try for FREE!", for: .normal)
+                self.blur.alpha = 1
                 
             } else {
                 
@@ -198,7 +199,7 @@ class PaywallViewController: UIViewController {
                   self.leadingtext.alpha = 1
                   self.disclaimertext.alpha = 1
                   self.tapcontinue.setTitle("Continue", for: .normal)
-
+self.blur.alpha = 0
             }
             
             if let discountcode = value?["DiscountCode"] as? String {
@@ -212,6 +213,7 @@ class PaywallViewController: UIViewController {
         })
         
     }
+    @IBOutlet weak var blur: UIImageView!
     
     
     /*
@@ -225,15 +227,15 @@ class PaywallViewController: UIViewController {
      */
     
     func logPaywallShownEvent(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "paywall shown"), parameters: ["referrer" : referrer])
+        AppEvents.logEvent(AppEvents.Name(rawValue: "paywall shown"), parameters: ["referrer" : referrer, "bookID" : selectedbookid, "genre" : selectedgenre])
     }
     
     func logTapSubscribeEvent(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "tap subscribe"), parameters: ["referrer" : referrer])
+        AppEvents.logEvent(AppEvents.Name(rawValue: "tap subscribe"), parameters: ["referrer" : referrer, "bookID" : selectedbookid, "genre" : selectedgenre])
     }
     
     func logPurchaseSuccessEvent(referrer : String) {
-        AppEvents.logEvent(AppEvents.Name(rawValue: "purchase success"), parameters: ["referrer" : referrer])
+        AppEvents.logEvent(AppEvents.Name(rawValue: "purchase success"), parameters: ["referrer" : referrer, "bookID" : selectedbookid, "genre" : selectedgenre])
     }
     
 }

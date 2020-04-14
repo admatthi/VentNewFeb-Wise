@@ -13,7 +13,6 @@ import FirebaseDatabase
 import FirebaseStorage
 import Purchases
 import FBSDKCoreKit
-import IQKeyboardManager
 import FirebaseMessaging
 import AppsFlyerLib
 
