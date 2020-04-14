@@ -43,6 +43,7 @@
 		9DD551CE24439AB20050B014 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD551CD24439AB20050B014 /* WriteViewController.swift */; };
 		9DD551CF24439AB20050B014 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD551CD24439AB20050B014 /* WriteViewController.swift */; };
 		9DD551D024439AB20050B014 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD551CD24439AB20050B014 /* WriteViewController.swift */; };
+		9DD551D224460E020050B014 /* EveningWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD551D124460E010050B014 /* EveningWriteViewController.swift */; };
 		9DD64A2D2376073000F159E5 /* FreeToPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */; };
 		9DD64A2F23760A1D00F159E5 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2E23760A1D00F159E5 /* HomeTabViewController.swift */; };
 		9DD9B400239C047A0061D960 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9B3FF239C047A0061D960 /* HomeTableViewCell.swift */; };
@@ -118,6 +119,7 @@
 		9D8C534C24201FA9004F35C7 /* ConsumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeViewController.swift; sourceTree = "<group>"; };
 		9DCEB53723DE0FBF00546242 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		9DD551CD24439AB20050B014 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
+		9DD551D124460E010050B014 /* EveningWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveningWriteViewController.swift; sourceTree = "<group>"; };
 		9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeToPlayViewController.swift; sourceTree = "<group>"; };
 		9DD64A2E23760A1D00F159E5 /* HomeTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		9DD9B3FF239C047A0061D960 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				9DD551CD24439AB20050B014 /* WriteViewController.swift */,
+				9DD551D124460E010050B014 /* EveningWriteViewController.swift */,
 				9DE1C832243139A000F73A0C /* Motivation.entitlements */,
 				9D7360E6236513DC00DC6ACB /* AppDelegate.swift */,
 				9D328D0923651B26003768CF /* Main.storyboard */,
@@ -579,6 +582,7 @@
 				9D328D1C2366593C003768CF /* TitleCollectionViewCell.swift in Sources */,
 				9D328D16236628E9003768CF /* PaywallViewController.swift in Sources */,
 				9DE8FCE7242469DB0035E3DA /* HappinessViewController.swift in Sources */,
+				9DD551D224460E020050B014 /* EveningWriteViewController.swift in Sources */,
 				9D0663AA2367B22A00385DEE /* Book.swift in Sources */,
 				9D503BBC237252AE0070F318 /* OverviewViewController.swift in Sources */,
 				9D0663B02367B3AA00385DEE /* Summary.swift in Sources */,
