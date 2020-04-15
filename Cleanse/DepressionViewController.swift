@@ -16,7 +16,8 @@ var backgroundimages = [UIImage]()
 
 class DepressionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
     
-      func logBookViewed(referrer : String) {
+    @IBOutlet weak var backimage2: UIImageView!
+    func logBookViewed(referrer : String) {
           AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "bookid" : selectedbookid])
       }
     
@@ -600,7 +601,6 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
     }
     
-    @IBOutlet weak var backimage2: UIImageView!
     @IBOutlet weak var depression: UIImageView!
     var selectedindex = Int()
     @IBOutlet weak var genreCollectionView: UICollectionView!
@@ -633,6 +633,14 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         let swipeDownRec = UISwipeGestureRecognizer()
         let swipeRightRec = UISwipeGestureRecognizer()
         
+        
+         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+         let blurEffectView = UIVisualEffectView(effect: blurEffect)
+         blurEffectView.frame = backimage2.bounds
+         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+         backimage2.addSubview(blurEffectView)
+        
         //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         //                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
         //                       blurEffectView.frame = backimage2.bounds
@@ -649,19 +657,23 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         self.view!.addGestureRecognizer(swipeLeftRec)
         
-        ref = Database.database().reference()
         
         
         queryforinfo()
         
         
         genres.removeAll()
+        genres.append("Relationships")
+        genres.append("Work")
+        genres.append("Family")
+        genres.append("Food")
+        genres.append("Exercise")
+        genres.append("Depression")
+        genres.append("Anxiety")
+        genres.append("Grief")
         genres.append("Money")
-        genres.append("Stocks")
-//        genres.append("Real Estate")
-        genres.append("Career")
         
-        genres.append("Success")
+//        genres.append("Real Estate")
         //                  genres.append("Finance")
         //                  genres.append("Economics")
         

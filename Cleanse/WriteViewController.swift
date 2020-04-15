@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseCore
+import FirebaseDatabase
+import FBSDKCoreKit
 
 class WriteViewController: UIViewController, UITextViewDelegate {
 
@@ -16,15 +20,38 @@ class WriteViewController: UIViewController, UITextViewDelegate {
  
 
     }
+    @IBOutlet weak var tapsave: UIButton!
+    @IBAction func tapSave(_ sender: Any) {
+        
+        if count == 0 {
+                    
+                    ref?.child("Users").child(uid).childByAutoId().updateChildValues(["Text" : "\(textView.text!)"])
+            
+            timerlabel.text = "2:00"
+                      count = 120
+                      textView.text = ""
+                      view.endEditing(true)
+                      tapsave.alpha = 0
+        } else {
+            
+            
+        }
+    }
+    
     @IBOutlet weak var backimage: UIImageView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var timerlabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
 
+        
         timerlabel.text = "2:00"
         
         textView.delegate = self
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+
+        view.addGestureRecognizer(tap)
 
         addDoneButtonOnKeyboard()
         
@@ -32,7 +59,7 @@ class WriteViewController: UIViewController, UITextViewDelegate {
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = backimage.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+
         backimage.addSubview(blurEffectView)
         
         // Do any additional setup after loading the view.
@@ -45,7 +72,17 @@ class WriteViewController: UIViewController, UITextViewDelegate {
             timerlabel.text = "\(String(count))s"
             timerlabel.text = timeString(time: TimeInterval(count))
         }
+        
+        if count == 0 {
+            
+            tapsave.alpha = 1
+        }
     }
+    
+    @objc func dismissKeyboard() {
+         //Causes the view (or one of its embedded text fields) to resign the first responder status.
+         view.endEditing(true)
+     }
     
     let timeInterval:TimeInterval = 1
     let timerEnd:TimeInterval = 0.0

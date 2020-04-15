@@ -206,6 +206,7 @@
 			children = (
 				9DD551CD24439AB20050B014 /* WriteViewController.swift */,
 				9DD551D124460E010050B014 /* EveningWriteViewController.swift */,
+				9DF6E6EF23AC8B6E00DCB973 /* DepressionViewController.swift */,
 				9DE1C832243139A000F73A0C /* Motivation.entitlements */,
 				9D7360E6236513DC00DC6ACB /* AppDelegate.swift */,
 				9D328D0923651B26003768CF /* Main.storyboard */,
@@ -213,7 +214,6 @@
 				9D328D112365F5DC003768CF /* DiscoverViewController.swift */,
 				9DF6E6ED23AC8B6300DCB973 /* SleepViewController.swift */,
 				9D83FCD12434E9D200A1C759 /* ForYouViewController.swift */,
-				9DF6E6EF23AC8B6E00DCB973 /* DepressionViewController.swift */,
 				9DE8FCE2242469980035E3DA /* LoveViewController.swift */,
 				9DE8FCE4242469C50035E3DA /* HealthViewController.swift */,
 				9DE8FCE6242469DB0035E3DA /* HappinessViewController.swift */,

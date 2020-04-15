@@ -13,38 +13,70 @@ class EveningWriteViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var tapstartsave: UIButton!
         @IBAction func tapStartSave(_ sender: Any) {
-            
-     
+        
+        
+              if count == 0 {
+                          
+                          ref?.child("Users").child(uid).childByAutoId().updateChildValues(["Text" : "\(textView.text!)"])
+                timerlabel.text = "2:00"
+                count = 120
+                textView.text = ""
+                view.endEditing(true)
+                tapsave.alpha = 0
+                
+              } else {
+                  
+                  
+              }
 
         }
-        @IBOutlet weak var textView: UITextView!
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    @IBOutlet weak var tapsave: UIButton!
+    @IBOutlet weak var textView: UITextView!
         @IBOutlet weak var timerlabel: UILabel!
         override func viewDidLoad() {
             super.viewDidLoad()
 
             timerlabel.text = "2:00"
-            
+
             textView.delegate = self
 
             addDoneButtonOnKeyboard()
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
             
+            view.addGestureRecognizer(tap)
+
+
             let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
             let blurEffectView = UIVisualEffectView(effect: blurEffect)
             blurEffectView.frame = backimage.bounds
             blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
+
             backimage.addSubview(blurEffectView)
+            count = 120
+
+            
             
             // Do any additional setup after loading the view.
         }
         
         @objc func update() {
-            if(count > 0) {
+            if count > 0 {
                 count -= 1
                 
                 timerlabel.text = "\(String(count))s"
                 timerlabel.text = timeString(time: TimeInterval(count))
             }
+            
+            if count == 0 {
+                    
+                    tapsave.alpha = 1
+                }
         }
         
         let timeInterval:TimeInterval = 1
@@ -78,6 +110,8 @@ class EveningWriteViewController: UIViewController, UITextViewDelegate {
             textView.inputAccessoryView = doneToolbar
 
         }
+    
+   
 
         @objc func doneButtonAction()
         {
@@ -86,13 +120,12 @@ class EveningWriteViewController: UIViewController, UITextViewDelegate {
         
         func textViewDidBeginEditing(_ textView: UITextView) {
             
-            
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(WriteViewController.update), userInfo: nil, repeats: true)
+
             if textView.text == "Tap to start writing session..." {
                 textView.text = ""
                 textView.textColor = UIColor.white
-                count = 120
                  
-                 timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(WriteViewController.update), userInfo: nil, repeats: true)
             }
         }
         
