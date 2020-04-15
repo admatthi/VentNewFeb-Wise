@@ -97,19 +97,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 //
 //        self.window?.makeKeyAndVisible()
         
-//        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-//          
-//          if launchedBefore {
-//              
-//              tabBarBuyer.selectedIndex = 0
-//              
-//          } else {
-//              
-//              tabBarBuyer.selectedIndex = 1
-//              
-//              UserDefaults.standard.set(true, forKey: "launchedBefore")
-//              
-//          }
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+          
+          if launchedBefore {
+              
+              
+              
+          } else {
+              
+              desiredtimeinseconds = 90
+              
+          }
         
         queryforpaywall()
         

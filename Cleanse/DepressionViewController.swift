@@ -659,7 +659,6 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         
         
-        queryforinfo()
         
         
         genres.removeAll()

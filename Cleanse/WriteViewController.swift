@@ -12,7 +12,9 @@ import FirebaseCore
 import FirebaseDatabase
 import FBSDKCoreKit
 
-class WriteViewController: UIViewController, UITextViewDelegate {
+var desiredtimeinseconds = Int()
+
+class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var tapstartsave: UIButton!
     @IBAction func tapStartSave(_ sender: Any) {
@@ -20,15 +22,26 @@ class WriteViewController: UIViewController, UITextViewDelegate {
  
 
     }
+    @IBAction func tapTimer(_ sender: Any) {
+        
+        view.endEditing(true)
+
+        pickerView.alpha = 1
+        
+    }
+    @IBOutlet weak var taptimer: UIButton!
+    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var tapsave: UIButton!
     @IBAction func tapSave(_ sender: Any) {
+        taptimer.alpha = 1
         
         if count == 0 {
                     
                     ref?.child("Users").child(uid).childByAutoId().updateChildValues(["Text" : "\(textView.text!)"])
             
-            timerlabel.text = "2:00"
-                      count = 120
+            taptimer.setTitle(self.timeString(time: TimeInterval(desiredtimeinseconds)), for: .normal)
+
+                      count = desiredtimeinseconds
                       textView.text = ""
                       view.endEditing(true)
                       tapsave.alpha = 0
@@ -44,9 +57,21 @@ class WriteViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
+        timeintervals.removeAll()
 
+//        taptimer = UIButton(type: .custom) as UIButton
         
-        timerlabel.text = "2:00"
+        timeintervals.append("1m")
+         timeintervals.append("2m")
+         timeintervals.append("5m")
+         timeintervals.append("10m")
+         timeintervals.append("15m")
+         timeintervals.append("30m")
+        
+        queryforinfo()
+        
+        pickerView.delegate = self
+
         
         textView.delegate = self
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
@@ -55,6 +80,7 @@ class WriteViewController: UIViewController, UITextViewDelegate {
 
         addDoneButtonOnKeyboard()
         
+        
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = backimage.bounds
@@ -62,19 +88,117 @@ class WriteViewController: UIViewController, UITextViewDelegate {
 
         backimage.addSubview(blurEffectView)
         
+        pickerView.alpha = 0
+        
+        pickerView.reloadAllComponents()
         // Do any additional setup after loading the view.
     }
     
+    var timeintervals = [String]()
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return timeintervals.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+            
+        return timeintervals[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let titleData = timeintervals[row]
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+
+        return myTitle
+    }
+    
+  
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        var newtimeinterval = timeintervals[row].replacingOccurrences(of: "m", with: "")
+        var intnewtimeinterval = 60 * (Int(newtimeinterval) ?? 120)
+        desiredtimeinseconds = intnewtimeinterval
+        count = desiredtimeinseconds
+        
+        ref?.child("Users").child(uid).updateChildValues(["Time Interval" : desiredtimeinseconds])
+        
+        taptimer.setTitle(self.timeString(time: TimeInterval(desiredtimeinseconds)), for: .normal)
+        
+        pickerView.alpha = 0
+        
+
+
+    }
+    
+    func queryforinfo() {
+        
+        ref?.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary
+            
+            if let timeinterval = value?["Time Interval"] as? Int {
+                
+                desiredtimeinseconds = timeinterval
+                self.taptimer.setTitle(self.timeString(time: TimeInterval(desiredtimeinseconds)), for: .normal)
+                self.count = desiredtimeinseconds
+                
+            } else {
+                
+                desiredtimeinseconds = 120
+                self.taptimer.setTitle(self.timeString(time: TimeInterval(desiredtimeinseconds)), for: .normal)
+
+            }
+            
+            if let purchased = value?["Purchased"] as? String {
+                
+                if purchased == "True" {
+                    
+                    didpurchase = true
+                    
+                } else {
+                    
+                    didpurchase = false
+//                    self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+                    
+                }
+                
+            } else {
+                
+                didpurchase = false
+//                self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+            }
+            
+        })
+        
+    }
+    
+  
+    
     @objc func update() {
+        
+        
+        
         if(count > 0) {
             count -= 1
             
-            timerlabel.text = "\(String(count))s"
-            timerlabel.text = timeString(time: TimeInterval(count))
+                            
+            
+            UIView.performWithoutAnimation {
+                taptimer.setTitle(self.timeString(time: TimeInterval(count)), for: .normal)
+                taptimer.layoutIfNeeded()
+            }
+
         }
         
         if count == 0 {
             
+            taptimer.alpha = 0
             tapsave.alpha = 1
         }
     }
@@ -123,13 +247,12 @@ class WriteViewController: UIViewController, UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
-        
-        if textView.text == "Tap to start writing session..." {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(WriteViewController.update), userInfo: nil, repeats: true)
+
+        if textView.text == "What are you thinking about?" {
             textView.text = ""
-            textView.textColor = UIColor.white
-            count = 120
+            textView.textColor = UIColor.black
              
-             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(WriteViewController.update), userInfo: nil, repeats: true)
         }
     }
     
@@ -140,7 +263,7 @@ class WriteViewController: UIViewController, UITextViewDelegate {
         timer.invalidate()
         
         if textView.text.isEmpty {
-            textView.text = "Tap to start writing session..."
+            textView.text = "What are you thinking about?"
             textView.textColor = UIColor.lightGray
         }
     }
