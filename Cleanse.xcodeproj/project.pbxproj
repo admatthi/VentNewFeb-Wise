@@ -44,6 +44,8 @@
 		9DD551CF24439AB20050B014 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD551CD24439AB20050B014 /* WriteViewController.swift */; };
 		9DD551D024439AB20050B014 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD551CD24439AB20050B014 /* WriteViewController.swift */; };
 		9DD551D224460E020050B014 /* EveningWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD551D124460E010050B014 /* EveningWriteViewController.swift */; };
+		9DD551D4244800850050B014 /* FavoritesWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD551D3244800850050B014 /* FavoritesWriteViewController.swift */; };
+		9DD551D6244802830050B014 /* SessionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD551D5244802830050B014 /* SessionsTableViewCell.swift */; };
 		9DD64A2D2376073000F159E5 /* FreeToPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */; };
 		9DD64A2F23760A1D00F159E5 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2E23760A1D00F159E5 /* HomeTabViewController.swift */; };
 		9DD9B400239C047A0061D960 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9B3FF239C047A0061D960 /* HomeTableViewCell.swift */; };
@@ -120,6 +122,8 @@
 		9DCEB53723DE0FBF00546242 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		9DD551CD24439AB20050B014 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		9DD551D124460E010050B014 /* EveningWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveningWriteViewController.swift; sourceTree = "<group>"; };
+		9DD551D3244800850050B014 /* FavoritesWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesWriteViewController.swift; sourceTree = "<group>"; };
+		9DD551D5244802830050B014 /* SessionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsTableViewCell.swift; sourceTree = "<group>"; };
 		9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeToPlayViewController.swift; sourceTree = "<group>"; };
 		9DD64A2E23760A1D00F159E5 /* HomeTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		9DD9B3FF239C047A0061D960 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 			isa = PBXGroup;
 			children = (
 				9DD551CD24439AB20050B014 /* WriteViewController.swift */,
+				9DD551D3244800850050B014 /* FavoritesWriteViewController.swift */,
+				9DD551D5244802830050B014 /* SessionsTableViewCell.swift */,
 				9DD551D124460E010050B014 /* EveningWriteViewController.swift */,
 				9DF6E6EF23AC8B6E00DCB973 /* DepressionViewController.swift */,
 				9DE1C832243139A000F73A0C /* Motivation.entitlements */,
@@ -559,6 +565,7 @@
 			files = (
 				9DF6E6F223AC8B8200DCB973 /* TraumaViewController.swift in Sources */,
 				9DE8FCE5242469C60035E3DA /* HealthViewController.swift in Sources */,
+				9DD551D4244800850050B014 /* FavoritesWriteViewController.swift in Sources */,
 				9D83FCD22434E9D200A1C759 /* ForYouViewController.swift in Sources */,
 				9D7360E7236513DC00DC6ACB /* AppDelegate.swift in Sources */,
 				9DD64A2D2376073000F159E5 /* FreeToPlayViewController.swift in Sources */,
@@ -580,6 +587,7 @@
 				9D0663B12367B3AA00385DEE /* Audio.swift in Sources */,
 				9D2E8F0523C006EB0012AA3E /* TextHomeViewController.swift in Sources */,
 				9D328D1C2366593C003768CF /* TitleCollectionViewCell.swift in Sources */,
+				9DD551D6244802830050B014 /* SessionsTableViewCell.swift in Sources */,
 				9D328D16236628E9003768CF /* PaywallViewController.swift in Sources */,
 				9DE8FCE7242469DB0035E3DA /* HappinessViewController.swift in Sources */,
 				9DD551D224460E020050B014 /* EveningWriteViewController.swift in Sources */,

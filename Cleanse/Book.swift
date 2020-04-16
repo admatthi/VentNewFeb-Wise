@@ -113,7 +113,7 @@ struct Book {
         self.original = json["Original"] as? String
         self.profession = json["Profession"] as? String
         self.authorImage = json["Author Image"] as? String
-        self.text1 = json["Text0"] as? String
+        self.text1 = json["Text"] as? String
         self.text2 = json["Text1"] as? String
         self.text3 = json["Text2"] as? String
         self.intdate = json["IntDate"] as? Int

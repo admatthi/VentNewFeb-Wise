@@ -37,12 +37,19 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         
         if count == 0 {
                     
-                    ref?.child("Users").child(uid).childByAutoId().updateChildValues(["Text" : "\(textView.text!)"])
+            let date = Date()
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.dateFormat = "MMM d"
+                 var result = dateFormatter.string(from: date)
+            
+            ref?.child("Users").child(uid).childByAutoId().updateChildValues(["Text" : "\(textView.text!)", "Name" : "Writing Session", "Date" : result])
             
             taptimer.setTitle(self.timeString(time: TimeInterval(desiredtimeinseconds)), for: .normal)
 
                       count = desiredtimeinseconds
-                      textView.text = ""
+                      textView.text = "Tap to start writing session"
+                        textView.textColor = UIColor.lightGray
+
                       view.endEditing(true)
                       tapsave.alpha = 0
         } else {
@@ -249,7 +256,7 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(WriteViewController.update), userInfo: nil, repeats: true)
 
-        if textView.text == "What are you thinking about?" {
+        if textView.text == "Tap to start writing session..." {
             textView.text = ""
             textView.textColor = UIColor.black
              
@@ -263,7 +270,7 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         timer.invalidate()
         
         if textView.text.isEmpty {
-            textView.text = "What are you thinking about?"
+            textView.text = "Tap to start writing session..."
             textView.textColor = UIColor.lightGray
         }
     }
