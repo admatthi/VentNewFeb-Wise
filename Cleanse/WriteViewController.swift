@@ -35,29 +35,34 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
     @IBAction func tapSave(_ sender: Any) {
         taptimer.alpha = 1
         
-        if count == 0 {
+//        if count == 0 {
                     
             let date = Date()
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.dateFormat = "MMM d"
                  var result = dateFormatter.string(from: date)
-            
-            ref?.child("Users").child(uid).childByAutoId().updateChildValues(["Text" : "\(textView.text!)", "Name" : "Therapy Session", "Date" : result, "Time" : selectedtime])
+            var first30 = String(textView.text!.prefix(30))
+           
+            var intselectedtime = Int((desiredtimeinseconds - count)/60)+1
+        
+            selectedtime = "\(String(intselectedtime))m"
+       
+        ref?.child("Users").child(uid).childByAutoId().updateChildValues(["Text" : "\(textView.text!)", "Name" : "\(first30)...", "Date" : result, "Time" : selectedtime])
             
             taptimer.setTitle(self.timeString(time: TimeInterval(desiredtimeinseconds)), for: .normal)
 
                       count = desiredtimeinseconds
-                      textView.text = "What are you struggling with?"
+                      textView.text = "What are you thinking about?"
                         textView.textColor = UIColor.lightGray
 
                       view.endEditing(true)
-                      tapsave.alpha = 0
+//                      tapsave.alpha = 1
             
             self.performSegue(withIdentifier: "WriteToSessions", sender: self)
-        } else {
-            
-            
-        }
+//        } else {
+//
+//
+//        }
     }
     @IBAction func tapBack(_ sender: Any) {
         
@@ -104,8 +109,8 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         
         taptimer.layer.borderColor = UIColor.white.cgColor
         taptimer.layer.borderWidth = 2.0
-        tapsave.layer.borderColor = UIColor.white.cgColor
-        tapsave.layer.borderWidth = 2.0
+//        tapsave.layer.borderColor = UIColor.white.cgColor
+//        tapsave.layer.borderWidth = 2.0
 
         pickerView.alpha = 0
         
@@ -221,7 +226,7 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         if count == 0 {
             
             taptimer.alpha = 0
-            tapsave.alpha = 1
+//            tapsave.alpha = 1
         }
     }
     
@@ -271,7 +276,7 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(WriteViewController.update), userInfo: nil, repeats: true)
 
-        if textView.text == "What are you struggling with?" {
+        if textView.text == "What are you thinking about?" {
             textView.text = ""
             textView.textColor = UIColor.black
              
@@ -285,7 +290,7 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         timer.invalidate()
         
         if textView.text.isEmpty {
-            textView.text = "What are you struggling with?"
+            textView.text = "What are you thinking about?"
             textView.textColor = UIColor.lightGray
         }
     }

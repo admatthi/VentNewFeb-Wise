@@ -10,6 +10,9 @@ import UIKit
 
 class SessionsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var taplike: UIButton!
+    @IBOutlet weak var likestext: UILabel!
+    @IBOutlet weak var backgroundimage: UIImageView!
     @IBOutlet weak var timelabel: UILabel!
     @IBOutlet weak var datelabel: UILabel!
     @IBOutlet weak var textlabel: UILabel!

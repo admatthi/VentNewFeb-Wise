@@ -487,13 +487,13 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             
             if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
-                
+
                 cell.titleImage.kf.setImage(with: imageUrl)
-                
+
             }//            cell.backlabel.image = backgroundimages[backgroundcounter]
-            
-            var viewscounter =  book?.time
-            cell.viewslabel.text = viewscounter
+//
+//            var viewscounter =  book?.time
+//            cell.viewslabel.text = viewscounter
             
             cell.titlelabel.text = name
             //                       cell.titleback.clipsToBounds = true
@@ -542,15 +542,15 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             let intdateago = Int(dateago) ?? 24
             
-            if intdateago > 23 {
-                
-                cell.newlabel.alpha = 0
-                
-            } else {
-                
-                cell.newlabel.alpha = 1
-
-            }
+//            if intdateago > 23 {
+//
+//                cell.newlabel.alpha = 0
+//
+//            } else {
+//
+//                cell.newlabel.alpha = 1
+//
+//            }
 
             
             print(dateago)
@@ -577,17 +577,17 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             if name == "x" {
                 
-                cell.titlelabel.alpha = 0
-                cell.backlabel.alpha = 0
-                cell.viewslabel.alpha = 0
-                cell.titleImage.alpha = 0
-                
+//                cell.titlelabel.alpha = 0
+//                cell.backlabel.alpha = 0
+//                cell.viewslabel.alpha = 0
+//                cell.titleImage.alpha = 0
+//
             } else {
                 
                 cell.titlelabel.alpha = 1
-                cell.backlabel.alpha = 1
-                cell.viewslabel.alpha = 1
-                cell.titleImage.alpha = 1
+//                cell.backlabel.alpha = 1
+//                cell.viewslabel.alpha = 1
+//                cell.titleImage.alpha = 1
             }
             
             
@@ -635,19 +635,19 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         let swipeRightRec = UISwipeGestureRecognizer()
         
         
-         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-         blurEffectView.frame = backimage2.bounds
-         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+//         let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//         blurEffectView.frame = backimage2.bounds
+//         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//
+//         backimage2.addSubview(blurEffectView)
 
-         backimage2.addSubview(blurEffectView)
+                            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+                               let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                               blurEffectView.frame = backimage2.bounds
+                               blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        //                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        //                       blurEffectView.frame = backimage2.bounds
-        //                       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //
-        //                    backimage2.addSubview(blurEffectView)
+                            backimage2.addSubview(blurEffectView)
         //
         titleCollectionView.layer.cornerRadius = 10.0
         titleCollectionView.clipsToBounds = true
@@ -706,7 +706,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-        layout.itemSize = CGSize(width: screenWidth/2.35, height: screenHeight/2.4)
+        layout.itemSize = CGSize(width: screenWidth/2.35, height: screenHeight/2.45)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
@@ -942,9 +942,9 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             print(dateago)
             
-            timeagolabel.text = dateago
-            quotelabel.text = name
-            authorlabel.text = author
+//            timeagolabel.text = dateago
+//            quotelabel.text = name
+//            authorlabel.text = author
             
             blur.slideInFromTop()
             //            quotelabel.slideInFromTop()
@@ -953,18 +953,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             //
             fullview.slideInFromTop()
             
-            if didpurchase {
-                
-                quotelabel.alpha = 1
-                authorlabel.alpha = 1
-                blur.alpha = 0
-            } else {
-                
-                quotelabel.alpha = 0
-                authorlabel.alpha = 0
-                blur.alpha = 1
-            }
-            
+  
         }
         
     }
