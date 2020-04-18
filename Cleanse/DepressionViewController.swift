@@ -110,6 +110,8 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                 
             }
             
+//            addstaticbooks()
+            
             //            titleCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
             
             
@@ -280,9 +282,9 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         var counter2 = 0
         
-        while counter2 < 15 {
+        while counter2 < 25 {
             
-            ref?.child("AllBooks1").child(selectedgenre).childByAutoId().updateChildValues(["Name": "x", "Image" : "x", "Author" : "Brian Stevens", "Genre" : "x", "Headline1" : "x", "Headline2" : "x", "Headline3" : "x", "Headline4" : "x", "Headline5" : "x", "Headline6" : "x", "Headline7" : "x", "Headline8" : "x", "Headline9" : "x", "Headline10" : "x", "Headline11" : "x", "Headline12" : "x", "Headline13" : "x", "Headline14" : "x", "Headline15" : "x", "Headline16" : "x", "Headline17" : "x", "Headline18" : "x", "Headline19" : "x", "Headline20" : "x", "Headline21" : "x", "Headline22" : "x", "Headline23" : "x", "Headline24" : "x", "Headline25" : "x", "Headline26" : "x", "Headline27" : "x", "Headline28" : "x", "Headline29" : "x", "Headline30" : "x", "Headline31" : "x", "Author Image" : "https://images.unsplash.com/photo-1541418950054-c12804e149d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60", "Description" : "x", "Profession" : "x"])
+            ref?.child("AllBooks1").child(selectedgenre).childByAutoId().updateChildValues(["Name": "x", "Image" : "x", "Author" : "Dr. Smitha Bandhari", "Genre" : "x", "Headline1" : "x", "Author Image" : "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/biographies/bhandari_smitha136x159.jpg?resize=136px:*", "Profession" : "MD, Psychiatry", "Time" : "25 min", "Description" : "This writing therapy program is designed to help you better process the thoughts running around in your head, so you can imporove your mood, reduce your stress, and love yourself. As always, the only rule is to keep writigng until the time is up. It doesn't matter what you write, as long as you don't stop writing."])
             
             
             counter2 += 1
@@ -490,7 +492,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                 
             }//            cell.backlabel.image = backgroundimages[backgroundcounter]
             
-            var viewscounter =  book?.profession
+            var viewscounter =  book?.time
             cell.viewslabel.text = viewscounter
             
             cell.titlelabel.text = name
@@ -579,14 +581,13 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
                 cell.backlabel.alpha = 0
                 cell.viewslabel.alpha = 0
                 cell.titleImage.alpha = 0
-                cell.greylabel.alpha = 0
+                
             } else {
                 
                 cell.titlelabel.alpha = 1
                 cell.backlabel.alpha = 1
                 cell.viewslabel.alpha = 1
                 cell.titleImage.alpha = 1
-                cell.greylabel.alpha = 1
             }
             
             
@@ -662,15 +663,17 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         
         genres.removeAll()
-        genres.append("Relationships")
-        genres.append("Work")
-        genres.append("Family")
-        genres.append("Food")
-        genres.append("Exercise")
+        genres.append("Sleep")
+        genres.append("Morning")
+        genres.append("Break Ups")
+        genres.append("Death")
         genres.append("Depression")
-        genres.append("Anxiety")
-        genres.append("Grief")
-        genres.append("Money")
+        genres.append("Addiction")
+        genres.append("Stress")
+        genres.append("Focus")
+        genres.append("Self-Help")
+        
+        
         
 //        genres.append("Real Estate")
         //                  genres.append("Finance")

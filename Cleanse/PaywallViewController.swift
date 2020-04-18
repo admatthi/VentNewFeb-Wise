@@ -138,11 +138,11 @@ class PaywallViewController: UIViewController {
         
         ref = Database.database().reference()
         
-//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        blurEffectView.frame = backimage.bounds
-//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        backimage.addSubview(blurEffectView)
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = backimage.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backimage.addSubview(blurEffectView)
         
         tapcontinue.layer.cornerRadius = 5.0
         

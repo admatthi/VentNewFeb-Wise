@@ -28,13 +28,15 @@ class OverviewViewController: UIViewController {
             
             randomString = NSUUID().uuidString
             
-            self.performSegue(withIdentifier: "OverviewToRead", sender: self)
+            self.performSegue(withIdentifier: "OverviewToWrite3", sender: self)
         } else {
             
             self.performSegue(withIdentifier: "OverviewToSale", sender: self)
 
         }
     }
+    
+    
     @IBOutlet weak var authorimage: UIImageView!
     @IBOutlet weak var blurredimage: UIImageView!
     @IBOutlet weak var descriptionlabel: UILabel!
@@ -87,7 +89,7 @@ class OverviewViewController: UIViewController {
         authorlabel.text = selectedauthorname
         titlelabel.text = selectedtitle
         professionlabel.text = selectedprofession
-        descriptionlabel.text = "\(selecteddescription) We hope these quotes teach you a life-changing lesson 😊"
+        descriptionlabel.text = "\(selecteddescription) We hope this writing session helps you feel better 😊"
  
 
         // Do any additional setup after loading the view.

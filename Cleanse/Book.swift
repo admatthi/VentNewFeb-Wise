@@ -60,6 +60,7 @@ struct Book {
     let intdate: Int?
     let title: String?
     let views: Int?
+    let time: String?
 
 
     let summary: Summary
@@ -70,6 +71,7 @@ struct Book {
         self.author = json["Author"] as? String
         self.views = json["Views"] as? Int
         self.date = json["Date"] as? String
+        self.time = json["Time"] as? String
 
         self.description = json["Description"] as? String
         self.imageURL = json["Image"] as? String

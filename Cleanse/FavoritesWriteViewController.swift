@@ -46,7 +46,7 @@ class FavoritesWriteViewController: UIViewController, UITableViewDataSource, UIT
         cell.titlelabel.text = name
         cell.textlabel.text = book?.text1
           
-
+        cell.timelabel.text = " • \(book?.time ?? " ")"
         return cell
         
     }
@@ -95,11 +95,11 @@ class FavoritesWriteViewController: UIViewController, UITableViewDataSource, UIT
                             
                         if Int(time) ?? 11 > 12 {
                             
-                            self.books = self.books.sorted(by: { $1.name ?? "1"  > $0.name ?? "2" })
+                            self.books = self.books.sorted(by: { $1.date ?? "1"  > $0.date ?? "2" })
 
                         } else {
                             
-                            self.books = self.books.sorted(by: { $0.name ?? "1"  > $1.name ?? "2" })
+                            self.books = self.books.sorted(by: { $0.date ?? "1"  > $1.date ?? "2" })
 
                         }
 

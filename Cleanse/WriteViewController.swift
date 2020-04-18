@@ -42,20 +42,27 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
                                 dateFormatter.dateFormat = "MMM d"
                  var result = dateFormatter.string(from: date)
             
-            ref?.child("Users").child(uid).childByAutoId().updateChildValues(["Text" : "\(textView.text!)", "Name" : "Writing Session", "Date" : result])
+            ref?.child("Users").child(uid).childByAutoId().updateChildValues(["Text" : "\(textView.text!)", "Name" : "Therapy Session", "Date" : result, "Time" : selectedtime])
             
             taptimer.setTitle(self.timeString(time: TimeInterval(desiredtimeinseconds)), for: .normal)
 
                       count = desiredtimeinseconds
-                      textView.text = "Tap to start writing session"
+                      textView.text = "What are you struggling with?"
                         textView.textColor = UIColor.lightGray
 
                       view.endEditing(true)
                       tapsave.alpha = 0
+            
+            self.performSegue(withIdentifier: "WriteToSessions", sender: self)
         } else {
             
             
         }
+    }
+    @IBAction func tapBack(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBOutlet weak var backimage: UIImageView!
@@ -86,15 +93,20 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         view.addGestureRecognizer(tap)
 
         addDoneButtonOnKeyboard()
+        textView.becomeFirstResponder()
         
+//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = backimage.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//
+//        backimage.addSubview(blurEffectView)
         
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = backimage.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        taptimer.layer.borderColor = UIColor.white.cgColor
+        taptimer.layer.borderWidth = 2.0
+        tapsave.layer.borderColor = UIColor.white.cgColor
+        tapsave.layer.borderWidth = 2.0
 
-        backimage.addSubview(blurEffectView)
-        
         pickerView.alpha = 0
         
         pickerView.reloadAllComponents()
@@ -124,9 +136,11 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         return myTitle
     }
     
-  
+  var selectedtime = String()
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        selectedtime = timeintervals[row]
         
         var newtimeinterval = timeintervals[row].replacingOccurrences(of: "m", with: "")
         var intnewtimeinterval = 60 * (Int(newtimeinterval) ?? 120)
@@ -152,6 +166,7 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
             if let timeinterval = value?["Time Interval"] as? Int {
                 
                 desiredtimeinseconds = timeinterval
+                self.selectedtime = "\(String(timeinterval/60))m"
                 self.taptimer.setTitle(self.timeString(time: TimeInterval(desiredtimeinseconds)), for: .normal)
                 self.count = desiredtimeinseconds
                 
@@ -256,7 +271,7 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(WriteViewController.update), userInfo: nil, repeats: true)
 
-        if textView.text == "Tap to start writing session..." {
+        if textView.text == "What are you struggling with?" {
             textView.text = ""
             textView.textColor = UIColor.black
              
@@ -270,7 +285,7 @@ class WriteViewController: UIViewController, UITextViewDelegate, UIPickerViewDel
         timer.invalidate()
         
         if textView.text.isEmpty {
-            textView.text = "Tap to start writing session..."
+            textView.text = "What are you struggling with?"
             textView.textColor = UIColor.lightGray
         }
     }

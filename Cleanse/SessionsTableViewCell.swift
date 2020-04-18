@@ -10,6 +10,7 @@ import UIKit
 
 class SessionsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var timelabel: UILabel!
     @IBOutlet weak var datelabel: UILabel!
     @IBOutlet weak var textlabel: UILabel!
     @IBOutlet weak var titlelabel: UILabel!
